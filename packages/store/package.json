@@ -14,7 +14,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@poker/core": "workspace:*"
+    "@poker/core": "workspace:*",
+    "@sqlite.org/sqlite-wasm": "3.54.1-build1"
   },
   "devDependencies": {
     "@poker/adapter-pokerstars": "workspace:*"

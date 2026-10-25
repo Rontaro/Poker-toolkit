@@ -1,4 +1,4 @@
-import type { Database } from './driver.js'
+import type { SqlDatabase as Database } from './sql-database.js'
 
 export interface MigrationEntry {
   readonly version: number

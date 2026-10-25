@@ -1,5 +1,7 @@
 import { createRequire } from 'node:module'
 
+import type { SqlDatabase } from './sql-database.js'
+
 /**
  * The SQLite driver, in the one place that is allowed to know which one it is.
  *
@@ -24,4 +26,13 @@ type SqliteModule = typeof import('node:sqlite')
 
 export const { DatabaseSync } = nodeRequire('node:sqlite') as SqliteModule
 
-export type Database = InstanceType<SqliteModule['DatabaseSync']>
+/**
+ * `Database` is `SqlDatabase`, the driver-agnostic structural interface --
+ * not `InstanceType<SqliteModule['DatabaseSync']>`, which is `node:sqlite`'s
+ * own concrete class. The rest of this package (`sqlite-store.ts`,
+ * `migrate.ts`) keeps importing `type { Database } from './driver.js'`
+ * unchanged; only the definition behind that name stopped being Node-only,
+ * so a browser driver (see `driver-browser.ts`) can satisfy it too without
+ * pretending to be `DatabaseSync`.
+ */
+export type Database = SqlDatabase
