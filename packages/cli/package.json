@@ -1,0 +1,22 @@
+{
+  "name": "@poker/cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": { "poker": "./src/main.ts" },
+  "exports": { ".": { "types": "./src/index.ts", "default": "./src/index.ts" } },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@poker/core": "workspace:*",
+    "@poker/ingest": "workspace:*",
+    "@poker/metrics": "workspace:*",
+    "@poker/prompt-builder": "workspace:*",
+    "@poker/rules": "workspace:*",
+    "@poker/store": "workspace:*",
+    "@poker/timeline": "workspace:*",
+    "clipboardy": "^4.0.0"
+  }
+}

@@ -1,0 +1,42 @@
+﻿Mano PokerStars n° 261973402835:  Hold'em No Limit (€0.01/€0.02 EUR) [ID ADM: M6687304955FA2ZQ] - 04/09/2026 23:30:12 CET [04/09/2026 17:30:12 ET]
+Tavolo 'Bruwer VI' 6-max Il bottone è al posto 1
+Posto 1: Hero99 (€1.61 chips) 
+Posto 2: RailBird42 (€2.13 chips) 
+Posto 3: NitFish07 (€1.97 chips) 
+Posto 4: ChipLeader3 (€2.07 chips) 
+Posto 5: CallStation5 (€1.53 chips) 
+Posto 6: ButtonAbuser (€3.84 chips) 
+RailBird42: versa il piccolo buio €0.01
+NitFish07: versa il grande buio €0.02
+*** CARTE COPERTE ***
+Distribuite a Hero99 [9s 5c]
+ChipLeader3: folda 
+CallStation5: rilancia €0.02 fino a €0.04
+ButtonAbuser: chiama €0.04
+Hero99: folda 
+RailBird42: folda 
+NitFish07: folda 
+*** FLOP *** [4d Js 9d]
+CallStation5: fa check 
+ButtonAbuser: punta €0.05
+CallStation5: chiama €0.05
+*** TURN *** [4d Js 9d] [4s]
+CallStation5: fa check 
+ButtonAbuser: punta €0.10
+CallStation5: chiama €0.10
+*** RIVER *** [4d Js 9d 4s] [7s]
+CallStation5: fa check 
+ButtonAbuser: fa check 
+*** SHOW DOWN ***
+CallStation5: mostra [Ac 9h] (doppia coppia, Nove e Quattro)
+ButtonAbuser: scarta il punto 
+CallStation5 ha raccolto €0.39 dal piatto
+*** RIASSUNTO ***
+Piatto totale €0.41 | Rake €0.02 
+Board [4d Js 9d 4s 7s]
+Posto 1: Hero99 (bottone) ha foldato prima del Flop (senza puntare)
+Posto 2: RailBird42 (small blind) ha foldato prima del Flop
+Posto 3: NitFish07 (big blind) ha foldato prima del Flop
+Posto 4: ChipLeader3 ha foldato prima del Flop (senza puntare)
+Posto 5: CallStation5 ha mostrato [Ac 9h] e ha vinto (€0.39) con doppia coppia, Nove e Quattro
+Posto 6: ButtonAbuser ha scartato [6d 6h]

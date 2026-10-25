@@ -1,0 +1,29 @@
+﻿Mano PokerStars n° 261973595904:  Hold'em No Limit (€0.01/€0.02 EUR) [ID ADM: M6687304955FA2ZQ] - 04/09/2026 23:45:39 CET [04/09/2026 17:45:39 ET]
+Tavolo 'Bruwer VI' 6-max Il bottone è al posto 1
+Posto 5: CallStation5 (€2.19 chips) è in sit-out
+Posto 1: Hero99 (€1.65 chips) 
+Posto 2: RailBird42 (€2.51 chips) 
+Posto 3: NitFish07 (€2 chips) 
+Posto 4: ChipLeader3 (€2.04 chips) 
+Posto 6: ButtonAbuser (€3.13 chips) 
+RailBird42: versa il piccolo buio €0.01
+NitFish07: versa il grande buio €0.02
+CallStation5: va in sit-out 
+*** CARTE COPERTE ***
+Distribuite a Hero99 [Qs 6s]
+ChipLeader3: folda 
+ButtonAbuser: folda 
+Hero99: rilancia €0.02 fino a €0.04
+RailBird42: folda 
+NitFish07: folda 
+La puntata non vista (€0.02) è restituita a Hero99
+Hero99 ha raccolto €0.05 dal piatto
+Hero99: non mostra il punto 
+*** RIASSUNTO ***
+Piatto totale €0.05 | Rake €0 
+Posto 5: CallStation5
+Posto 1: Hero99 (bottone) ha raccolto (€0.05)
+Posto 2: RailBird42 (small blind) ha foldato prima del Flop
+Posto 3: NitFish07 (big blind) ha foldato prima del Flop
+Posto 4: ChipLeader3 ha foldato prima del Flop (senza puntare)
+Posto 6: ButtonAbuser ha foldato prima del Flop (senza puntare)

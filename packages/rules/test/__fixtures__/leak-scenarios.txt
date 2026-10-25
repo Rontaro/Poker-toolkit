@@ -1,0 +1,161 @@
+﻿PokerStars Hand #910000000001:  Hold'em No Limit (€0.01/€0.02 EUR) - 2026/09/05 20:00:00 CET [2026/09/05 14:00:00 ET]
+Table 'Leaks I' 6-max Seat #1 is the button
+Seat 1: Hero (€2 in chips) 
+Seat 2: Villain (€2 in chips) 
+Seat 3: Caller (€2 in chips) 
+Seat 4: FolderA (€2 in chips) 
+Seat 5: FolderB (€2 in chips) 
+Seat 6: FolderC (€2 in chips) 
+Villain: posts small blind €0.01
+Caller: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero [Ah Ks]
+FolderA: folds 
+FolderB: folds 
+FolderC: folds 
+Hero: raises €0.04 to €0.06
+Villain: folds 
+Caller: calls €0.04
+*** FLOP *** [8d 3c 2h]
+Caller: checks 
+Hero: bets €0.02
+Caller: calls €0.02
+*** TURN *** [8d 3c 2h] [7s]
+Caller: checks 
+Hero: bets €0.02
+Caller: calls €0.02
+*** RIVER *** [8d 3c 2h 7s] [Kd]
+Caller: checks 
+Hero: checks 
+*** SHOW DOWN ***
+Caller: shows [9c 9d] (a pair of Nines)
+Hero: shows [Ah Ks] (a pair of Kings)
+Hero collected €0.20 from pot
+*** SUMMARY ***
+Total pot €0.21 | Rake €0.01 
+Board [8d 3c 2h 7s Kd]
+Seat 1: Hero (button) showed [Ah Ks] and won (€0.20) with a pair of Kings
+Seat 2: Villain (small blind) folded before Flop
+Seat 3: Caller (big blind) showed [9c 9d] and lost with a pair of Nines
+Seat 4: FolderA folded before Flop (didn't bet)
+Seat 5: FolderB folded before Flop (didn't bet)
+Seat 6: FolderC folded before Flop (didn't bet)
+
+
+PokerStars Hand #910000000002:  Hold'em No Limit (€0.01/€0.02 EUR) - 2026/09/05 20:05:00 CET [2026/09/05 14:05:00 ET]
+Table 'Leaks I' 6-max Seat #1 is the button
+Seat 1: Hero (€2 in chips) 
+Seat 2: Villain (€2 in chips) 
+Seat 3: Caller (€2 in chips) 
+Seat 4: FolderA (€2 in chips) 
+Seat 5: FolderB (€2 in chips) 
+Seat 6: FolderC (€2 in chips) 
+Villain: posts small blind €0.01
+Caller: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero [Ah Ks]
+FolderA: folds 
+FolderB: folds 
+FolderC: folds 
+Hero: raises €0.04 to €0.06
+Villain: folds 
+Caller: calls €0.04
+*** FLOP *** [Kd 7c 2h]
+Caller: checks 
+Hero: checks 
+*** TURN *** [Kd 7c 2h] [3s]
+Caller: bets €0.06
+Hero: folds 
+Uncalled bet (€0.06) returned to Caller
+Caller collected €0.13 from pot
+Caller: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.13 | Rake €0 
+Board [Kd 7c 2h 3s]
+Seat 1: Hero (button) folded on the Turn
+Seat 2: Villain (small blind) folded before Flop
+Seat 3: Caller (big blind) collected (€0.13)
+Seat 4: FolderA folded before Flop (didn't bet)
+Seat 5: FolderB folded before Flop (didn't bet)
+Seat 6: FolderC folded before Flop (didn't bet)
+
+
+PokerStars Hand #910000000003:  Hold'em No Limit (€0.01/€0.02 EUR) - 2026/09/05 20:10:00 CET [2026/09/05 14:10:00 ET]
+Table 'Leaks I' 6-max Seat #6 is the button
+Seat 1: Villain (€2 in chips) 
+Seat 2: Hero (€2 in chips) 
+Seat 3: FolderA (€2 in chips) 
+Seat 4: FolderB (€2 in chips) 
+Seat 5: FolderC (€2 in chips) 
+Seat 6: Raiser (€2 in chips) 
+Villain: posts small blind €0.01
+Hero: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero [Ac Qd]
+FolderA: folds 
+FolderB: folds 
+FolderC: folds 
+Raiser: raises €0.04 to €0.06
+Villain: folds 
+Hero: calls €0.04
+*** FLOP *** [Qh 7d 2c]
+Hero: checks 
+Raiser: bets €0.04
+Hero: calls €0.04
+*** TURN *** [Qh 7d 2c] [3s]
+Hero: checks 
+Raiser: checks 
+*** RIVER *** [Qh 7d 2c 3s] [8h]
+Hero: checks 
+Raiser: checks 
+*** SHOW DOWN ***
+Hero: shows [Ac Qd] (a pair of Queens)
+Raiser: shows [Jh Ts] (high card Jack)
+Hero collected €0.20 from pot
+*** SUMMARY ***
+Total pot €0.21 | Rake €0.01 
+Board [Qh 7d 2c 3s 8h]
+Seat 1: Villain (small blind) folded before Flop
+Seat 2: Hero (big blind) showed [Ac Qd] and won (€0.20) with a pair of Queens
+Seat 3: FolderA folded before Flop (didn't bet)
+Seat 4: FolderB folded before Flop (didn't bet)
+Seat 5: FolderC folded before Flop (didn't bet)
+Seat 6: Raiser (button) showed [Jh Ts] and lost with high card Jack
+
+
+PokerStars Hand #910000000004:  Hold'em No Limit (€0.01/€0.02 EUR) - 2026/09/05 20:15:00 CET [2026/09/05 14:15:00 ET]
+Table 'Leaks I' 6-max Seat #1 is the button
+Seat 1: Hero (€0.40 in chips) 
+Seat 2: Villain (€2 in chips) 
+Seat 3: Caller (€2 in chips) 
+Seat 4: FolderA (€2 in chips) 
+Seat 5: FolderB (€2 in chips) 
+Seat 6: FolderC (€2 in chips) 
+Villain: posts small blind €0.01
+Caller: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero [Kh Qh]
+FolderA: folds 
+FolderB: folds 
+FolderC: folds 
+Hero: raises €0.04 to €0.06
+Villain: folds 
+Caller: calls €0.04
+*** FLOP *** [Ah 7h 2c]
+Caller: bets €0.06
+Hero: calls €0.06
+*** TURN *** [Ah 7h 2c] [3s]
+Caller: bets €0.14
+Hero: folds 
+Uncalled bet (€0.14) returned to Caller
+Caller collected €0.24 from pot
+Caller: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.25 | Rake €0.01 
+Board [Ah 7h 2c 3s]
+Seat 1: Hero (button) folded on the Turn
+Seat 2: Villain (small blind) folded before Flop
+Seat 3: Caller (big blind) collected (€0.24)
+Seat 4: FolderA folded before Flop (didn't bet)
+Seat 5: FolderB folded before Flop (didn't bet)
+Seat 6: FolderC folded before Flop (didn't bet)

@@ -1,0 +1,15 @@
+{
+  "id": "nl2-9max",
+  "label": "NL2 full ring cash",
+  "appliesTo": { "gameTypes": ["cash"], "tableSizes": { "min": 7, "max": 10 } },
+  "source": "Full ring plays tighter than 6-max: more players left to act means fewer hands are profitable to open.",
+  "ranges": {
+    "vpip": { "min": 15, "max": 20 },
+    "pfr": { "min": 12, "max": 17 },
+    "three-bet": { "min": 4, "max": 7 },
+    "cbet-flop": { "min": 55, "max": 70 },
+    "wtsd": { "min": 22, "max": 28 },
+    "wsd": { "min": 52, "max": 58 },
+    "avg-stack": { "min": 90, "max": 130 }
+  }
+}

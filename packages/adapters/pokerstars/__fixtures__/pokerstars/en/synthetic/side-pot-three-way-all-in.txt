@@ -1,0 +1,45 @@
+﻿PokerStars Hand #900000000001:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 22:10:01 CET [2026/09/04 16:10:01 ET]
+Table 'Synthetic I' 6-max Seat #6 is the button
+Seat 1: Hero (€2 in chips) 
+Seat 2: ShortStack (€0.30 in chips) 
+Seat 3: BigStack (€5 in chips) 
+Seat 4: FolderA (€1 in chips) 
+Seat 5: FolderB (€1 in chips) 
+Seat 6: FolderC (€1 in chips) 
+Hero: posts small blind €0.01
+ShortStack: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero [Qh Jh]
+BigStack: raises €0.04 to €0.06
+FolderA: folds 
+FolderB: folds 
+FolderC: folds 
+Hero: calls €0.05
+ShortStack: raises €0.24 to €0.30 and is all-in
+BigStack: calls €0.24
+Hero: calls €0.24
+*** FLOP *** [Ah Kd 7c]
+Hero: checks 
+BigStack: bets €0.50
+Hero: calls €0.50
+*** TURN *** [Ah Kd 7c] [2s]
+Hero: checks 
+BigStack: checks 
+*** RIVER *** [Ah Kd 7c 2s] [9h]
+Hero: checks 
+BigStack: checks 
+*** SHOW DOWN ***
+Hero: shows [Qh Jh] (high card Ace)
+BigStack: shows [As Kh] (two pair, Aces and Kings)
+ShortStack: shows [Ac Ad] (three of a kind, Aces)
+ShortStack collected €0.86 from main pot
+BigStack collected €0.95 from side pot
+*** SUMMARY ***
+Total pot €1.90 Main pot €0.90. Side pot €1. | Rake €0.09 
+Board [Ah Kd 7c 2s 9h]
+Seat 1: Hero (small blind) showed [Qh Jh] and lost with high card Ace
+Seat 2: ShortStack (big blind) showed [Ac Ad] and won (€0.86) with three of a kind, Aces
+Seat 3: BigStack showed [As Kh] and won (€0.95) with two pair, Aces and Kings
+Seat 4: FolderA folded before Flop (didn't bet)
+Seat 5: FolderB folded before Flop (didn't bet)
+Seat 6: FolderC (button) folded before Flop (didn't bet)

@@ -1,0 +1,34 @@
+﻿PokerStars Hand #261973589911:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:45:10 CET [2026/09/04 17:45:10 ET]
+Table 'Bruwer VI' 6-max Seat #6 is the button
+Seat 5: CallStation5 (€2.19 in chips) is sitting out
+Seat 1: Hero99 (€1.66 in chips) 
+Seat 2: RailBird42 (€2.53 in chips) 
+Seat 3: NitFish07 (€2.10 in chips) 
+Seat 4: ChipLeader3 (€2.04 in chips) 
+Seat 6: ButtonAbuser (€2.89 in chips) 
+Hero99: posts small blind €0.01
+RailBird42: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [Ks Ts]
+NitFish07: raises €0.03 to €0.05
+ChipLeader3: folds 
+ButtonAbuser: raises €0.19 to €0.24
+Hero99: folds 
+RailBird42: folds 
+NitFish07: calls €0.19
+*** FLOP *** [8s 3h 4s]
+NitFish07: checks 
+ButtonAbuser: bets €2.65 and is all-in
+NitFish07: folds 
+Uncalled bet (€2.65) returned to ButtonAbuser
+ButtonAbuser collected €0.48 from pot
+ButtonAbuser: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.51 | Rake €0.03 
+Board [8s 3h 4s]
+Seat 5: CallStation5
+Seat 1: Hero99 (small blind) folded before Flop
+Seat 2: RailBird42 (big blind) folded before Flop
+Seat 3: NitFish07 folded on the Flop
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser (button) collected (€0.48)

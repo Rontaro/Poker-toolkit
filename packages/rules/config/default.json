@@ -1,0 +1,45 @@
+{
+  "id": "default",
+  "label": "Micro-stakes 6-max cash",
+  "note": "Thresholds and the guesses used to price each leak. Everything a rule treats as a number lives here, so disagreeing with a rule means editing this file rather than the code. The probabilities are estimates, not solver output: they exist to rank leaks against each other.",
+  "rules": {
+    "min-bet": {
+      "minPotFraction": 0.33,
+      "recommendedPotFraction": 0.5,
+      "callProbability": 0.5
+    },
+    "missed-value-river": {
+      "recommendedPotFraction": 0.5,
+      "callProbability": 0.5
+    },
+    "passive-call-strong": {
+      "maxBetPotFraction": 0.4,
+      "raiseMultiple": 3,
+      "callProbability": 0.5
+    },
+    "open-limp": {
+      "foldEquity": 0.3
+    },
+    "small-open": {
+      "baseOpenBB": 2.5,
+      "perLimperBB": 1,
+      "valueFactor": 0.3
+    },
+    "missed-cbet": {
+      "maxBoardWetness": 1,
+      "recommendedPotFraction": 0.5,
+      "foldEquity": 0.5
+    },
+    "sb-flat": {
+      "penaltyFraction": 0.5
+    },
+    "short-buyin": {
+      "thresholdBB": 40,
+      "costPerHandBB": 0.05
+    },
+    "thin-stack-no-shove": {
+      "maxStackBB": 20,
+      "foldEquity": 0.4
+    }
+  }
+}

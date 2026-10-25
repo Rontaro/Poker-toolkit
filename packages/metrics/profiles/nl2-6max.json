@@ -1,0 +1,27 @@
+{
+  "id": "nl2-6max",
+  "label": "NL2 6-max cash",
+  "appliesTo": { "gameTypes": ["cash"], "tableSizes": { "min": 6, "max": 6 } },
+  "source": "Common winning-regular ranges for micro-stakes 6-max. Adjust these to taste: they are a starting point, not a verdict.",
+  "ranges": {
+    "vpip": { "min": 22, "max": 26 },
+    "pfr": { "min": 18, "max": 22 },
+    "three-bet": { "min": 6, "max": 9 },
+    "fold-to-three-bet": { "min": 40, "max": 60 },
+    "four-bet": { "min": 2, "max": 5 },
+    "cbet-flop": { "min": 55, "max": 70 },
+    "cbet-turn": { "min": 40, "max": 60 },
+    "cbet-river": { "min": 30, "max": 50 },
+    "fold-to-cbet-flop": { "min": 40, "max": 55 },
+    "wwsf": { "min": 45, "max": 50 },
+    "wtsd": { "min": 24, "max": 30 },
+    "wsd": { "min": 50, "max": 56 },
+    "af-flop": { "min": 1.5, "max": 3 },
+    "af-turn": { "min": 1.5, "max": 3 },
+    "af-river": { "min": 1, "max": 2.5 },
+    "afq-flop": { "min": 35, "max": 55 },
+    "afq-turn": { "min": 35, "max": 55 },
+    "afq-river": { "min": 30, "max": 50 },
+    "avg-stack": { "min": 90, "max": 130 }
+  }
+}

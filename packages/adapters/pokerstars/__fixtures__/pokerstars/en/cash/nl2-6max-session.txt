@@ -1,0 +1,2019 @@
+﻿PokerStars Hand #261973389667:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:29:09 CET [2026/09/04 17:29:09 ET]
+Table 'Bruwer VI' 6-max Seat #6 is the button
+Seat 1: Hero99 (€1.62 in chips) 
+Seat 2: RailBird42 (€2 in chips) 
+Seat 3: NitFish07 (€1.97 in chips) 
+Seat 4: ChipLeader3 (€2.21 in chips) 
+Seat 5: CallStation5 (€1.53 in chips) 
+Seat 6: ButtonAbuser (€3.84 in chips) 
+Hero99: posts small blind €0.01
+RailBird42: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [2d 5c]
+NitFish07: folds 
+ChipLeader3: raises €0.04 to €0.06
+CallStation5: folds 
+ButtonAbuser: folds 
+Hero99: folds 
+RailBird42: calls €0.04
+*** FLOP *** [4c Qs 5d]
+RailBird42: checks 
+ChipLeader3: checks 
+*** TURN *** [4c Qs 5d] [7c]
+RailBird42: bets €0.08
+ChipLeader3: calls €0.08
+*** RIVER *** [4c Qs 5d 7c] [Td]
+RailBird42: bets €0.14
+ChipLeader3: folds 
+Uncalled bet (€0.14) returned to RailBird42
+RailBird42 collected €0.27 from pot
+RailBird42: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.29 | Rake €0.02 
+Board [4c Qs 5d 7c Td]
+Seat 1: Hero99 (small blind) folded before Flop
+Seat 2: RailBird42 (big blind) collected (€0.27)
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 folded on the River
+Seat 5: CallStation5 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser (button) folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973402835:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:30:12 CET [2026/09/04 17:30:12 ET]
+Table 'Bruwer VI' 6-max Seat #1 is the button
+Seat 1: Hero99 (€1.61 in chips) 
+Seat 2: RailBird42 (€2.13 in chips) 
+Seat 3: NitFish07 (€1.97 in chips) 
+Seat 4: ChipLeader3 (€2.07 in chips) 
+Seat 5: CallStation5 (€1.53 in chips) 
+Seat 6: ButtonAbuser (€3.84 in chips) 
+RailBird42: posts small blind €0.01
+NitFish07: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [9s 5c]
+ChipLeader3: folds 
+CallStation5: raises €0.02 to €0.04
+ButtonAbuser: calls €0.04
+Hero99: folds 
+RailBird42: folds 
+NitFish07: folds 
+*** FLOP *** [4d Js 9d]
+CallStation5: checks 
+ButtonAbuser: bets €0.05
+CallStation5: calls €0.05
+*** TURN *** [4d Js 9d] [4s]
+CallStation5: checks 
+ButtonAbuser: bets €0.10
+CallStation5: calls €0.10
+*** RIVER *** [4d Js 9d 4s] [7s]
+CallStation5: checks 
+ButtonAbuser: checks 
+*** SHOW DOWN ***
+CallStation5: shows [Ac 9h] (two pair, Nines and Fours)
+ButtonAbuser: mucks hand 
+CallStation5 collected €0.39 from pot
+*** SUMMARY ***
+Total pot €0.41 | Rake €0.02 
+Board [4d Js 9d 4s 7s]
+Seat 1: Hero99 (button) folded before Flop (didn't bet)
+Seat 2: RailBird42 (small blind) folded before Flop
+Seat 3: NitFish07 (big blind) folded before Flop
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 5: CallStation5 showed [Ac 9h] and won (€0.39) with two pair, Nines and Fours
+Seat 6: ButtonAbuser mucked [6d 6h]
+
+
+
+PokerStars Hand #261973409201:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:30:42 CET [2026/09/04 17:30:42 ET]
+Table 'Bruwer VI' 6-max Seat #2 is the button
+Seat 1: Hero99 (€1.61 in chips) 
+Seat 2: RailBird42 (€2.12 in chips) 
+Seat 3: NitFish07 (€1.95 in chips) 
+Seat 4: ChipLeader3 (€2.07 in chips) 
+Seat 5: CallStation5 (€1.73 in chips) 
+Seat 6: ButtonAbuser (€3.65 in chips) 
+NitFish07: posts small blind €0.01
+ChipLeader3: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [Kc 6h]
+CallStation5: folds 
+ButtonAbuser: folds 
+Hero99: folds 
+RailBird42: raises €0.04 to €0.06
+NitFish07: folds 
+ChipLeader3: folds 
+Uncalled bet (€0.04) returned to RailBird42
+RailBird42 collected €0.05 from pot
+RailBird42: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.05 | Rake €0 
+Seat 1: Hero99 folded before Flop (didn't bet)
+Seat 2: RailBird42 (button) collected (€0.05)
+Seat 3: NitFish07 (small blind) folded before Flop
+Seat 4: ChipLeader3 (big blind) folded before Flop
+Seat 5: CallStation5 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973414541:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:31:07 CET [2026/09/04 17:31:07 ET]
+Table 'Bruwer VI' 6-max Seat #3 is the button
+Seat 1: Hero99 (€1.61 in chips) 
+Seat 2: RailBird42 (€2.15 in chips) 
+Seat 3: NitFish07 (€1.94 in chips) 
+Seat 4: ChipLeader3 (€2.05 in chips) 
+Seat 5: CallStation5 (€1.73 in chips) 
+Seat 6: ButtonAbuser (€3.65 in chips) 
+ChipLeader3: posts small blind €0.01
+CallStation5: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [8s 4d]
+ButtonAbuser: folds 
+Hero99: folds 
+RailBird42 has timed out
+RailBird42: folds 
+NitFish07: folds 
+ChipLeader3: raises €0.05 to €0.07
+CallStation5: folds 
+Uncalled bet (€0.05) returned to ChipLeader3
+ChipLeader3 collected €0.04 from pot
+ChipLeader3: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.04 | Rake €0 
+Seat 1: Hero99 folded before Flop (didn't bet)
+Seat 2: RailBird42 folded before Flop (didn't bet)
+Seat 3: NitFish07 (button) folded before Flop (didn't bet)
+Seat 4: ChipLeader3 (small blind) collected (€0.04)
+Seat 5: CallStation5 (big blind) folded before Flop
+Seat 6: ButtonAbuser folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973420544:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:31:35 CET [2026/09/04 17:31:35 ET]
+Table 'Bruwer VI' 6-max Seat #4 is the button
+Seat 1: Hero99 (€1.61 in chips) 
+Seat 2: RailBird42 (€2.15 in chips) 
+Seat 3: NitFish07 (€1.94 in chips) 
+Seat 4: ChipLeader3 (€2.07 in chips) 
+Seat 5: CallStation5 (€1.71 in chips) 
+Seat 6: ButtonAbuser (€3.65 in chips) 
+CallStation5: posts small blind €0.01
+ButtonAbuser: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [Tc As]
+Hero99: calls €0.02
+RailBird42: raises €0.04 to €0.06
+NitFish07: folds 
+ChipLeader3: folds 
+CallStation5: folds 
+ButtonAbuser: folds 
+Hero99: calls €0.04
+*** FLOP *** [Th 5s Jd]
+Hero99: bets €0.06
+RailBird42: calls €0.06
+*** TURN *** [Th 5s Jd] [4d]
+Hero99: bets €0.12
+RailBird42: calls €0.12
+*** RIVER *** [Th 5s Jd 4d] [Qd]
+Hero99: checks 
+RailBird42: bets €0.14
+Hero99: calls €0.14
+*** SHOW DOWN ***
+RailBird42: shows [9s Qs] (a pair of Queens)
+Hero99: mucks hand 
+RailBird42 collected €0.75 from pot
+*** SUMMARY ***
+Total pot €0.79 | Rake €0.04 
+Board [Th 5s Jd 4d Qd]
+Seat 1: Hero99 mucked [Tc As]
+Seat 2: RailBird42 showed [9s Qs] and won (€0.75) with a pair of Queens
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 (button) folded before Flop (didn't bet)
+Seat 5: CallStation5 (small blind) folded before Flop
+Seat 6: ButtonAbuser (big blind) folded before Flop
+
+
+
+PokerStars Hand #261973435309:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:32:46 CET [2026/09/04 17:32:46 ET]
+Table 'Bruwer VI' 6-max Seat #5 is the button
+Seat 1: Hero99 (€1.23 in chips) 
+Seat 2: RailBird42 (€2.52 in chips) 
+Seat 3: NitFish07 (€1.94 in chips) 
+Seat 4: ChipLeader3 (€2.07 in chips) 
+Seat 5: CallStation5 (€1.70 in chips) 
+Seat 6: ButtonAbuser (€3.63 in chips) 
+ButtonAbuser: posts small blind €0.01
+Hero99: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [8s Ts]
+RailBird42: folds 
+NitFish07: raises €0.03 to €0.05
+ChipLeader3: folds 
+CallStation5: folds 
+ButtonAbuser: folds 
+Hero99: calls €0.03
+*** FLOP *** [8c Ac As]
+Hero99: checks 
+NitFish07: bets €0.03
+Hero99: raises €0.03 to €0.06
+NitFish07: folds 
+Uncalled bet (€0.03) returned to Hero99
+Hero99 collected €0.16 from pot
+Hero99: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.17 | Rake €0.01 
+Board [8c Ac As]
+Seat 1: Hero99 (big blind) collected (€0.16)
+Seat 2: RailBird42 folded before Flop (didn't bet)
+Seat 3: NitFish07 folded on the Flop
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 5: CallStation5 (button) folded before Flop (didn't bet)
+Seat 6: ButtonAbuser (small blind) folded before Flop
+
+
+
+PokerStars Hand #261973443524:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:33:25 CET [2026/09/04 17:33:25 ET]
+Table 'Bruwer VI' 6-max Seat #6 is the button
+Seat 1: Hero99 (€1.31 in chips) 
+Seat 2: RailBird42 (€2.52 in chips) 
+Seat 3: NitFish07 (€2 in chips) 
+Seat 4: ChipLeader3 (€2.07 in chips) 
+Seat 5: CallStation5 (€1.70 in chips) 
+Seat 6: ButtonAbuser (€3.62 in chips) 
+Hero99: posts small blind €0.01
+RailBird42: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [Qc Ad]
+NitFish07: folds 
+ChipLeader3: folds 
+CallStation5: folds 
+ButtonAbuser: calls €0.02
+Hero99: raises €0.02 to €0.04
+RailBird42: folds 
+ButtonAbuser: calls €0.02
+*** FLOP *** [8s 6s 7d]
+Hero99: bets €0.04
+ButtonAbuser: calls €0.04
+*** TURN *** [8s 6s 7d] [7h]
+Hero99: bets €0.08
+ButtonAbuser: folds 
+Uncalled bet (€0.08) returned to Hero99
+Hero99 collected €0.17 from pot
+Hero99: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.18 | Rake €0.01 
+Board [8s 6s 7d 7h]
+Seat 1: Hero99 (small blind) collected (€0.17)
+Seat 2: RailBird42 (big blind) folded before Flop
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 5: CallStation5 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser (button) folded on the Turn
+
+
+
+PokerStars Hand #261973451137:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:34:01 CET [2026/09/04 17:34:01 ET]
+Table 'Bruwer VI' 6-max Seat #1 is the button
+Seat 1: Hero99 (€1.40 in chips) 
+Seat 2: RailBird42 (€2.50 in chips) 
+Seat 3: NitFish07 (€2 in chips) 
+Seat 4: ChipLeader3 (€2.07 in chips) 
+Seat 5: CallStation5 (€1.70 in chips) 
+Seat 6: ButtonAbuser (€3.54 in chips) 
+RailBird42: posts small blind €0.01
+NitFish07: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [Kd 2d]
+ChipLeader3: folds 
+CallStation5: folds 
+ButtonAbuser: folds 
+Hero99: raises €0.04 to €0.06
+RailBird42: folds 
+NitFish07: calls €0.04
+*** FLOP *** [Qd Tc 9d]
+NitFish07: checks 
+Hero99: bets €0.08
+NitFish07: calls €0.08
+*** TURN *** [Qd Tc 9d] [6h]
+NitFish07: checks 
+Hero99: bets €0.14
+NitFish07: calls €0.14
+*** RIVER *** [Qd Tc 9d 6h] [Jh]
+NitFish07: checks 
+Hero99: bets €0.30
+NitFish07: folds 
+Uncalled bet (€0.30) returned to Hero99
+Hero99 collected €0.54 from pot
+Hero99: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.57 | Rake €0.03 
+Board [Qd Tc 9d 6h Jh]
+Seat 1: Hero99 (button) collected (€0.54)
+Seat 2: RailBird42 (small blind) folded before Flop
+Seat 3: NitFish07 (big blind) folded on the River
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 5: CallStation5 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973463442:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:34:59 CET [2026/09/04 17:34:59 ET]
+Table 'Bruwer VI' 6-max Seat #2 is the button
+Seat 1: Hero99 (€1.66 in chips) 
+Seat 2: RailBird42 (€2.49 in chips) 
+Seat 3: NitFish07 (€2 in chips) 
+Seat 4: ChipLeader3 (€2.07 in chips) 
+Seat 5: CallStation5 (€1.70 in chips) 
+Seat 6: ButtonAbuser (€3.54 in chips) 
+NitFish07: posts small blind €0.01
+ChipLeader3: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [5s Jh]
+CallStation5: folds 
+ButtonAbuser: raises €0.04 to €0.06
+Hero99: folds 
+RailBird42: folds 
+NitFish07: folds 
+ChipLeader3: folds 
+Uncalled bet (€0.04) returned to ButtonAbuser
+ButtonAbuser collected €0.05 from pot
+ButtonAbuser: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.05 | Rake €0 
+Seat 1: Hero99 folded before Flop (didn't bet)
+Seat 2: RailBird42 (button) folded before Flop (didn't bet)
+Seat 3: NitFish07 (small blind) folded before Flop
+Seat 4: ChipLeader3 (big blind) folded before Flop
+Seat 5: CallStation5 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser collected (€0.05)
+
+
+
+PokerStars Hand #261973468099:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:35:21 CET [2026/09/04 17:35:21 ET]
+Table 'Bruwer VI' 6-max Seat #3 is the button
+Seat 1: Hero99 (€1.66 in chips) 
+Seat 2: RailBird42 (€2.49 in chips) 
+Seat 3: NitFish07 (€1.99 in chips) 
+Seat 4: ChipLeader3 (€2.05 in chips) 
+Seat 5: CallStation5 (€1.70 in chips) 
+Seat 6: ButtonAbuser (€3.57 in chips) 
+ChipLeader3: posts small blind €0.01
+CallStation5: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [4s Th]
+ButtonAbuser: folds 
+Hero99: folds 
+RailBird42: folds 
+NitFish07: raises €0.02 to €0.04
+ChipLeader3: folds 
+CallStation5: calls €0.02
+*** FLOP *** [Ac 3s 2h]
+CallStation5: checks 
+NitFish07: bets €0.03
+CallStation5: calls €0.03
+*** TURN *** [Ac 3s 2h] [3h]
+CallStation5: checks 
+NitFish07: bets €0.07
+CallStation5: raises €0.09 to €0.16
+NitFish07: folds 
+Uncalled bet (€0.09) returned to CallStation5
+CallStation5 collected €0.27 from pot
+*** SUMMARY ***
+Total pot €0.29 | Rake €0.02 
+Board [Ac 3s 2h 3h]
+Seat 1: Hero99 folded before Flop (didn't bet)
+Seat 2: RailBird42 folded before Flop (didn't bet)
+Seat 3: NitFish07 (button) folded on the Turn
+Seat 4: ChipLeader3 (small blind) folded before Flop
+Seat 5: CallStation5 (big blind) collected (€0.27)
+Seat 6: ButtonAbuser folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973477521:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:36:07 CET [2026/09/04 17:36:07 ET]
+Table 'Bruwer VI' 6-max Seat #4 is the button
+Seat 1: Hero99 (€1.66 in chips) 
+Seat 2: RailBird42 (€2.49 in chips) 
+Seat 3: NitFish07 (€2 in chips) 
+Seat 4: ChipLeader3 (€2.04 in chips) 
+Seat 5: CallStation5 (€1.83 in chips) 
+Seat 6: ButtonAbuser (€3.57 in chips) 
+CallStation5: posts small blind €0.01
+ButtonAbuser: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [3h Th]
+Hero99: calls €0.02
+RailBird42: folds 
+NitFish07: folds 
+ChipLeader3: folds 
+CallStation5: folds 
+ButtonAbuser: checks 
+*** FLOP *** [3d 4h Ac]
+ButtonAbuser: checks 
+Hero99: bets €0.02
+ButtonAbuser: calls €0.02
+*** TURN *** [3d 4h Ac] [7h]
+ButtonAbuser: bets €0.04
+Hero99: raises €0.04 to €0.08
+ButtonAbuser: calls €0.04
+*** RIVER *** [3d 4h Ac 7h] [2h]
+ButtonAbuser: checks 
+Hero99: bets €0.14
+ButtonAbuser: folds 
+Uncalled bet (€0.14) returned to Hero99
+Hero99 collected €0.24 from pot
+Hero99: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.25 | Rake €0.01 
+Board [3d 4h Ac 7h 2h]
+Seat 1: Hero99 collected (€0.24)
+Seat 2: RailBird42 folded before Flop (didn't bet)
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 (button) folded before Flop (didn't bet)
+Seat 5: CallStation5 (small blind) folded before Flop
+Seat 6: ButtonAbuser (big blind) folded on the River
+
+
+
+PokerStars Hand #261973490545:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:37:09 CET [2026/09/04 17:37:09 ET]
+Table 'Bruwer VI' 6-max Seat #5 is the button
+Seat 1: Hero99 (€1.78 in chips) 
+Seat 2: RailBird42 (€2.49 in chips) 
+Seat 3: NitFish07 (€2 in chips) 
+Seat 4: ChipLeader3 (€2.04 in chips) 
+Seat 5: CallStation5 (€1.82 in chips) 
+Seat 6: ButtonAbuser (€3.45 in chips) 
+ButtonAbuser: posts small blind €0.01
+Hero99: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [Kc 8s]
+RailBird42: folds 
+NitFish07: folds 
+ChipLeader3: folds 
+CallStation5: raises €0.03 to €0.05
+ButtonAbuser: folds 
+Hero99: calls €0.03
+*** FLOP *** [8d 4s 7d]
+Hero99: bets €0.06
+CallStation5: calls €0.06
+*** TURN *** [8d 4s 7d] [As]
+Hero99: bets €0.12
+CallStation5: calls €0.12
+*** RIVER *** [8d 4s 7d As] [Tc]
+Hero99: checks 
+CallStation5: checks 
+*** SHOW DOWN ***
+Hero99: shows [Kc 8s] (a pair of Eights)
+CallStation5: shows [Js Jh] (a pair of Jacks)
+CallStation5 collected €0.44 from pot
+*** SUMMARY ***
+Total pot €0.47 | Rake €0.03 
+Board [8d 4s 7d As Tc]
+Seat 1: Hero99 (big blind) showed [Kc 8s] and lost with a pair of Eights
+Seat 2: RailBird42 folded before Flop (didn't bet)
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 5: CallStation5 (button) showed [Js Jh] and won (€0.44) with a pair of Jacks
+Seat 6: ButtonAbuser (small blind) folded before Flop
+
+
+
+PokerStars Hand #261973500395:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:37:57 CET [2026/09/04 17:37:57 ET]
+Table 'Bruwer VI' 6-max Seat #6 is the button
+Seat 1: Hero99 (€1.55 in chips) 
+Seat 2: RailBird42 (€2.49 in chips) 
+Seat 3: NitFish07 (€2 in chips) 
+Seat 4: ChipLeader3 (€2.04 in chips) 
+Seat 5: CallStation5 (€2.03 in chips) 
+Seat 6: ButtonAbuser (€3.44 in chips) 
+Hero99: posts small blind €0.01
+RailBird42: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [As 9d]
+NitFish07: folds 
+ChipLeader3: raises €0.04 to €0.06
+CallStation5: folds 
+ButtonAbuser: folds 
+Hero99: calls €0.05
+RailBird42: calls €0.04
+*** FLOP *** [2d Ac 4d]
+Hero99: bets €0.10
+RailBird42: folds 
+ChipLeader3: folds 
+Uncalled bet (€0.10) returned to Hero99
+Hero99 collected €0.17 from pot
+Hero99: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.18 | Rake €0.01 
+Board [2d Ac 4d]
+Seat 1: Hero99 (small blind) collected (€0.17)
+Seat 2: RailBird42 (big blind) folded on the Flop
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 folded on the Flop
+Seat 5: CallStation5 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser (button) folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973506570:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:38:27 CET [2026/09/04 17:38:27 ET]
+Table 'Bruwer VI' 6-max Seat #1 is the button
+Seat 1: Hero99 (€1.66 in chips) 
+Seat 2: RailBird42 (€2.43 in chips) 
+Seat 3: NitFish07 (€2 in chips) 
+Seat 4: ChipLeader3 (€2 in chips) 
+Seat 5: CallStation5 (€2.03 in chips) 
+Seat 6: ButtonAbuser (€3.44 in chips) 
+RailBird42: posts small blind €0.01
+NitFish07: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [Td Tc]
+ChipLeader3: raises €0.04 to €0.06
+CallStation5: folds 
+ButtonAbuser: folds 
+Hero99: raises €0.04 to €0.10
+RailBird42: raises €0.28 to €0.38
+NitFish07: folds 
+ChipLeader3: folds 
+Hero99: calls €0.28
+*** FLOP *** [7d 4s 8h]
+RailBird42: bets €0.40
+Hero99: folds 
+Uncalled bet (€0.40) returned to RailBird42
+RailBird42 collected €0.79 from pot
+RailBird42: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.84 | Rake €0.05 
+Board [7d 4s 8h]
+Seat 1: Hero99 (button) folded on the Flop
+Seat 2: RailBird42 (small blind) collected (€0.79)
+Seat 3: NitFish07 (big blind) folded before Flop
+Seat 4: ChipLeader3 folded before Flop
+Seat 5: CallStation5 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973517707:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:39:21 CET [2026/09/04 17:39:21 ET]
+Table 'Bruwer VI' 6-max Seat #2 is the button
+Seat 1: Hero99 (€1.28 in chips) 
+Seat 2: RailBird42 (€2.84 in chips) 
+Seat 3: NitFish07 (€1.98 in chips) 
+Seat 4: ChipLeader3 (€2 in chips) 
+Seat 5: CallStation5 (€2.03 in chips) 
+Seat 6: ButtonAbuser (€3.44 in chips) 
+NitFish07: posts small blind €0.01
+ChipLeader3: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [Th 9h]
+CallStation5: folds 
+ButtonAbuser: calls €0.02
+Hero99: raises €0.02 to €0.04
+RailBird42: folds 
+NitFish07: folds 
+ChipLeader3: folds 
+ButtonAbuser: calls €0.02
+*** FLOP *** [Ac Ts 2c]
+ButtonAbuser: bets €0.06
+Hero99: calls €0.06
+*** TURN *** [Ac Ts 2c] [4s]
+ButtonAbuser: bets €0.12
+Hero99: calls €0.12
+*** RIVER *** [Ac Ts 2c 4s] [3c]
+ButtonAbuser: bets €0.10
+Hero99: calls €0.10
+*** SHOW DOWN ***
+ButtonAbuser: shows [As 9s] (a pair of Aces)
+Hero99: mucks hand 
+ButtonAbuser collected €0.63 from pot
+*** SUMMARY ***
+Total pot €0.67 | Rake €0.04 
+Board [Ac Ts 2c 4s 3c]
+Seat 1: Hero99 mucked [Th 9h]
+Seat 2: RailBird42 (button) folded before Flop (didn't bet)
+Seat 3: NitFish07 (small blind) folded before Flop
+Seat 4: ChipLeader3 (big blind) folded before Flop
+Seat 5: CallStation5 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser showed [As 9s] and won (€0.63) with a pair of Aces
+
+
+
+PokerStars Hand #261973527737:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:40:09 CET [2026/09/04 17:40:09 ET]
+Table 'Bruwer VI' 6-max Seat #3 is the button
+Seat 1: Hero99 (€0.96 in chips) 
+Seat 2: RailBird42 (€2.84 in chips) 
+Seat 3: NitFish07 (€1.97 in chips) 
+Seat 4: ChipLeader3 (€2 in chips) 
+Seat 5: CallStation5 (€2.03 in chips) 
+Seat 6: ButtonAbuser (€3.75 in chips) 
+ChipLeader3: posts small blind €0.01
+CallStation5: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [7h Qs]
+ButtonAbuser: calls €0.02
+Hero99: folds 
+RailBird42: folds 
+NitFish07: raises €0.06 to €0.08
+ChipLeader3: folds 
+CallStation5: folds 
+ButtonAbuser: calls €0.06
+*** FLOP *** [Kd 8h 2c]
+ButtonAbuser: checks 
+NitFish07: bets €0.05
+ButtonAbuser: folds 
+Uncalled bet (€0.05) returned to NitFish07
+NitFish07 collected €0.18 from pot
+*** SUMMARY ***
+Total pot €0.19 | Rake €0.01 
+Board [Kd 8h 2c]
+Seat 1: Hero99 folded before Flop (didn't bet)
+Seat 2: RailBird42 folded before Flop (didn't bet)
+Seat 3: NitFish07 (button) collected (€0.18)
+Seat 4: ChipLeader3 (small blind) folded before Flop
+Seat 5: CallStation5 (big blind) folded before Flop
+Seat 6: ButtonAbuser folded on the Flop
+
+
+
+PokerStars Hand #261973534982:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:40:44 CET [2026/09/04 17:40:44 ET]
+Table 'Bruwer VI' 6-max Seat #4 is the button
+Seat 1: Hero99 (€0.96 in chips) 
+Seat 2: RailBird42 (€2.84 in chips) 
+Seat 3: NitFish07 (€2.07 in chips) 
+Seat 4: ChipLeader3 (€2 in chips) 
+Seat 5: CallStation5 (€2.01 in chips) 
+Seat 6: ButtonAbuser (€3.67 in chips) 
+CallStation5: posts small blind €0.01
+ButtonAbuser: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [Td Qd]
+Hero99: calls €0.02
+RailBird42: folds 
+NitFish07: folds 
+ChipLeader3: raises €0.06 to €0.08
+CallStation5: folds 
+ButtonAbuser: folds 
+Hero99: calls €0.06
+*** FLOP *** [9c 4d As]
+Hero99: checks 
+ChipLeader3: bets €0.06
+Hero99: folds 
+Uncalled bet (€0.06) returned to ChipLeader3
+ChipLeader3 collected €0.18 from pot
+ChipLeader3: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.19 | Rake €0.01 
+Board [9c 4d As]
+Seat 1: Hero99 folded on the Flop
+Seat 2: RailBird42 folded before Flop (didn't bet)
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 (button) collected (€0.18)
+Seat 5: CallStation5 (small blind) folded before Flop
+Seat 6: ButtonAbuser (big blind) folded before Flop
+
+
+
+PokerStars Hand #261973544061:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:41:28 CET [2026/09/04 17:41:28 ET]
+Table 'Bruwer VI' 6-max Seat #5 is the button
+Seat 1: Hero99 (€0.88 in chips) 
+Seat 2: RailBird42 (€2.84 in chips) 
+Seat 3: NitFish07 (€2.07 in chips) 
+Seat 4: ChipLeader3 (€2.10 in chips) 
+Seat 5: CallStation5 (€2 in chips) 
+Seat 6: ButtonAbuser (€3.65 in chips) 
+ButtonAbuser: posts small blind €0.01
+Hero99: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [7d 7c]
+RailBird42: raises €0.04 to €0.06
+NitFish07: folds 
+ChipLeader3: folds 
+CallStation5: raises €0.14 to €0.20
+ButtonAbuser: folds 
+Hero99: folds 
+RailBird42: calls €0.14
+*** FLOP *** [6s 2s Ts]
+RailBird42: checks 
+CallStation5: checks 
+*** TURN *** [6s 2s Ts] [3c]
+RailBird42: checks 
+CallStation5: checks 
+*** RIVER *** [6s 2s Ts 3c] [7s]
+RailBird42: checks 
+CallStation5: checks 
+*** SHOW DOWN ***
+RailBird42: shows [Qd Jh] (high card Queen)
+CallStation5: shows [Ad Kh] (high card Ace)
+CallStation5 collected €0.41 from pot
+*** SUMMARY ***
+Total pot €0.43 | Rake €0.02 
+Board [6s 2s Ts 3c 7s]
+Seat 1: Hero99 (big blind) folded before Flop
+Seat 2: RailBird42 showed [Qd Jh] and lost with high card Queen
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 5: CallStation5 (button) showed [Ad Kh] and won (€0.41) with high card Ace
+Seat 6: ButtonAbuser (small blind) folded before Flop
+
+
+
+PokerStars Hand #261973555164:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:42:22 CET [2026/09/04 17:42:22 ET]
+Table 'Bruwer VI' 6-max Seat #6 is the button
+Seat 1: Hero99 (€0.86 in chips) 
+Seat 2: RailBird42 (€2.64 in chips) 
+Seat 3: NitFish07 (€2.07 in chips) 
+Seat 4: ChipLeader3 (€2.10 in chips) 
+Seat 5: CallStation5 (€2.21 in chips) 
+Seat 6: ButtonAbuser (€3.64 in chips) 
+Hero99: posts small blind €0.01
+RailBird42: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [Ts Jc]
+NitFish07: folds 
+ChipLeader3: folds 
+CallStation5: folds 
+ButtonAbuser: raises €0.08 to €0.10
+Hero99: folds 
+RailBird42: calls €0.08
+*** FLOP *** [Ad Ks 9d]
+RailBird42: checks 
+ButtonAbuser: bets €0.10
+RailBird42: folds 
+Uncalled bet (€0.10) returned to ButtonAbuser
+ButtonAbuser collected €0.20 from pot
+ButtonAbuser: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.21 | Rake €0.01 
+Board [Ad Ks 9d]
+Seat 1: Hero99 (small blind) folded before Flop
+Seat 2: RailBird42 (big blind) folded on the Flop
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 5: CallStation5 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser (button) collected (€0.20)
+
+
+
+PokerStars Hand #261973560982:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:42:50 CET [2026/09/04 17:42:50 ET]
+Table 'Bruwer VI' 6-max Seat #1 is the button
+Seat 1: Hero99 (€0.85 in chips) 
+Seat 2: RailBird42 (€2.54 in chips) 
+Seat 3: NitFish07 (€2.07 in chips) 
+Seat 4: ChipLeader3 (€2.10 in chips) 
+Seat 5: CallStation5 (€2.21 in chips) 
+Seat 6: ButtonAbuser (€3.74 in chips) 
+RailBird42: posts small blind €0.01
+NitFish07: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [Jh 4c]
+ChipLeader3: folds 
+CallStation5: folds 
+ButtonAbuser: folds 
+Hero99: folds 
+RailBird42: folds 
+Uncalled bet (€0.01) returned to NitFish07
+NitFish07 collected €0.02 from pot
+*** SUMMARY ***
+Total pot €0.02 | Rake €0 
+Seat 1: Hero99 (button) folded before Flop (didn't bet)
+Seat 2: RailBird42 (small blind) folded before Flop
+Seat 3: NitFish07 (big blind) collected (€0.02)
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 5: CallStation5 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973569754:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:43:32 CET [2026/09/04 17:43:32 ET]
+Table 'Bruwer VI' 6-max Seat #2 is the button
+Seat 1: Hero99 (€0.85 in chips) 
+Seat 2: RailBird42 (€2.53 in chips) 
+Seat 3: NitFish07 (€2.08 in chips) 
+Seat 4: ChipLeader3 (€2.10 in chips) 
+Seat 5: CallStation5 (€2.21 in chips) 
+Seat 6: ButtonAbuser (€3.74 in chips) 
+NitFish07: posts small blind €0.01
+ChipLeader3: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [Qs 3c]
+CallStation5: folds 
+ButtonAbuser: folds 
+Hero99: folds 
+RailBird42: folds 
+NitFish07: raises €0.04 to €0.06
+ChipLeader3: folds 
+Uncalled bet (€0.04) returned to NitFish07
+NitFish07 collected €0.04 from pot
+*** SUMMARY ***
+Total pot €0.04 | Rake €0 
+Seat 1: Hero99 folded before Flop (didn't bet)
+Seat 2: RailBird42 (button) folded before Flop (didn't bet)
+Seat 3: NitFish07 (small blind) collected (€0.04)
+Seat 4: ChipLeader3 (big blind) folded before Flop
+Seat 5: CallStation5 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973572786:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:43:46 CET [2026/09/04 17:43:46 ET]
+Table 'Bruwer VI' 6-max Seat #3 is the button
+Seat 1: Hero99 (€0.85 in chips) 
+Seat 2: RailBird42 (€2.53 in chips) 
+Seat 3: NitFish07 (€2.10 in chips) 
+Seat 4: ChipLeader3 (€2.08 in chips) 
+Seat 5: CallStation5 (€2.21 in chips) 
+Seat 6: ButtonAbuser (€3.74 in chips) 
+ChipLeader3: posts small blind €0.01
+CallStation5: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [Js 5h]
+ButtonAbuser: folds 
+Hero99: folds 
+RailBird42: folds 
+NitFish07: folds 
+ChipLeader3: raises €0.05 to €0.07
+CallStation5 is disconnected 
+CallStation5 has timed out while disconnected
+CallStation5: folds 
+Uncalled bet (€0.05) returned to ChipLeader3
+ChipLeader3 collected €0.04 from pot
+ChipLeader3: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.04 | Rake €0 
+Seat 1: Hero99 folded before Flop (didn't bet)
+Seat 2: RailBird42 folded before Flop (didn't bet)
+Seat 3: NitFish07 (button) folded before Flop (didn't bet)
+Seat 4: ChipLeader3 (small blind) collected (€0.04)
+Seat 5: CallStation5 (big blind) folded before Flop
+Seat 6: ButtonAbuser folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973581758:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:44:30 CET [2026/09/04 17:44:30 ET]
+Table 'Bruwer VI' 6-max Seat #4 is the button
+Seat 5: CallStation5 (€2.19 in chips) is sitting out
+Seat 1: Hero99 (€0.85 in chips) 
+Seat 2: RailBird42 (€2.53 in chips) 
+Seat 3: NitFish07 (€2.10 in chips) 
+Seat 4: ChipLeader3 (€2.10 in chips) 
+Seat 6: ButtonAbuser (€3.74 in chips) 
+ButtonAbuser: posts small blind €0.01
+Hero99: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [6s 8s]
+RailBird42: folds 
+NitFish07: folds 
+ChipLeader3: raises €0.04 to €0.06
+ButtonAbuser: calls €0.05
+Hero99: calls €0.04
+*** FLOP *** [8d 6c Jc]
+ButtonAbuser: bets €0.09
+Hero99: calls €0.09
+ChipLeader3: folds 
+*** TURN *** [8d 6c Jc] [4c]
+ButtonAbuser: bets €0.34
+Hero99: calls €0.34
+*** RIVER *** [8d 6c Jc 4c] [Th]
+ButtonAbuser: bets €0.98
+Hero99: calls €0.36 and is all-in
+Uncalled bet (€0.62) returned to ButtonAbuser
+*** SHOW DOWN ***
+ButtonAbuser: shows [Jh Ad] (a pair of Jacks)
+Hero99: shows [6s 8s] (two pair, Eights and Sixes)
+Hero99 collected €1.66 from pot
+*** SUMMARY ***
+Total pot €1.76 | Rake €0.10 
+Board [8d 6c Jc 4c Th]
+Seat 5: CallStation5
+Seat 1: Hero99 (big blind) showed [6s 8s] and won (€1.66) with two pair, Eights and Sixes
+Seat 2: RailBird42 folded before Flop (didn't bet)
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 (button) folded on the Flop
+Seat 6: ButtonAbuser (small blind) showed [Jh Ad] and lost with a pair of Jacks
+
+
+
+PokerStars Hand #261973589911:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:45:10 CET [2026/09/04 17:45:10 ET]
+Table 'Bruwer VI' 6-max Seat #6 is the button
+Seat 5: CallStation5 (€2.19 in chips) is sitting out
+Seat 1: Hero99 (€1.66 in chips) 
+Seat 2: RailBird42 (€2.53 in chips) 
+Seat 3: NitFish07 (€2.10 in chips) 
+Seat 4: ChipLeader3 (€2.04 in chips) 
+Seat 6: ButtonAbuser (€2.89 in chips) 
+Hero99: posts small blind €0.01
+RailBird42: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [Ks Ts]
+NitFish07: raises €0.03 to €0.05
+ChipLeader3: folds 
+ButtonAbuser: raises €0.19 to €0.24
+Hero99: folds 
+RailBird42: folds 
+NitFish07: calls €0.19
+*** FLOP *** [8s 3h 4s]
+NitFish07: checks 
+ButtonAbuser: bets €2.65 and is all-in
+NitFish07: folds 
+Uncalled bet (€2.65) returned to ButtonAbuser
+ButtonAbuser collected €0.48 from pot
+ButtonAbuser: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.51 | Rake €0.03 
+Board [8s 3h 4s]
+Seat 5: CallStation5
+Seat 1: Hero99 (small blind) folded before Flop
+Seat 2: RailBird42 (big blind) folded before Flop
+Seat 3: NitFish07 folded on the Flop
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser (button) collected (€0.48)
+
+
+
+PokerStars Hand #261973595904:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:45:39 CET [2026/09/04 17:45:39 ET]
+Table 'Bruwer VI' 6-max Seat #1 is the button
+Seat 5: CallStation5 (€2.19 in chips) is sitting out
+Seat 1: Hero99 (€1.65 in chips) 
+Seat 2: RailBird42 (€2.51 in chips) 
+Seat 3: NitFish07 (€2 in chips) 
+Seat 4: ChipLeader3 (€2.04 in chips) 
+Seat 6: ButtonAbuser (€3.13 in chips) 
+RailBird42: posts small blind €0.01
+NitFish07: posts big blind €0.02
+CallStation5: sits out 
+*** HOLE CARDS ***
+Dealt to Hero99 [Qs 6s]
+ChipLeader3: folds 
+ButtonAbuser: folds 
+Hero99: raises €0.02 to €0.04
+RailBird42: folds 
+NitFish07: folds 
+Uncalled bet (€0.02) returned to Hero99
+Hero99 collected €0.05 from pot
+Hero99: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.05 | Rake €0 
+Seat 5: CallStation5
+Seat 1: Hero99 (button) collected (€0.05)
+Seat 2: RailBird42 (small blind) folded before Flop
+Seat 3: NitFish07 (big blind) folded before Flop
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973598787:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:45:54 CET [2026/09/04 17:45:54 ET]
+Table 'Bruwer VI' 6-max Seat #2 is the button
+Seat 5: CallStation5 (€2.19 in chips) is sitting out
+Seat 1: Hero99 (€1.68 in chips) 
+Seat 2: RailBird42 (€2.50 in chips) 
+Seat 3: NitFish07 (€1.98 in chips) 
+Seat 4: ChipLeader3 (€2.04 in chips) 
+Seat 6: ButtonAbuser (€3.13 in chips) 
+NitFish07: posts small blind €0.01
+ChipLeader3: posts big blind €0.02
+CallStation5: sits out 
+*** HOLE CARDS ***
+Dealt to Hero99 [Kh 8s]
+ButtonAbuser: calls €0.02
+Hero99: folds 
+RailBird42: folds 
+NitFish07: raises €0.06 to €0.08
+ChipLeader3: folds 
+ButtonAbuser: calls €0.06
+*** FLOP *** [Jc 2s 6d]
+NitFish07: bets €0.05
+ButtonAbuser: calls €0.05
+*** TURN *** [Jc 2s 6d] [9h]
+NitFish07: checks 
+ButtonAbuser: bets €0.10
+NitFish07: folds 
+Uncalled bet (€0.10) returned to ButtonAbuser
+ButtonAbuser collected €0.26 from pot
+ButtonAbuser: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.28 | Rake €0.02 
+Board [Jc 2s 6d 9h]
+Seat 5: CallStation5
+Seat 1: Hero99 folded before Flop (didn't bet)
+Seat 2: RailBird42 (button) folded before Flop (didn't bet)
+Seat 3: NitFish07 (small blind) folded on the Turn
+Seat 4: ChipLeader3 (big blind) folded before Flop
+Seat 6: ButtonAbuser collected (€0.26)
+
+
+
+PokerStars Hand #261973606564:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:46:32 CET [2026/09/04 17:46:32 ET]
+Table 'Bruwer VI' 6-max Seat #3 is the button
+Seat 1: Hero99 (€1.68 in chips) 
+Seat 2: RailBird42 (€2.50 in chips) 
+Seat 3: NitFish07 (€2 in chips) 
+Seat 4: ChipLeader3 (€2.02 in chips) 
+Seat 5: CallStation5 (€2.19 in chips) 
+Seat 6: ButtonAbuser (€3.26 in chips) 
+ChipLeader3: posts small blind €0.01
+CallStation5: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [4s Qd]
+ButtonAbuser: folds 
+Hero99: folds 
+RailBird42: folds 
+NitFish07: raises €0.02 to €0.04
+ChipLeader3: folds 
+CallStation5: folds 
+Uncalled bet (€0.02) returned to NitFish07
+NitFish07 collected €0.05 from pot
+*** SUMMARY ***
+Total pot €0.05 | Rake €0 
+Seat 1: Hero99 folded before Flop (didn't bet)
+Seat 2: RailBird42 folded before Flop (didn't bet)
+Seat 3: NitFish07 (button) collected (€0.05)
+Seat 4: ChipLeader3 (small blind) folded before Flop
+Seat 5: CallStation5 (big blind) folded before Flop
+Seat 6: ButtonAbuser folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973611583:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:46:56 CET [2026/09/04 17:46:56 ET]
+Table 'Bruwer VI' 6-max Seat #4 is the button
+Seat 1: Hero99 (€1.68 in chips) 
+Seat 2: RailBird42 (€2.50 in chips) 
+Seat 3: NitFish07 (€2.03 in chips) 
+Seat 4: ChipLeader3 (€2.01 in chips) 
+Seat 5: CallStation5 (€2.17 in chips) 
+Seat 6: ButtonAbuser (€3.26 in chips) 
+CallStation5: posts small blind €0.01
+ButtonAbuser: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [Qc Kc]
+Hero99: raises €0.04 to €0.06
+RailBird42: folds 
+NitFish07: folds 
+ChipLeader3: folds 
+CallStation5: folds 
+ButtonAbuser: calls €0.04
+*** FLOP *** [2d 8s 6h]
+ButtonAbuser: bets €0.02
+Hero99: raises €0.02 to €0.04
+ButtonAbuser: calls €0.02
+*** TURN *** [2d 8s 6h] [9c]
+CallStation5 leaves the table
+ButtonAbuser: bets €0.20
+Hero99: folds 
+Uncalled bet (€0.20) returned to ButtonAbuser
+ButtonAbuser collected €0.20 from pot
+ButtonAbuser: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.21 | Rake €0.01 
+Board [2d 8s 6h 9c]
+Seat 1: Hero99 folded on the Turn
+Seat 2: RailBird42 folded before Flop (didn't bet)
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 (button) folded before Flop (didn't bet)
+Seat 5: CallStation5 (small blind) folded before Flop
+Seat 6: ButtonAbuser (big blind) collected (€0.20)
+
+
+
+PokerStars Hand #261973619800:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:47:37 CET [2026/09/04 17:47:37 ET]
+Table 'Bruwer VI' 6-max Seat #6 is the button
+Seat 1: Hero99 (€1.58 in chips) 
+Seat 2: RailBird42 (€2.50 in chips) 
+Seat 3: NitFish07 (€2.03 in chips) 
+Seat 4: ChipLeader3 (€2.01 in chips) 
+Seat 6: ButtonAbuser (€3.36 in chips) 
+Hero99: posts small blind €0.01
+RailBird42: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [9s Kh]
+Blu30518 joins the table at seat #5 
+NitFish07: folds 
+ChipLeader3: folds 
+ButtonAbuser: folds 
+Hero99: calls €0.01
+RailBird42: checks 
+*** FLOP *** [2c Jh 6d]
+Hero99: checks 
+RailBird42: checks 
+*** TURN *** [2c Jh 6d] [4s]
+Hero99: bets €0.04
+RailBird42: folds 
+Uncalled bet (€0.04) returned to Hero99
+Hero99 collected €0.04 from pot
+Hero99: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.04 | Rake €0 
+Board [2c Jh 6d 4s]
+Seat 1: Hero99 (small blind) collected (€0.04)
+Seat 2: RailBird42 (big blind) folded on the Turn
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser (button) folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973625315:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:48:04 CET [2026/09/04 17:48:04 ET]
+Table 'Bruwer VI' 6-max Seat #1 is the button
+Seat 5: Blu30518 (€2 in chips) is sitting out
+Seat 1: Hero99 (€1.60 in chips) 
+Seat 2: RailBird42 (€2.48 in chips) 
+Seat 3: NitFish07 (€2.03 in chips) 
+Seat 4: ChipLeader3 (€2.01 in chips) 
+Seat 6: ButtonAbuser (€3.36 in chips) 
+RailBird42: posts small blind €0.01
+NitFish07: posts big blind €0.02
+Blu30518: sits out 
+*** HOLE CARDS ***
+Dealt to Hero99 [Ad Kd]
+ChipLeader3: folds 
+ButtonAbuser: calls €0.02
+Hero99: raises €0.06 to €0.08
+RailBird42: folds 
+NitFish07: folds 
+ButtonAbuser: calls €0.06
+*** FLOP *** [3d 6s 3s]
+ButtonAbuser: bets €0.02
+Hero99: raises €0.06 to €0.08
+ButtonAbuser: folds 
+Uncalled bet (€0.06) returned to Hero99
+Hero99 collected €0.22 from pot
+Hero99: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.23 | Rake €0.01 
+Board [3d 6s 3s]
+Seat 5: Blu30518
+Seat 1: Hero99 (button) collected (€0.22)
+Seat 2: RailBird42 (small blind) folded before Flop
+Seat 3: NitFish07 (big blind) folded before Flop
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser folded on the Flop
+
+
+
+PokerStars Hand #261973633687:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:48:46 CET [2026/09/04 17:48:46 ET]
+Table 'Bruwer VI' 6-max Seat #2 is the button
+Seat 5: Blu30518 (€2 in chips) is sitting out
+Seat 1: Hero99 (€1.72 in chips) 
+Seat 2: RailBird42 (€2.47 in chips) 
+Seat 3: NitFish07 (€2.01 in chips) 
+Seat 4: ChipLeader3 (€2.01 in chips) 
+Seat 6: ButtonAbuser (€3.26 in chips) 
+NitFish07: posts small blind €0.01
+ChipLeader3: posts big blind €0.02
+Blu30518: sits out 
+*** HOLE CARDS ***
+Dealt to Hero99 [Kc 4d]
+ButtonAbuser: calls €0.02
+Hero99: folds 
+RailBird42: raises €0.04 to €0.06
+NitFish07: folds 
+ChipLeader3: folds 
+ButtonAbuser: calls €0.04
+*** FLOP *** [Ad 7c 5h]
+ButtonAbuser: bets €0.14
+RailBird42: folds 
+Uncalled bet (€0.14) returned to ButtonAbuser
+ButtonAbuser collected €0.14 from pot
+ButtonAbuser: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.15 | Rake €0.01 
+Board [Ad 7c 5h]
+Seat 5: Blu30518
+Seat 1: Hero99 folded before Flop (didn't bet)
+Seat 2: RailBird42 (button) folded on the Flop
+Seat 3: NitFish07 (small blind) folded before Flop
+Seat 4: ChipLeader3 (big blind) folded before Flop
+Seat 6: ButtonAbuser collected (€0.14)
+
+
+
+PokerStars Hand #261973638491:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:49:10 CET [2026/09/04 17:49:10 ET]
+Table 'Bruwer VI' 6-max Seat #3 is the button
+Seat 1: Hero99 (€1.72 in chips) 
+Seat 2: RailBird42 (€2.41 in chips) 
+Seat 3: NitFish07 (€2 in chips) 
+Seat 4: ChipLeader3 (€2 in chips) 
+Seat 5: Blu30518 (€2 in chips) 
+Seat 6: ButtonAbuser (€3.34 in chips) 
+ChipLeader3: posts small blind €0.01
+Blu30518: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [3c Qh]
+ButtonAbuser: calls €0.02
+Hero99: folds 
+RailBird42: folds 
+NitFish07: raises €0.06 to €0.08
+ChipLeader3: raises €0.26 to €0.34
+Blu30518: folds 
+ButtonAbuser: calls €0.32
+NitFish07: folds 
+*** FLOP *** [Qc Kc Ac]
+ChipLeader3: bets €0.41
+ButtonAbuser: calls €0.41
+*** TURN *** [Qc Kc Ac] [7s]
+ChipLeader3: bets €1.25 and is all-in
+ButtonAbuser: calls €1.25
+*** RIVER *** [Qc Kc Ac 7s] [2s]
+*** SHOW DOWN ***
+ChipLeader3: shows [Jc Jd] (a pair of Jacks)
+ButtonAbuser: shows [As Js] (a pair of Aces)
+ButtonAbuser collected €3.87 from pot
+*** SUMMARY ***
+Total pot €4.10 | Rake €0.23 
+Board [Qc Kc Ac 7s 2s]
+Seat 1: Hero99 folded before Flop (didn't bet)
+Seat 2: RailBird42 folded before Flop (didn't bet)
+Seat 3: NitFish07 (button) folded before Flop
+Seat 4: ChipLeader3 (small blind) showed [Jc Jd] and lost with a pair of Jacks
+Seat 5: Blu30518 (big blind) folded before Flop
+Seat 6: ButtonAbuser showed [As Js] and won (€3.87) with a pair of Aces
+
+
+
+PokerStars Hand #261973651956:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:50:17 CET [2026/09/04 17:50:17 ET]
+Table 'Bruwer VI' 6-max Seat #4 is the button
+Seat 1: Hero99 (€1.72 in chips) 
+Seat 2: RailBird42 (€2.41 in chips) 
+Seat 3: NitFish07 (€1.92 in chips) 
+Seat 4: ChipLeader3 (€2 in chips) 
+Seat 5: Blu30518 (€1.98 in chips) 
+Seat 6: ButtonAbuser (€5.21 in chips) 
+Blu30518: posts small blind €0.01
+ButtonAbuser: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [Jd 5h]
+Hero99: folds 
+RailBird42: folds 
+NitFish07: folds 
+ChipLeader3: folds 
+Blu30518: calls €0.01
+ButtonAbuser: checks 
+*** FLOP *** [4c 8d Kd]
+Blu30518: checks 
+ButtonAbuser: bets €0.04
+Blu30518: calls €0.04
+*** TURN *** [4c 8d Kd] [Qs]
+Blu30518: checks 
+ButtonAbuser: bets €0.11
+Blu30518: folds 
+Uncalled bet (€0.11) returned to ButtonAbuser
+ButtonAbuser collected €0.11 from pot
+ButtonAbuser: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.12 | Rake €0.01 
+Board [4c 8d Kd Qs]
+Seat 1: Hero99 folded before Flop (didn't bet)
+Seat 2: RailBird42 folded before Flop (didn't bet)
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 (button) folded before Flop (didn't bet)
+Seat 5: Blu30518 (small blind) folded on the Turn
+Seat 6: ButtonAbuser (big blind) collected (€0.11)
+
+
+
+PokerStars Hand #261973657204:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:50:43 CET [2026/09/04 17:50:43 ET]
+Table 'Bruwer VI' 6-max Seat #5 is the button
+Seat 1: Hero99 (€1.72 in chips) 
+Seat 2: RailBird42 (€2.41 in chips) 
+Seat 3: NitFish07 (€1.92 in chips) 
+Seat 4: ChipLeader3 (€2 in chips) 
+Seat 5: Blu30518 (€1.92 in chips) 
+Seat 6: ButtonAbuser (€5.26 in chips) 
+ButtonAbuser: posts small blind €0.01
+Hero99: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [8h Jc]
+RailBird42: folds 
+NitFish07: folds 
+ChipLeader3: folds 
+Blu30518: folds 
+ButtonAbuser: calls €0.01
+Hero99: checks 
+*** FLOP *** [Qh Qd 4c]
+ButtonAbuser: checks 
+Hero99: checks 
+*** TURN *** [Qh Qd 4c] [3c]
+ButtonAbuser: checks 
+Hero99: checks 
+*** RIVER *** [Qh Qd 4c 3c] [Ks]
+ButtonAbuser: checks 
+Hero99: checks 
+*** SHOW DOWN ***
+ButtonAbuser: shows [8d Td] (a pair of Queens)
+Hero99: shows [8h Jc] (a pair of Queens - King+Jack kicker)
+Hero99 collected €0.04 from pot
+*** SUMMARY ***
+Total pot €0.04 | Rake €0 
+Board [Qh Qd 4c 3c Ks]
+Seat 1: Hero99 (big blind) showed [8h Jc] and won (€0.04) with a pair of Queens
+Seat 2: RailBird42 folded before Flop (didn't bet)
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 5: Blu30518 (button) folded before Flop (didn't bet)
+Seat 6: ButtonAbuser (small blind) showed [8d Td] and lost with a pair of Queens
+
+
+
+PokerStars Hand #261973661421:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:51:05 CET [2026/09/04 17:51:05 ET]
+Table 'Bruwer VI' 6-max Seat #6 is the button
+Seat 1: Hero99 (€1.74 in chips) 
+Seat 2: RailBird42 (€2.41 in chips) 
+Seat 3: NitFish07 (€1.92 in chips) 
+Seat 4: ChipLeader3 (€2 in chips) 
+Seat 5: Blu30518 (€1.92 in chips) 
+Seat 6: ButtonAbuser (€5.24 in chips) 
+Hero99: posts small blind €0.01
+RailBird42: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [6c 4c]
+NitFish07: folds 
+ChipLeader3: folds 
+Blu30518: calls €0.02
+ButtonAbuser: folds 
+Hero99: calls €0.01
+RailBird42: checks 
+*** FLOP *** [Qc Jc 5d]
+Hero99: checks 
+RailBird42: checks 
+Blu30518: bets €0.08
+Hero99: folds 
+RailBird42: folds 
+Uncalled bet (€0.08) returned to Blu30518
+Blu30518 collected €0.06 from pot
+*** SUMMARY ***
+Total pot €0.06 | Rake €0 
+Board [Qc Jc 5d]
+Seat 1: Hero99 (small blind) folded on the Flop
+Seat 2: RailBird42 (big blind) folded on the Flop
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 5: Blu30518 collected (€0.06)
+Seat 6: ButtonAbuser (button) folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973667876:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:51:37 CET [2026/09/04 17:51:37 ET]
+Table 'Bruwer VI' 6-max Seat #1 is the button
+Seat 1: Hero99 (€1.72 in chips) 
+Seat 2: RailBird42 (€2.39 in chips) 
+Seat 3: NitFish07 (€1.92 in chips) 
+Seat 4: ChipLeader3 (€2 in chips) 
+Seat 5: Blu30518 (€1.96 in chips) 
+Seat 6: ButtonAbuser (€5.24 in chips) 
+RailBird42: posts small blind €0.01
+NitFish07: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [9d Qh]
+ChipLeader3: folds 
+Blu30518: folds 
+ButtonAbuser: folds 
+Hero99: folds 
+RailBird42: folds 
+Uncalled bet (€0.01) returned to NitFish07
+NitFish07 collected €0.02 from pot
+*** SUMMARY ***
+Total pot €0.02 | Rake €0 
+Seat 1: Hero99 (button) folded before Flop (didn't bet)
+Seat 2: RailBird42 (small blind) folded before Flop
+Seat 3: NitFish07 (big blind) collected (€0.02)
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 5: Blu30518 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973672101:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:51:58 CET [2026/09/04 17:51:58 ET]
+Table 'Bruwer VI' 6-max Seat #2 is the button
+Seat 1: Hero99 (€1.72 in chips) 
+Seat 2: RailBird42 (€2.38 in chips) 
+Seat 3: NitFish07 (€1.93 in chips) 
+Seat 4: ChipLeader3 (€2 in chips) 
+Seat 5: Blu30518 (€1.96 in chips) 
+Seat 6: ButtonAbuser (€5.24 in chips) 
+NitFish07: posts small blind €0.01
+ChipLeader3: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [2s Qh]
+Blu30518: raises €0.08 to €0.10
+ButtonAbuser: folds 
+Hero99: folds 
+RailBird42: folds 
+NitFish07: folds 
+ChipLeader3: folds 
+Uncalled bet (€0.08) returned to Blu30518
+Blu30518 collected €0.05 from pot
+*** SUMMARY ***
+Total pot €0.05 | Rake €0 
+Seat 1: Hero99 folded before Flop (didn't bet)
+Seat 2: RailBird42 (button) folded before Flop (didn't bet)
+Seat 3: NitFish07 (small blind) folded before Flop
+Seat 4: ChipLeader3 (big blind) folded before Flop
+Seat 5: Blu30518 collected (€0.05)
+Seat 6: ButtonAbuser folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973676848:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:52:22 CET [2026/09/04 17:52:22 ET]
+Table 'Bruwer VI' 6-max Seat #3 is the button
+Seat 1: Hero99 (€1.72 in chips) 
+Seat 2: RailBird42 (€2.38 in chips) 
+Seat 3: NitFish07 (€1.92 in chips) 
+Seat 4: ChipLeader3 (€2 in chips) 
+Seat 5: Blu30518 (€1.99 in chips) 
+Seat 6: ButtonAbuser (€5.24 in chips) 
+ChipLeader3: posts small blind €0.01
+Blu30518: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [8d Td]
+ButtonAbuser: calls €0.02
+Hero99: calls €0.02
+RailBird42: raises €0.04 to €0.06
+NitFish07: calls €0.06
+ChipLeader3: folds 
+Blu30518: folds 
+ButtonAbuser: calls €0.04
+Hero99: calls €0.04
+*** FLOP *** [4h 9d 5s]
+ButtonAbuser: bets €0.06
+Hero99: folds 
+RailBird42: folds 
+NitFish07: calls €0.06
+*** TURN *** [4h 9d 5s] [Kh]
+ButtonAbuser: checks 
+NitFish07: checks 
+*** RIVER *** [4h 9d 5s Kh] [2s]
+ButtonAbuser: bets €0.06
+NitFish07: folds 
+Uncalled bet (€0.06) returned to ButtonAbuser
+ButtonAbuser collected €0.37 from pot
+ButtonAbuser: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.39 | Rake €0.02 
+Board [4h 9d 5s Kh 2s]
+Seat 1: Hero99 folded on the Flop
+Seat 2: RailBird42 folded on the Flop
+Seat 3: NitFish07 (button) folded on the River
+Seat 4: ChipLeader3 (small blind) folded before Flop
+Seat 5: Blu30518 (big blind) folded before Flop
+Seat 6: ButtonAbuser collected (€0.37)
+
+
+
+PokerStars Hand #261973688554:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:53:22 CET [2026/09/04 17:53:22 ET]
+Table 'Bruwer VI' 6-max Seat #4 is the button
+Seat 1: Hero99 (€1.66 in chips) 
+Seat 2: RailBird42 (€2.32 in chips) 
+Seat 3: NitFish07 (€2 in chips) 
+Seat 4: ChipLeader3 (€2 in chips) 
+Seat 5: Blu30518 (€1.97 in chips) 
+Seat 6: ButtonAbuser (€5.49 in chips) 
+Blu30518: posts small blind €0.01
+ButtonAbuser: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [Qh 7c]
+Hero99: folds 
+RailBird42: folds 
+NitFish07: folds 
+ChipLeader3: raises €0.04 to €0.06
+Blu30518: calls €0.05
+ButtonAbuser: folds 
+*** FLOP *** [9h 6d 9c]
+Blu30518: checks 
+ChipLeader3: bets €0.04
+Blu30518: calls €0.04
+*** TURN *** [9h 6d 9c] [Tc]
+Blu30518: checks 
+ChipLeader3: bets €0.17
+Blu30518: folds 
+Uncalled bet (€0.17) returned to ChipLeader3
+ChipLeader3 collected €0.21 from pot
+ChipLeader3: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.22 | Rake €0.01 
+Board [9h 6d 9c Tc]
+Seat 1: Hero99 folded before Flop (didn't bet)
+Seat 2: RailBird42 folded before Flop (didn't bet)
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 (button) collected (€0.21)
+Seat 5: Blu30518 (small blind) folded on the Turn
+Seat 6: ButtonAbuser (big blind) folded before Flop
+
+
+
+PokerStars Hand #261973696664:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:54:03 CET [2026/09/04 17:54:03 ET]
+Table 'Bruwer VI' 6-max Seat #5 is the button
+Seat 1: Hero99 (€1.66 in chips) 
+Seat 2: RailBird42 (€2.32 in chips) 
+Seat 3: NitFish07 (€2 in chips) 
+Seat 4: ChipLeader3 (€2.11 in chips) 
+Seat 5: Blu30518 (€1.87 in chips) 
+Seat 6: ButtonAbuser (€5.47 in chips) 
+ButtonAbuser: posts small blind €0.01
+Hero99: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [Kc Qc]
+RailBird42: raises €0.04 to €0.06
+NitFish07: folds 
+ChipLeader3: folds 
+Blu30518: calls €0.06
+ButtonAbuser: folds 
+Hero99: calls €0.04
+*** FLOP *** [5c Kh 2c]
+Hero99: bets €0.08
+RailBird42: folds 
+Blu30518: calls €0.08
+*** TURN *** [5c Kh 2c] [Ks]
+Hero99: bets €0.12
+Blu30518: folds 
+Uncalled bet (€0.12) returned to Hero99
+Hero99 collected €0.33 from pot
+Hero99: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.35 | Rake €0.02 
+Board [5c Kh 2c Ks]
+Seat 1: Hero99 (big blind) collected (€0.33)
+Seat 2: RailBird42 folded on the Flop
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 5: Blu30518 (button) folded on the Turn
+Seat 6: ButtonAbuser (small blind) folded before Flop
+
+
+
+PokerStars Hand #261973704102:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:54:41 CET [2026/09/04 17:54:41 ET]
+Table 'Bruwer VI' 6-max Seat #6 is the button
+Seat 1: Hero99 (€1.85 in chips) 
+Seat 2: RailBird42 (€2.26 in chips) 
+Seat 3: NitFish07 (€2 in chips) 
+Seat 4: ChipLeader3 (€2.11 in chips) 
+Seat 5: Blu30518 (€1.73 in chips) 
+Seat 6: ButtonAbuser (€5.46 in chips) 
+Hero99: posts small blind €0.01
+RailBird42: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [5h Ts]
+NitFish07: folds 
+ChipLeader3: folds 
+Blu30518: folds 
+ButtonAbuser: calls €0.02
+Hero99: calls €0.01
+RailBird42: raises €0.04 to €0.06
+ButtonAbuser: calls €0.04
+Hero99: folds 
+*** FLOP *** [5d Qd 2c]
+RailBird42: checks 
+ButtonAbuser: checks 
+*** TURN *** [5d Qd 2c] [5c]
+RailBird42: checks 
+ButtonAbuser: checks 
+*** RIVER *** [5d Qd 2c 5c] [Th]
+RailBird42: checks 
+ButtonAbuser: checks 
+*** SHOW DOWN ***
+RailBird42: shows [3h Qh] (two pair, Queens and Fives)
+ButtonAbuser: mucks hand 
+RailBird42 collected €0.13 from pot
+*** SUMMARY ***
+Total pot €0.14 | Rake €0.01 
+Board [5d Qd 2c 5c Th]
+Seat 1: Hero99 (small blind) folded before Flop
+Seat 2: RailBird42 (big blind) showed [3h Qh] and won (€0.13) with two pair, Queens and Fives
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 5: Blu30518 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser (button) mucked [6d 3d]
+
+
+
+PokerStars Hand #261973712507:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:55:32 CET [2026/09/04 17:55:32 ET]
+Table 'Bruwer VI' 6-max Seat #1 is the button
+Seat 1: Hero99 (€1.83 in chips) 
+Seat 2: RailBird42 (€2.33 in chips) 
+Seat 3: NitFish07 (€2 in chips) 
+Seat 4: ChipLeader3 (€2.11 in chips) 
+Seat 5: Blu30518 (€1.73 in chips) 
+Seat 6: ButtonAbuser (€5.40 in chips) 
+RailBird42: posts small blind €0.01
+NitFish07: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [7s 4c]
+ChipLeader3: folds 
+Blu30518: folds 
+ButtonAbuser: raises €0.04 to €0.06
+Hero99: folds 
+RailBird42: calls €0.05
+NitFish07: calls €0.04
+*** FLOP *** [2h 5h Ah]
+RailBird42: checks 
+NitFish07: checks 
+ButtonAbuser: checks 
+*** TURN *** [2h 5h Ah] [4h]
+RailBird42: bets €0.09
+NitFish07: folds 
+ButtonAbuser: folds 
+Uncalled bet (€0.09) returned to RailBird42
+RailBird42 collected €0.17 from pot
+RailBird42: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.18 | Rake €0.01 
+Board [2h 5h Ah 4h]
+Seat 1: Hero99 (button) folded before Flop (didn't bet)
+Seat 2: RailBird42 (small blind) collected (€0.17)
+Seat 3: NitFish07 (big blind) folded on the Turn
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 5: Blu30518 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser folded on the Turn
+
+
+
+PokerStars Hand #261973719913:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:56:23 CET [2026/09/04 17:56:23 ET]
+Table 'Bruwer VI' 6-max Seat #2 is the button
+Seat 1: Hero99 (€1.83 in chips) 
+Seat 2: RailBird42 (€2.44 in chips) 
+Seat 3: NitFish07 (€1.94 in chips) 
+Seat 4: ChipLeader3 (€2.11 in chips) 
+Seat 5: Blu30518 (€1.73 in chips) 
+Seat 6: ButtonAbuser (€5.34 in chips) 
+NitFish07: posts small blind €0.01
+ChipLeader3: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [8d 6h]
+Blu30518: folds 
+ButtonAbuser: folds 
+Hero99: folds 
+RailBird42: raises €0.04 to €0.06
+NitFish07: folds 
+ChipLeader3: calls €0.04
+*** FLOP *** [7s Qc 5c]
+ChipLeader3: checks 
+RailBird42: bets €0.06
+ChipLeader3: calls €0.06
+*** TURN *** [7s Qc 5c] [3d]
+ChipLeader3: checks 
+RailBird42: bets €0.17
+ChipLeader3: folds 
+Uncalled bet (€0.17) returned to RailBird42
+RailBird42 collected €0.24 from pot
+RailBird42: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.25 | Rake €0.01 
+Board [7s Qc 5c 3d]
+Seat 1: Hero99 folded before Flop (didn't bet)
+Seat 2: RailBird42 (button) collected (€0.24)
+Seat 3: NitFish07 (small blind) folded before Flop
+Seat 4: ChipLeader3 (big blind) folded on the Turn
+Seat 5: Blu30518 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973726141:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:57:07 CET [2026/09/04 17:57:07 ET]
+Table 'Bruwer VI' 6-max Seat #3 is the button
+Seat 1: Hero99 (€1.83 in chips) 
+Seat 2: RailBird42 (€2.56 in chips) 
+Seat 3: NitFish07 (€1.93 in chips) 
+Seat 4: ChipLeader3 (€2 in chips) 
+Seat 5: Blu30518 (€1.73 in chips) 
+Seat 6: ButtonAbuser (€5.34 in chips) 
+ChipLeader3: posts small blind €0.01
+Blu30518: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [5d 6c]
+ButtonAbuser: folds 
+Hero99: folds 
+RailBird42: raises €0.04 to €0.06
+NitFish07: raises €0.12 to €0.18
+ChipLeader3: folds 
+Blu30518: folds 
+RailBird42: calls €0.12
+*** FLOP *** [8c 9d 4h]
+RailBird42: checks 
+NitFish07: bets €0.11
+RailBird42: folds 
+Uncalled bet (€0.11) returned to NitFish07
+NitFish07 collected €0.37 from pot
+*** SUMMARY ***
+Total pot €0.39 | Rake €0.02 
+Board [8c 9d 4h]
+Seat 1: Hero99 folded before Flop (didn't bet)
+Seat 2: RailBird42 folded on the Flop
+Seat 3: NitFish07 (button) collected (€0.37)
+Seat 4: ChipLeader3 (small blind) folded before Flop
+Seat 5: Blu30518 (big blind) folded before Flop
+Seat 6: ButtonAbuser folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973731956:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:57:47 CET [2026/09/04 17:57:47 ET]
+Table 'Bruwer VI' 6-max Seat #4 is the button
+Seat 1: Hero99 (€1.83 in chips) 
+Seat 2: RailBird42 (€2.38 in chips) 
+Seat 3: NitFish07 (€2.12 in chips) 
+Seat 4: ChipLeader3 (€2 in chips) 
+Seat 5: Blu30518 (€1.71 in chips) 
+Seat 6: ButtonAbuser (€5.34 in chips) 
+Blu30518: posts small blind €0.01
+ButtonAbuser: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [6s Ad]
+Hero99: calls €0.02
+RailBird42: raises €0.04 to €0.06
+NitFish07: folds 
+ChipLeader3: calls €0.06
+Blu30518: folds 
+ButtonAbuser: calls €0.04
+Hero99: calls €0.04
+*** FLOP *** [Ah 2s Kc]
+ButtonAbuser: checks 
+Hero99: checks 
+RailBird42: checks 
+ChipLeader3: checks 
+*** TURN *** [Ah 2s Kc] [As]
+ButtonAbuser: checks 
+Hero99: bets €0.12
+RailBird42: folds 
+ChipLeader3: calls €0.12
+ButtonAbuser: folds 
+*** RIVER *** [Ah 2s Kc As] [Td]
+Hero99: bets €0.32
+ChipLeader3: folds 
+Uncalled bet (€0.32) returned to Hero99
+Hero99 collected €0.46 from pot
+Hero99: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.49 | Rake €0.03 
+Board [Ah 2s Kc As Td]
+Seat 1: Hero99 collected (€0.46)
+Seat 2: RailBird42 folded on the Turn
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 (button) folded on the River
+Seat 5: Blu30518 (small blind) folded before Flop
+Seat 6: ButtonAbuser (big blind) folded on the Turn
+
+
+
+PokerStars Hand #261973740562:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:58:46 CET [2026/09/04 17:58:46 ET]
+Table 'Bruwer VI' 6-max Seat #5 is the button
+Seat 1: Hero99 (€2.11 in chips) 
+Seat 2: RailBird42 (€2.32 in chips) 
+Seat 3: NitFish07 (€2.12 in chips) 
+Seat 4: ChipLeader3 (€2 in chips) 
+Seat 5: Blu30518 (€1.70 in chips) 
+Seat 6: ButtonAbuser (€5.28 in chips) 
+ButtonAbuser: posts small blind €0.01
+Hero99: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [5s Jd]
+RailBird42: raises €0.04 to €0.06
+NitFish07: folds 
+ChipLeader3: folds 
+Blu30518: folds 
+ButtonAbuser: raises €0.14 to €0.20
+Hero99: folds 
+RailBird42: calls €0.14
+*** FLOP *** [9c 3h Ts]
+ButtonAbuser: bets €0.20
+RailBird42: folds 
+Uncalled bet (€0.20) returned to ButtonAbuser
+ButtonAbuser collected €0.40 from pot
+ButtonAbuser: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.42 | Rake €0.02 
+Board [9c 3h Ts]
+Seat 1: Hero99 (big blind) folded before Flop
+Seat 2: RailBird42 folded on the Flop
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 5: Blu30518 (button) folded before Flop (didn't bet)
+Seat 6: ButtonAbuser (small blind) collected (€0.40)
+
+
+
+PokerStars Hand #261973745820:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 23:59:22 CET [2026/09/04 17:59:22 ET]
+Table 'Bruwer VI' 6-max Seat #6 is the button
+Seat 1: Hero99 (€2.09 in chips) 
+Seat 2: RailBird42 (€2.12 in chips) 
+Seat 3: NitFish07 (€2.12 in chips) 
+Seat 4: ChipLeader3 (€2 in chips) 
+Seat 5: Blu30518 (€1.70 in chips) 
+Seat 6: ButtonAbuser (€5.48 in chips) 
+Hero99: posts small blind €0.01
+RailBird42: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [5h Ah]
+NitFish07: folds 
+ChipLeader3: raises €0.04 to €0.06
+Blu30518: folds 
+ButtonAbuser: folds 
+Hero99: calls €0.05
+RailBird42: raises €0.18 to €0.24
+ChipLeader3: folds 
+Hero99: folds 
+Uncalled bet (€0.18) returned to RailBird42
+RailBird42 collected €0.18 from pot
+RailBird42: doesn't show hand 
+*** SUMMARY ***
+Total pot €0.18 | Rake €0 
+Seat 1: Hero99 (small blind) folded before Flop
+Seat 2: RailBird42 (big blind) collected (€0.18)
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 folded before Flop
+Seat 5: Blu30518 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser (button) folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973751794:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/05 0:00:04 CET [2026/09/04 18:00:04 ET]
+Table 'Bruwer VI' 6-max Seat #1 is the button
+Seat 1: Hero99 (€2.03 in chips) 
+Seat 2: RailBird42 (€2.24 in chips) 
+Seat 3: NitFish07 (€2.12 in chips) 
+Seat 4: ChipLeader3 (€2 in chips) 
+Seat 5: Blu30518 (€1.70 in chips) 
+Seat 6: ButtonAbuser (€5.48 in chips) 
+RailBird42: posts small blind €0.01
+NitFish07: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [3d 7d]
+ChipLeader3: folds 
+Blu30518: folds 
+ButtonAbuser: folds 
+Hero99: folds 
+RailBird42: folds 
+Uncalled bet (€0.01) returned to NitFish07
+NitFish07 collected €0.02 from pot
+*** SUMMARY ***
+Total pot €0.02 | Rake €0 
+Seat 1: Hero99 (button) folded before Flop (didn't bet)
+Seat 2: RailBird42 (small blind) folded before Flop
+Seat 3: NitFish07 (big blind) collected (€0.02)
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 5: Blu30518 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973754958:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/05 0:00:25 CET [2026/09/04 18:00:25 ET]
+Table 'Bruwer VI' 6-max Seat #2 is the button
+Seat 1: Hero99 (€2.03 in chips) 
+Seat 2: RailBird42 (€2.23 in chips) 
+Seat 3: NitFish07 (€2.13 in chips) 
+Seat 4: ChipLeader3 (€2 in chips) 
+Seat 5: Blu30518 (€1.70 in chips) 
+Seat 6: ButtonAbuser (€5.48 in chips) 
+NitFish07: posts small blind €0.01
+ChipLeader3: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [5h As]
+Blu30518: folds 
+ButtonAbuser: folds 
+Hero99: calls €0.02
+RailBird42: folds 
+NitFish07: folds 
+ChipLeader3: checks 
+*** FLOP *** [9d Tc 5c]
+ChipLeader3: checks 
+Hero99: checks 
+*** TURN *** [9d Tc 5c] [Jd]
+ChipLeader3: checks 
+Hero99: checks 
+*** RIVER *** [9d Tc 5c Jd] [8s]
+ChipLeader3: checks 
+Hero99: checks 
+*** SHOW DOWN ***
+ChipLeader3: shows [6h 8c] (a pair of Eights)
+Hero99: mucks hand 
+ChipLeader3 collected €0.05 from pot
+*** SUMMARY ***
+Total pot €0.05 | Rake €0 
+Board [9d Tc 5c Jd 8s]
+Seat 1: Hero99 mucked [5h As]
+Seat 2: RailBird42 (button) folded before Flop (didn't bet)
+Seat 3: NitFish07 (small blind) folded before Flop
+Seat 4: ChipLeader3 (big blind) showed [6h 8c] and won (€0.05) with a pair of Eights
+Seat 5: Blu30518 folded before Flop (didn't bet)
+Seat 6: ButtonAbuser folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973761801:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/05 0:01:06 CET [2026/09/04 18:01:06 ET]
+Table 'Bruwer VI' 6-max Seat #3 is the button
+Seat 1: Hero99 (€2.01 in chips) 
+Seat 2: RailBird42 (€2.23 in chips) 
+Seat 3: NitFish07 (€2.12 in chips) 
+Seat 4: ChipLeader3 (€2.03 in chips) 
+Seat 5: Blu30518 (€1.70 in chips) 
+Seat 6: ButtonAbuser (€5.48 in chips) 
+ChipLeader3: posts small blind €0.01
+Blu30518: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [6c 5c]
+ButtonAbuser: folds 
+Hero99: folds 
+RailBird42: raises €0.04 to €0.06
+NitFish07: folds 
+ChipLeader3: raises €0.20 to €0.26
+Blu30518: calls €0.24
+RailBird42: folds 
+*** FLOP *** [Jd 2c 7s]
+ChipLeader3: bets €0.20
+Blu30518: calls €0.20
+*** TURN *** [Jd 2c 7s] [3h]
+ChipLeader3: bets €0.41
+Blu30518: calls €0.41
+*** RIVER *** [Jd 2c 7s 3h] [2h]
+ChipLeader3: bets €1.16 and is all-in
+Blu30518: folds 
+Uncalled bet (€1.16) returned to ChipLeader3
+ChipLeader3 collected €1.70 from pot
+ChipLeader3: doesn't show hand 
+*** SUMMARY ***
+Total pot €1.80 | Rake €0.10 
+Board [Jd 2c 7s 3h 2h]
+Seat 1: Hero99 folded before Flop (didn't bet)
+Seat 2: RailBird42 folded before Flop
+Seat 3: NitFish07 (button) folded before Flop (didn't bet)
+Seat 4: ChipLeader3 (small blind) collected (€1.70)
+Seat 5: Blu30518 (big blind) folded on the River
+Seat 6: ButtonAbuser folded before Flop (didn't bet)
+
+
+
+PokerStars Hand #261973775485:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/05 0:02:19 CET [2026/09/04 18:02:19 ET]
+Table 'Bruwer VI' 6-max Seat #4 is the button
+Seat 2: RailBird42 (€2.17 in chips) is sitting out
+Seat 1: Hero99 (€2.01 in chips) 
+Seat 3: NitFish07 (€2.12 in chips) 
+Seat 4: ChipLeader3 (€2.86 in chips) 
+Seat 5: Blu30518 (€0.83 in chips) 
+Seat 6: ButtonAbuser (€5.48 in chips) 
+Blu30518: posts small blind €0.01
+ButtonAbuser: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [2h Qs]
+RailBird42 leaves the table
+Hero99: folds 
+NitFish07: folds 
+ChipLeader3: folds 
+Blu30518: calls €0.01
+ButtonAbuser: checks 
+*** FLOP *** [2s Qd 6h]
+Blu30518: checks 
+ButtonAbuser: bets €0.02
+Blu30518: calls €0.02
+*** TURN *** [2s Qd 6h] [8d]
+Blu30518: checks 
+ButtonAbuser: checks 
+*** RIVER *** [2s Qd 6h 8d] [6c]
+Blu30518: checks 
+ButtonAbuser: bets €0.08
+Blu30518: raises €0.08 to €0.16
+ButtonAbuser: calls €0.08
+*** SHOW DOWN ***
+Blu30518: shows [5s 5h] (two pair, Sixes and Fives)
+ButtonAbuser: shows [8s Qc] (two pair, Queens and Eights)
+ButtonAbuser collected €0.38 from pot
+*** SUMMARY ***
+Total pot €0.40 | Rake €0.02 
+Board [2s Qd 6h 8d 6c]
+Seat 2: RailBird42
+Seat 1: Hero99 folded before Flop (didn't bet)
+Seat 3: NitFish07 folded before Flop (didn't bet)
+Seat 4: ChipLeader3 (button) folded before Flop (didn't bet)
+Seat 5: Blu30518 (small blind) showed [5s 5h] and lost with two pair, Sixes and Fives
+Seat 6: ButtonAbuser (big blind) showed [8s Qc] and won (€0.38) with two pair, Queens and Eights
+
+
+
+PokerStars Hand #261973781959:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/05 0:02:53 CET [2026/09/04 18:02:53 ET]
+Table 'Bruwer VI' 6-max Seat #5 is the button
+Seat 1: Hero99 (€2.01 in chips) 
+Seat 3: NitFish07 (€2.12 in chips) 
+Seat 4: ChipLeader3 (€2.86 in chips) 
+Seat 5: Blu30518 (€0.63 in chips) 
+Seat 6: ButtonAbuser (€5.66 in chips) 
+ButtonAbuser: posts small blind €0.01
+Hero99: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero99 [7h 5s]
+NitFish07: raises €0.03 to €0.05
+ChipLeader3: folds 
+Blu30518: calls €0.05
+ButtonAbuser: folds 
+Hero99: folds 
+*** FLOP *** [Kh 4s 4d]
+NitFish07: bets €0.04
+Blu30518: folds 
+Uncalled bet (€0.04) returned to NitFish07
+NitFish07 collected €0.12 from pot
+*** SUMMARY ***
+Total pot €0.13 | Rake €0.01 
+Board [Kh 4s 4d]
+Seat 1: Hero99 (big blind) folded before Flop
+Seat 3: NitFish07 collected (€0.12)
+Seat 4: ChipLeader3 folded before Flop (didn't bet)
+Seat 5: Blu30518 (button) folded on the Flop
+Seat 6: ButtonAbuser (small blind) folded before Flop
+
+
+

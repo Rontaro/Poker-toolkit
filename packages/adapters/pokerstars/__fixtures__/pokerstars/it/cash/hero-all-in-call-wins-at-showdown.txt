@@ -1,0 +1,41 @@
+﻿Mano PokerStars n° 261973581758:  Hold'em No Limit (€0.01/€0.02 EUR) [ID ADM: M6687304955FA2ZQ] - 04/09/2026 23:44:30 CET [04/09/2026 17:44:30 ET]
+Tavolo 'Bruwer VI' 6-max Il bottone è al posto 4
+Posto 5: CallStation5 (€2.19 chips) è in sit-out
+Posto 1: Hero99 (€0.85 chips) 
+Posto 2: RailBird42 (€2.53 chips) 
+Posto 3: NitFish07 (€2.10 chips) 
+Posto 4: ChipLeader3 (€2.10 chips) 
+Posto 6: ButtonAbuser (€3.74 chips) 
+ButtonAbuser: versa il piccolo buio €0.01
+Hero99: versa il grande buio €0.02
+*** CARTE COPERTE ***
+Distribuite a Hero99 [6s 8s]
+RailBird42: folda 
+NitFish07: folda 
+ChipLeader3: rilancia €0.04 fino a €0.06
+ButtonAbuser: chiama €0.05
+Hero99: chiama €0.04
+*** FLOP *** [8d 6c Jc]
+ButtonAbuser: punta €0.09
+Hero99: chiama €0.09
+ChipLeader3: folda 
+*** TURN *** [8d 6c Jc] [4c]
+ButtonAbuser: punta €0.34
+Hero99: chiama €0.34
+*** RIVER *** [8d 6c Jc 4c] [Th]
+ButtonAbuser: punta €0.98
+Hero99: chiama €0.36 ed è all-in
+La puntata non vista (€0.62) è restituita a ButtonAbuser
+*** SHOW DOWN ***
+ButtonAbuser: mostra [Jh Ad] (una coppia di Jack)
+Hero99: mostra [6s 8s] (doppia coppia, Otto e Sei)
+Hero99 ha raccolto €1.66 dal piatto
+*** RIASSUNTO ***
+Piatto totale €1.76 | Rake €0.10 
+Board [8d 6c Jc 4c Th]
+Posto 5: CallStation5
+Posto 1: Hero99 (big blind) ha mostrato [6s 8s] e ha vinto (€1.66) con doppia coppia, Otto e Sei
+Posto 2: RailBird42 ha foldato prima del Flop (senza puntare)
+Posto 3: NitFish07 ha foldato prima del Flop (senza puntare)
+Posto 4: ChipLeader3 (bottone) ha foldato al Flop
+Posto 6: ButtonAbuser (small blind) ha mostrato [Jh Ad] e ha perso con una coppia di Jack

@@ -1,0 +1,41 @@
+﻿PokerStars Hand #900000000002:  Hold'em No Limit (€0.01/€0.02 EUR) [ADM ID: M6687304955FA2ZQ] - 2026/09/04 22:15:44 CET [2026/09/04 16:15:44 ET]
+Table 'Synthetic I' 6-max Seat #6 is the button
+Seat 1: Hero (€2 in chips) 
+Seat 2: Villain (€2 in chips) 
+Seat 3: FolderA (€1 in chips) 
+Seat 4: FolderB (€1 in chips) 
+Seat 5: FolderC (€1 in chips) 
+Seat 6: FolderD (€1 in chips) 
+Hero: posts small blind €0.01
+Villain: posts big blind €0.02
+*** HOLE CARDS ***
+Dealt to Hero [9h 9s]
+FolderA: folds 
+FolderB: folds 
+FolderC: folds 
+FolderD: folds 
+Hero: calls €0.01
+Villain: checks 
+*** FLOP *** [Ah Kd Qc]
+Hero: checks 
+Villain: checks 
+*** TURN *** [Ah Kd Qc] [Jd]
+Hero: bets €0.04
+Villain: calls €0.04
+*** RIVER *** [Ah Kd Qc Jd] [Ts]
+Hero: checks 
+Villain: checks 
+*** SHOW DOWN ***
+Hero: shows [9h 9s] (a straight, Ten to Ace)
+Villain: shows [8c 8d] (a straight, Ten to Ace)
+Hero collected €0.06 from pot
+Villain collected €0.06 from pot
+*** SUMMARY ***
+Total pot €0.12 | Rake €0 
+Board [Ah Kd Qc Jd Ts]
+Seat 1: Hero (small blind) showed [9h 9s] and won (€0.06) with a straight, Ten to Ace
+Seat 2: Villain (big blind) showed [8c 8d] and won (€0.06) with a straight, Ten to Ace
+Seat 3: FolderA folded before Flop (didn't bet)
+Seat 4: FolderB folded before Flop (didn't bet)
+Seat 5: FolderC folded before Flop (didn't bet)
+Seat 6: FolderD (button) folded before Flop (didn't bet)

@@ -1,0 +1,254 @@
+{
+  "id": "base",
+  "label": "Percorso base",
+  "note": "Livelli, teoria e vincoli di generazione. Cambiare un numero qui cambia il gioco: nessuna di queste soglie sta nel codice.",
+  "levels": [
+    {
+      "id": "outs-colore",
+      "title": "Gli out: il colore",
+      "goal": "Contare le carte che ti danno il colore, senza pensarci.",
+      "theory": [
+        "Un out è una carta che ti fa passare in vantaggio. Non una carta che ti migliora: una che ti mette davanti. Con una coppia di 4 contro un tris, i due 4 rimasti sono out; le altre carte che ti accoppiano no.",
+        "Sul flop hai davanti cinque carte: le tue due e le tre del board. Ne restano 47 che non vedi. Gli out si contano sempre su quelle.",
+        "Il colore è il conto più facile di tutti. Di ogni seme ci sono 13 carte; se ne vedi quattro, due in mano e due sul board, ne restano 9. Nove out, sempre, ogni volta che hai quattro carte dello stesso seme.",
+        "Nove su 47 fa circa il 19%: una volta su cinque il turn ti completa il colore."
+      ],
+      "drills": ["count-outs"],
+      "questions": 8,
+      "pass": 6,
+      "constraints": [
+        { "street": "flop", "requireDraw": "flush", "minOuts": 6, "maxOuts": 13, "maxOutKinds": 2 }
+      ]
+    },
+    {
+      "id": "outs-scala",
+      "title": "Gli out: la scala",
+      "goal": "Distinguere una bilaterale da un incastro, e contarli giusti.",
+      "theory": [
+        "Con una scala aperta da due parti, 8 9 in mano su un board con 7 e T, ti servono due ranghi diversi: i 6 e gli J. Quattro carte per rango, otto out.",
+        "Con un incastro te ne serve uno solo: quattro out. Metà del valore, e la stessa voglia di chiamare: è qui che si perdono i soldi.",
+        "Il doppio incastro vale come una bilaterale: due ranghi diversi, otto carte. Si riconosce quando due buchi separati portano entrambi alla scala.",
+        "Attenzione alla scala sbagliata: se la carta che ti completa la scala ne dà una più alta a lui, quell'out non è un out. Il tool conta solo le carte che ti mettono davvero davanti, ed è per questo che a volte il numero è più basso di quello che ti aspetti."
+      ],
+      "drills": ["count-outs"],
+      "questions": 8,
+      "pass": 6,
+      "constraints": [
+        { "street": "flop", "requireDraw": "straight", "minOuts": 2, "maxOuts": 11, "maxOutKinds": 2 }
+      ]
+    },
+    {
+      "id": "outs-misti",
+      "title": "Tutti gli altri out",
+      "goal": "Contare anche coppie, doppie coppie e tris. E riconoscere gli out sporchi.",
+      "theory": [
+        "Una coppia che diventa tris: due carte. Che diventa doppia coppia: tre carte per ogni carta non accoppiata che hai in mano.",
+        "Due carte più alte delle sue, senza altro: sei out, tre per rango. Ma sono gli out più sporchi che esistano, perché la carta che ti accoppia può dargli due coppie o un progetto.",
+        "Un out sporco è una carta che ti fa la mano e a lui una migliore. Nel dubbio contali per metà: è una regola grossolana e ti tiene lontano dagli errori più cari.",
+        "Quando conti, conta i ranghi e poi moltiplica. Quattro carte per rango, meno quelle che stanno già in mano o sul board."
+      ],
+      "drills": ["count-outs"],
+      "questions": 10,
+      "pass": 7,
+      "constraints": [
+        { "street": "flop", "minOuts": 2, "maxOuts": 15 },
+        { "street": "turn", "minOuts": 2, "maxOuts": 15 }
+      ]
+    },
+    {
+      "id": "regola-2-4",
+      "title": "La regola del 2 e del 4",
+      "goal": "Trasformare gli out in una percentuale, a mente, in un secondo.",
+      "theory": [
+        "Ogni carta che non vedi vale circa due punti di equity: una su 47 fa il 2,1%. Da lì viene tutto.",
+        "Sul flop, se vedrai sia turn che river: out per 4. Sul turn, con una carta sola da vedere: out per 2.",
+        "Nove out al flop fanno 36%. Il numero esatto è 35%: la regola è precisa quanto basta e si fa mentre l'avversario sta ancora pensando.",
+        "Un avvertimento: il per 4 vale solo se vedrai davvero due carte senza dover pagare ancora. Se ti aspetti un'altra puntata al turn, il conto giusto è per 2. E sopra i 9 out il per 4 esagera di qualche punto, perché conta due volte le mani che migliorano su entrambe le carte."
+      ],
+      "drills": ["outs-to-equity"],
+      "questions": 10,
+      "pass": 8,
+      "constraints": [
+        { "street": "flop", "minOuts": 4, "maxOuts": 12 },
+        { "street": "turn", "minOuts": 4, "maxOuts": 14 }
+      ]
+    },
+    {
+      "id": "equity-vera",
+      "title": "L'equity vera",
+      "goal": "Stimare quante volte su cento vinci davvero, e vedere dove la regola sbaglia.",
+      "theory": [
+        "L'equity è la domanda vera: se le carte che restano uscissero tutte, quante volte su cento avresti la mano migliore.",
+        "Il tool la calcola contando ogni singola uscita possibile: 990 board sul flop, 44 sul turn. Non è una stima, è un conto.",
+        "La regola del 2 e del 4 quasi sempre dà un numero un po' più alto. I motivi sono due: qualche out ti fa la mano e gliene fa una migliore, e lui può ancora migliorare al river anche quando tu peschi.",
+        "Il modo di allenarsi qui è: conta gli out, applica la regola, poi togli due o tre punti e guarda quanto ti sei avvicinato."
+      ],
+      "drills": ["equity-estimate"],
+      "questions": 10,
+      "pass": 7,
+      "constraints": [
+        { "street": "flop", "minOuts": 3, "maxOuts": 15 },
+        { "street": "turn", "minOuts": 3, "maxOuts": 15 },
+        { "street": "flop", "heroAhead": true, "minOuts": 4, "maxOuts": 16 }
+      ]
+    },
+    {
+      "id": "pot-odds",
+      "title": "Le pot odds",
+      "goal": "Sapere sempre quanta equity ti sta chiedendo il piatto.",
+      "theory": [
+        "Il piatto ti fa un prezzo. Tradurlo in percentuale è una divisione: quanto devi mettere, diviso quanto ci sarà nel piatto dopo che l'hai messo.",
+        "Se nel piatto ci sono 30 bb e devi chiamarne 10: 10 diviso 40 fa 25%. Ti serve la mano migliore una volta su quattro perché il call sia in pari.",
+        "Quattro numeri da sapere a memoria, perché coprono quasi tutte le puntate che vedrai: un terzo del piatto vuole il 20%, metà piatto il 25%, tre quarti il 30%, il piatto intero il 33%.",
+        "Più punta, più equity ti serve. È l'unico motivo per cui la grandezza della puntata conta."
+      ],
+      "drills": ["pot-odds"],
+      "questions": 10,
+      "pass": 8,
+      "constraints": [
+        { "potRange": [6, 30], "betFractions": [0.33, 0.5, 0.75, 1] },
+        { "potRange": [8, 60], "betFractions": [0.25, 0.4, 0.66, 1.5] }
+      ]
+    },
+    {
+      "id": "decidere",
+      "title": "Chiamare o passare",
+      "goal": "Mettere i due numeri uno accanto all'altro e decidere.",
+      "theory": [
+        "Qui si mette insieme tutto: la tua equity contro il suo range, e il prezzo che ti fa il piatto. Se l'equity è sopra il prezzo, chiami. Se è sotto, passi.",
+        "L'avversario non ha più due carte scoperte: ha un range, cioè l'insieme delle mani con cui può essere lì. È scritto al posto delle sue carte.",
+        "Un call che perde poco resta un call che perde. Non esiste la mano troppo bella per passare: esiste solo il confronto fra due numeri.",
+        "L'eccezione si chiama implied odds: chiamare con meno equity del prezzo si può fare se conti di vincergli altri soldi quando peschi. Vanno stimati, non dati per scontati, e contro qualcuno che non paga mai valgono zero."
+      ],
+      "drills": ["call-or-fold"],
+      "questions": 10,
+      "pass": 8,
+      "constraints": [
+        { "street": "flop", "edge": 8 },
+        { "street": "turn", "edge": 8 }
+      ]
+    },
+    {
+      "id": "bluff",
+      "title": "Il bluff, e quanto devi difendere",
+      "goal": "Le due frequenze che tengono in piedi tutto il resto.",
+      "theory": [
+        "Quando punti in bluff stai facendo un prezzo a te stesso: rischi la puntata per vincere il piatto. Puntata diviso piatto più puntata è quanto spesso deve far passare per essere gratis.",
+        "Metà piatto deve funzionare una volta su tre. Il piatto intero, una su due. Puntare di più non rende il bluff più credibile: lo rende solo più caro.",
+        "Dall'altra parte c'è il conto opposto. Se passi troppo spesso, gli conviene puntare con qualsiasi cosa. La frazione minima che devi continuare a giocare è piatto diviso piatto più sua puntata.",
+        "Contro metà piatto si difendono due terzi delle mani, contro il piatto intero la metà. È un limite teorico: contro chi non bluffa mai passare di più è la mossa giusta, ma allora è una scelta, non una fuga."
+      ],
+      "drills": ["breakeven-bluff", "mdf"],
+      "questions": 12,
+      "pass": 9,
+      "constraints": [
+        { "potRange": [5, 30], "betFractions": [0.33, 0.5, 0.75, 1] },
+        { "potRange": [6, 50], "betFractions": [0.25, 0.66, 1, 1.5] }
+      ]
+    },
+    {
+      "id": "preflop",
+      "title": "I numeri preflop",
+      "goal": "Sapere a memoria quanto valgono i testa a testa che si ripetono ogni sera.",
+      "theory": [
+        "Preflop le situazioni sono sempre le stesse, quindi i numeri si imparano una volta sola.",
+        "Coppia contro due carte più alte: 55/45 per la coppia, il famoso testa o croce. Due carte alte contro due più basse non dominate: 60/40. Coppia contro coppia più bassa: 80/20.",
+        "Dominazione: AK contro AQ è 70/30, perché quando esce un asso lui migliora e resta comunque dietro.",
+        "Contro un range largo tutto si avvicina al 50%: più mani ha, meno la sua mano media è forte, e meno la tua vale rispetto a lei."
+      ],
+      "drills": ["preflop-equity"],
+      "questions": 10,
+      "pass": 7,
+      "constraints": [
+        { "villainRanges": ["QQ+, AKs, AKo", "JJ+, AQs+, AKo", "22+"] },
+        {
+          "villainRanges": [
+            "77+, A9s+, KTs+, QJs, AJo+, KQo",
+            "22+, A2s+, K9s+, QTs+, JTs, T9s, A9o+, KTo+, QJo",
+            "random"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "combo",
+      "title": "Le combinazioni e i blocker",
+      "goal": "Contare quante versioni di una mano può avere, invece di chiedersi se ce l'ha.",
+      "theory": [
+        "Ogni mano di partenza esiste in più versioni. Una coppia sono 6 combinazioni, due carte diverse sono 16: 4 dello stesso seme e 12 di semi diversi.",
+        "Ogni carta scoperta ne toglie. Se hai un asso in mano, i suoi AK scendono da 16 a 12. Se un 7 sta sul board, i suoi 77 scendono da 6 a 3.",
+        "È il motivo per cui i set sono sempre pochi: tre combinazioni contro le dodici di una coppia massima. Potrebbe avere un set è vero e quasi sempre irrilevante.",
+        "Un blocker è esattamente questo, senza mistero: una carta che hai in mano e che gli toglie combinazioni. Avere l'asso di cuori quando il colore di cuori si è chiuso significa che il colore massimo non ce l'ha."
+      ],
+      "drills": ["combo-count"],
+      "questions": 10,
+      "pass": 8,
+      "constraints": [{ "street": "flop" }, { "street": "turn" }]
+    },
+    {
+      "id": "esame",
+      "title": "Esame",
+      "goal": "Tutto insieme, senza sapere prima che domanda arriva.",
+      "theory": [
+        "Ogni domanda può essere di qualsiasi tipo. È l'unica condizione che somiglia al tavolo, dove nessuno ti avverte che questa è una domanda sulle pot odds.",
+        "Se ne sbagli tante di un tipo solo, il riepilogo alla fine te lo dice: quello è il livello da rifare."
+      ],
+      "drills": [
+        "count-outs",
+        "outs-to-equity",
+        "equity-estimate",
+        "pot-odds",
+        "call-or-fold",
+        "breakeven-bluff",
+        "mdf",
+        "combo-count",
+        "preflop-equity"
+      ],
+      "questions": 15,
+      "pass": 11,
+      "constraints": [
+        { "street": "flop", "minOuts": 2 },
+        { "street": "turn", "minOuts": 2 }
+      ]
+    }
+  ],
+  "endless": {
+    "label": "Infinito",
+    "goal": "Domande finché ne hai voglia. Più risposte giuste di fila dai, più diventa difficile.",
+    "theory": [
+      "Non si vince e non si perde: si accumula. Ogni risposta giusta di fila alza il moltiplicatore e stringe le tolleranze.",
+      "Le domande non escono a caso: il gioco pesca più spesso i tipi su cui stai sbagliando. Se odi le combinazioni, ti tocca farne di più."
+    ],
+    "drills": [
+      "count-outs",
+      "outs-to-equity",
+      "equity-estimate",
+      "pot-odds",
+      "call-or-fold",
+      "breakeven-bluff",
+      "mdf",
+      "combo-count",
+      "preflop-equity"
+    ],
+    "tiers": [
+      {
+        "from": 0,
+        "label": "riscaldamento",
+        "multiplier": 1,
+        "constraints": { "street": "flop", "minOuts": 3, "edge": 10 }
+      },
+      {
+        "from": 4,
+        "label": "sul serio",
+        "multiplier": 1.5,
+        "constraints": { "street": "turn", "minOuts": 2, "edge": 7 }
+      },
+      {
+        "from": 9,
+        "label": "tosto",
+        "multiplier": 2,
+        "constraints": { "street": "turn", "minOuts": 1, "edge": 5, "tolerance": 3 }
+      }
+    ]
+  }
+}
