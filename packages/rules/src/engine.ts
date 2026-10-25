@@ -20,7 +20,7 @@ export interface RuleConfig {
  * TypeScript.
  */
 export function loadRuleConfig(): RuleConfig {
-  return defaultConfig as unknown as RuleConfig
+  return defaultConfig as RuleConfig
 }
 
 /** A rule's own defaults, with anything the config says layered on top. */

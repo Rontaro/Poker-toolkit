@@ -26,7 +26,7 @@ export interface Profile {
 }
 
 // Sorted by file name, matching the previous directory-listing order.
-const PROFILES: readonly Profile[] = [nl26max, nl29max] as unknown as readonly Profile[]
+const PROFILES: readonly Profile[] = [nl26max, nl29max] as readonly Profile[]
 
 export function loadProfiles(): readonly Profile[] {
   return PROFILES
