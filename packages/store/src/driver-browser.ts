@@ -92,9 +92,18 @@ function resolveParamName(stmt: WasmStatement, key: string): string {
 
 /** Resets the statement (dropping any previous bindings) and binds `args`
  * using whichever of the two calling conventions `args` matches. Called at
- * the start of every `run`/`get`/`all`/`iterate` so each is independently
- * safe to call more than once on the same prepared statement -- the pattern
- * `sqlite-store.ts` relies on (e.g. `insert` reused across an upsert loop). */
+ * the start of every `run`/`get`/`all`/`iterate` so each is safe to call
+ * again on the same prepared statement *after* the previous call/iteration
+ * has fully finished -- the pattern `sqlite-store.ts` relies on (e.g.
+ * `insert` reused across an upsert loop, or one `all()` followed by one
+ * `iterate()` on the same statement, see driver-browser.test.ts). This does
+ * NOT make two interleaved/concurrent iterators over the same statement
+ * safe: SQLite statements have a single cursor, so starting a second
+ * `iterate()` before the first is drained resets that one shared cursor out
+ * from under it -- a limitation shared with node:sqlite/better-sqlite3, not
+ * something this reset-on-entry dispatch fixes, and not a pattern any
+ * current caller in `sqlite-store.ts` uses (every call there drains its
+ * statement before moving on). */
 function bindArgs(stmt: WasmStatement, args: readonly unknown[]): void {
   stmt.reset(true)
   if (args.length === 0) return

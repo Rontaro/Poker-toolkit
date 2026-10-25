@@ -1,3 +1,7 @@
+// Imported from `sql-database.js`, not `driver.js`, so this file's dependency
+// graph never points -- even just by type -- at `driver.js`, which loads
+// `node:sqlite` at module scope: wrong for a file meant to also run from a
+// browser bundle fed by a static import.
 import type { SqlDatabase as Database } from './sql-database.js'
 
 export interface MigrationEntry {

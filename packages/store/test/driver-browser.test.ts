@@ -102,6 +102,31 @@ describe('openBrowserDatabase', () => {
     expect(collected).toHaveLength(3)
   })
 
+  it('all() then iterate() on the SAME prepared statement both return correct, independent rows', () => {
+    db.exec('CREATE TABLE widgets (id INTEGER PRIMARY KEY, name TEXT) STRICT')
+    const insert = db.prepare('INSERT INTO widgets (id, name) VALUES (@id, @name)')
+    insert.run({ id: 1, name: 'a' })
+    insert.run({ id: 2, name: 'b' })
+    insert.run({ id: 3, name: 'c' })
+
+    // One `prepare()` call, reused for both a full `.all()` drain and a
+    // subsequent full `.iterate()` drain -- the actual scenario `bindArgs`'s
+    // reset-before-bind is meant to make safe, which the two-`prepare()`
+    // comparison above doesn't exercise.
+    const stmt = db.prepare('SELECT id, name FROM widgets ORDER BY id ASC')
+
+    const fromAll = stmt.all()
+    expect(fromAll).toEqual([
+      { id: 1, name: 'a' },
+      { id: 2, name: 'b' },
+      { id: 3, name: 'c' },
+    ])
+
+    const fromIterate: Record<string, unknown>[] = []
+    for (const row of stmt.iterate()) fromIterate.push(row)
+    expect(fromIterate).toEqual(fromAll)
+  })
+
   it('close() does not throw', () => {
     expect(() => db.close()).not.toThrow()
   })
