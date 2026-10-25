@@ -20,7 +20,7 @@ describe('getTimeline', () => {
     expect(result.bankroll).toEqual([])
   })
 
-  it('drops playedAt and netBB from the bankroll points, unlike getOverview', async () => {
+  it('drops playedAt from the bankroll points, unlike getOverview', async () => {
     const withHands = await storeWith(...sessionHands())
     store = withHands
     const result = await getTimeline(withHands, {})

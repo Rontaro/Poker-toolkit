@@ -14,16 +14,11 @@
   "dependencies": {
     "@poker/api-core": "workspace:*",
     "@poker/core": "workspace:*",
-    "@poker/metrics": "workspace:*",
-    "@poker/prompt-builder": "workspace:*",
-    "@poker/rules": "workspace:*",
     "@poker/store": "workspace:*",
-    "@poker/timeline": "workspace:*",
     "express": "^4.21.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "recharts": "^2.15.0",
-    "@poker/equity": "workspace:*",
     "@poker/trainer": "workspace:*"
   },
   "devDependencies": {

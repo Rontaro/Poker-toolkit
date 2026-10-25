@@ -49,6 +49,10 @@ export interface HandStore {
   upsert(hands: readonly Hand[]): Promise<void>
   query(filter: HandFilter): AsyncIterable<Hand>
   stats(filter: HandFilter): Promise<StatsResult>
+  // Both implementations already had these; declared here (rather than left
+  // as extras on the concrete classes) so callers that only need the shared
+  // interface -- like @poker/api-core's note routes -- don't have to depend
+  // on either concrete store.
   insertNote(note: HandNote): Promise<void>
   listNotesForHand(handId: HandId): Promise<readonly HandNote[]>
   searchNotes(query: string): Promise<readonly HandNote[]>

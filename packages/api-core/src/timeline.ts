@@ -16,8 +16,9 @@ export interface TimelineResult
 
 /** From `GET /api/timeline`: sessions, fatigue/tilt buckets and the bankroll
  * curve for the active filter. Note that unlike `getOverview`'s bankroll
- * points, these drop `playedAt` and `netBB` -- the dashboard's timeline chart
- * never used them, and the original route never sent them either. */
+ * points, these drop `playedAt` -- the dashboard's timeline chart never used
+ * it, and the original route never sent it either. (Neither function's
+ * bankroll points ever included `netBB`.) */
 export async function getTimeline(store: HandStore, filter: HandFilter): Promise<TimelineResult> {
   const hands = await load(store, filter)
   const timeline = await buildTimeline(hands)

@@ -92,24 +92,9 @@ importers:
       '@poker/core':
         specifier: workspace:*
         version: link:../core
-      '@poker/equity':
-        specifier: workspace:*
-        version: link:../equity
-      '@poker/metrics':
-        specifier: workspace:*
-        version: link:../metrics
-      '@poker/prompt-builder':
-        specifier: workspace:*
-        version: link:../prompt-builder
-      '@poker/rules':
-        specifier: workspace:*
-        version: link:../rules
       '@poker/store':
         specifier: workspace:*
         version: link:../store
-      '@poker/timeline':
-        specifier: workspace:*
-        version: link:../timeline
       '@poker/trainer':
         specifier: workspace:*
         version: link:../trainer
