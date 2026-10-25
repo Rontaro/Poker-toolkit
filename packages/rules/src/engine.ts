@@ -1,14 +1,10 @@
-import { readFileSync } from 'node:fs'
-import { dirname, join } from 'node:path'
-import { fileURLToPath } from 'node:url'
-
 import { HandContext, type Hand } from '@poker/core'
 import { applies } from '@poker/metrics'
 
 import { ALL_RULES } from './registry.js'
 import type { LeakEvent, LeakReport, LeakSummary, Rule, RuleSettings } from './types.js'
 
-const CONFIG_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', 'config')
+import defaultConfig from '../config/default.json' with { type: 'json' }
 
 export interface RuleConfig {
   readonly id: string
@@ -17,19 +13,14 @@ export interface RuleConfig {
   readonly rules: Readonly<Record<string, RuleSettings>>
 }
 
-let cachedConfig: RuleConfig | undefined
-
 /**
  * Thresholds live in JSON, not in code. A rule that fires too often is a
  * number to change, not a function to rewrite, and the player should be able
  * to disagree with "under a third of the pot is too small" without touching
  * TypeScript.
  */
-export function loadRuleConfig(path: string = join(CONFIG_DIR, 'default.json')): RuleConfig {
-  if (path === join(CONFIG_DIR, 'default.json') && cachedConfig !== undefined) return cachedConfig
-  const config = JSON.parse(readFileSync(path, 'utf-8')) as RuleConfig
-  if (path === join(CONFIG_DIR, 'default.json')) cachedConfig = config
-  return config
+export function loadRuleConfig(): RuleConfig {
+  return defaultConfig as unknown as RuleConfig
 }
 
 /** A rule's own defaults, with anything the config says layered on top. */

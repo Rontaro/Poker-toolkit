@@ -1,13 +1,8 @@
-import { readFileSync, readdirSync } from 'node:fs'
-import { dirname, join } from 'node:path'
-import { fileURLToPath } from 'node:url'
-
 import type { Hand } from '@poker/core'
 import { applies, type Applicability, type MetricResult } from './types.js'
 
-// `src` and `dist` both sit one level under the package root, so this resolves
-// whether the code is running from source or from a build.
-const PROFILES_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', 'profiles')
+import nl26max from '../profiles/nl2-6max.json' with { type: 'json' }
+import nl29max from '../profiles/nl2-9max.json' with { type: 'json' }
 
 export interface Range {
   readonly min: number
@@ -30,18 +25,11 @@ export interface Profile {
   readonly ranges: Readonly<Record<string, Range>>
 }
 
-let cache: readonly Profile[] | undefined
+// Sorted by file name, matching the previous directory-listing order.
+const PROFILES: readonly Profile[] = [nl26max, nl29max] as unknown as readonly Profile[]
 
-export function loadProfiles(directory: string = PROFILES_DIR): readonly Profile[] {
-  if (directory === PROFILES_DIR && cache !== undefined) return cache
-
-  const profiles = readdirSync(directory)
-    .filter((name) => name.endsWith('.json'))
-    .sort()
-    .map((name) => JSON.parse(readFileSync(join(directory, name), 'utf-8')) as Profile)
-
-  if (directory === PROFILES_DIR) cache = profiles
-  return profiles
+export function loadProfiles(): readonly Profile[] {
+  return PROFILES
 }
 
 export function profileById(id: string): Profile | undefined {
