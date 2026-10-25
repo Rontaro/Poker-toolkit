@@ -291,6 +291,8 @@ export class SqliteHandStore implements HandStore {
   }
 }
 
+// Duplicated verbatim in sql-store-extras.ts for BrowserHandStore -- keep
+// both in sync if you change either.
 function rowToNote(row: Record<string, unknown>): HandNote {
   return {
     handId: row['hand_id'] as HandId,

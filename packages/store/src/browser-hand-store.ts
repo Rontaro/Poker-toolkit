@@ -78,7 +78,15 @@ export class BrowserHandStore implements HandStore {
 
   static async create(filename?: string): Promise<BrowserHandStore> {
     const db = await openBrowserDatabase(filename)
-    applyMigrations(db, MIGRATIONS)
+    // A failed migration must not leave an open, unreachable WASM connection
+    // behind -- there is no process exit to reclaim it the way there would
+    // be in Node, so the tab would carry the leaked heap for its lifetime.
+    try {
+      applyMigrations(db, MIGRATIONS)
+    } catch (cause) {
+      db.close()
+      throw cause
+    }
     return new BrowserHandStore(db)
   }
 
