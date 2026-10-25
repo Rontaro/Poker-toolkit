@@ -12,6 +12,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@poker/api-core": "workspace:*",
     "@poker/core": "workspace:*",
     "@poker/metrics": "workspace:*",
     "@poker/prompt-builder": "workspace:*",

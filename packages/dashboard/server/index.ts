@@ -3,29 +3,34 @@ import { join } from 'node:path'
 
 import express, { type Request, type Response } from 'express'
 
-import type { Hand, HandId } from '@poker/core'
 import {
-  compareToProfile,
-  computeMetrics,
-  profileFor,
-  vpipPfrGap,
-  type MetricResult,
-} from '@poker/metrics'
-import { analyse, buildPrompt, ALL_SELECTORS, PRESETS, renderHand } from '@poker/prompt-builder'
-import { ALL_RULES, detectLeaks } from '@poker/rules'
+  calculateFreeEquity,
+  createNote,
+  DEFAULT_RANGE,
+  getHand,
+  getHandEquity,
+  getHandList,
+  getLeaks,
+  getOverview,
+  getStatistics,
+  getStudyOptions,
+  getTimeline,
+  runStudy,
+  searchNotes,
+} from '@poker/api-core'
+import type { HandId } from '@poker/core'
 import { SqliteHandStore, type HandFilter } from '@poker/store'
-import { buildTimeline } from '@poker/timeline'
-
-import { freeEquity, handEquity } from './equity-route.js'
 
 /**
  * A thin read-only API over the store.
  *
  * It exists because the dashboard runs in a browser and the store runs on
- * SQLite, and for no other reason: there is no logic here that is not either
- * translating query strings into a `HandFilter` or handing a package's own
- * output straight back. Anything that looks like analysis belongs in a package,
- * where it can be tested without an HTTP client.
+ * SQLite, and for no other reason: parsing a query string into a
+ * `HandFilter`, calling the matching `@poker/api-core` function, and handing
+ * its result to `response.json(...)` is all that happens here. The analysis
+ * itself lives in `@poker/api-core` and the packages it calls, where it can
+ * be tested without an HTTP client -- and, later, run inside a Web Worker
+ * instead of this server.
  */
 
 const PORT = Number(process.env['PORT'] ?? 5181)
@@ -75,157 +80,69 @@ function filterFrom(query: Request['query']): HandFilter {
   }
 }
 
-async function load(filter: HandFilter): Promise<Hand[]> {
-  const hands: Hand[] = []
-  for await (const hand of store.query(filter)) hands.push(hand)
-  return hands
-}
-
-function withVerdicts(results: readonly MetricResult[], hand: Hand | undefined): unknown[] {
-  const profile = hand === undefined ? undefined : profileFor(hand)
-  return results.map((result) => ({ ...result, verdict: compareToProfile(result, profile) }))
+/** Translates an `ApiResult` error into the same `response.status(...).json({error})`
+ * every route used to write by hand; the success branch still goes through
+ * `response.json(result.value)` at the call site so its type stays narrowed. */
+function sendError(response: Response, result: { readonly status: 400 | 404; readonly error: string }): void {
+  response.status(result.status).json({ error: result.error })
 }
 
 app.get('/api/overview', async (request: Request, response: Response) => {
-  const hands = await load(filterFrom(request.query))
-  if (hands.length === 0) {
-    response.json({ empty: true, hands: 0 })
-    return
-  }
-
-  const [metrics, leaks, timeline] = await Promise.all([
-    computeMetrics(hands, { byPosition: false }),
-    detectLeaks(hands),
-    buildTimeline(hands),
-  ])
-
-  response.json({
-    empty: false,
-    hands: hands.length,
-    profile: profileFor(hands[0] as Hand) ?? null,
-    metrics: withVerdicts(metrics.overall, hands[0]),
-    gap: vpipPfrGap(metrics.overall) ?? null,
-    leaks: leaks.byRule,
-    totalCostBB: leaks.totalCostBB,
-    bankroll: timeline.bankroll.map((point) => ({
-      index: point.index,
-      cumulativeBB: Number(point.cumulativeBB.toFixed(2)),
-      rollingBB100: point.rollingBB100 === undefined ? null : Number(point.rollingBB100.toFixed(1)),
-      playedAt: point.playedAt.toISOString(),
-    })),
-    sessions: timeline.sessions.length,
-  })
+  response.json(await getOverview(store, filterFrom(request.query)))
 })
 
 app.get('/api/statistics', async (request: Request, response: Response) => {
-  const hands = await load(filterFrom(request.query))
-  const metrics = await computeMetrics(hands)
-  const first = hands[0]
-
-  response.json({
-    hands: hands.length,
-    profile: first === undefined ? null : (profileFor(first) ?? null),
-    overall: withVerdicts(metrics.overall, first),
-    byPosition: Object.fromEntries(
-      Object.entries(metrics.byPosition).map(([position, results]) => [
-        position,
-        withVerdicts(results ?? [], first),
-      ]),
-    ),
-  })
+  response.json(await getStatistics(store, filterFrom(request.query)))
 })
 
 app.get('/api/leaks', async (request: Request, response: Response) => {
-  const hands = await load(filterFrom(request.query))
-  const sample = await analyse(hands)
-
-  response.json({
-    rules: ALL_RULES.map((rule) => ({ id: rule.id, label: rule.label, why: rule.why })),
-    byRule: sample.report.byRule,
-    events: sample.report.events.map((event) => {
-      const hand = sample.hands.find((entry) => entry.context.hand.id === event.handId)
-      return {
-        ...event,
-        playedAt: hand?.context.hand.playedAt.toISOString() ?? null,
-        position: hand?.context.heroPosition ?? null,
-        netBB: Number((hand?.context.heroNetBB() ?? 0).toFixed(2)),
-      }
-    }),
-  })
+  response.json(await getLeaks(store, filterFrom(request.query)))
 })
 
 app.get('/api/timeline', async (request: Request, response: Response) => {
-  const hands = await load(filterFrom(request.query))
-  const timeline = await buildTimeline(hands)
-  response.json({
-    ...timeline,
-    bankroll: timeline.bankroll.map((point) => ({
-      index: point.index,
-      cumulativeBB: Number(point.cumulativeBB.toFixed(2)),
-      rollingBB100: point.rollingBB100 === undefined ? null : Number(point.rollingBB100.toFixed(1)),
-    })),
-  })
+  response.json(await getTimeline(store, filterFrom(request.query)))
 })
 
 /** One hand, replayed in the same prose the prompts use. */
 app.get('/api/hand/:id', async (request: Request, response: Response) => {
   const id = request.params.id as HandId
-  const hands = await load({ handIds: [id] })
-  if (hands.length === 0) {
-    response.status(404).json({ error: 'mano non trovata' })
+  const result = await getHand(store, id)
+  if (!result.ok) {
+    sendError(response, result)
     return
   }
-
-  const sample = await analyse(hands)
-  const analysed = sample.hands[0]
-  if (analysed === undefined) {
-    response.status(404).json({ error: 'mano non trovata' })
-    return
-  }
-
-  response.json({
-    id,
-    replay: renderHand(analysed),
-    leaks: analysed.leaks,
-    notes: await store.listNotesForHand(id),
-  })
+  response.json(result.value)
 })
 
 app.get('/api/hand/:id/equity', async (request: Request, response: Response) => {
-  await handEquity(request, response, (id) => load({ handIds: [id as HandId] }))
+  const id = request.params.id as HandId
+  const notation = typeof request.query['range'] === 'string' ? request.query['range'] : DEFAULT_RANGE
+  const result = await getHandEquity(store, id, notation)
+  if (!result.ok) {
+    sendError(response, result)
+    return
+  }
+  response.json(result.value)
 })
 
 app.post('/api/equity', (request: Request, response: Response) => {
-  freeEquity(request, response)
+  const body = request.body as { players?: string[]; board?: string; dead?: string }
+  const result = calculateFreeEquity(body.players ?? [], body.board ?? '', body.dead ?? '')
+  if (!result.ok) {
+    sendError(response, result)
+    return
+  }
+  response.json(result.value)
 })
 
 /** Hands the equity tab can preload, newest first. */
 app.get('/api/hand-list', async (request: Request, response: Response) => {
-  const hands = await load(filterFrom(request.query))
-  response.json(
-    hands
-      .slice(-200)
-      .reverse()
-      .flatMap((hand) => {
-        const hero = hand.seats.find((seat) => seat.isHero)
-        if (hero?.holeCards === undefined) return []
-        const board = hand.streets.flatMap((street) => [...street.board])
-        return [
-          {
-            id: hand.id,
-            playedAt: hand.playedAt.toISOString(),
-            position: hero.position ?? null,
-            hole: hero.holeCards.join(' '),
-            board: board.join(' '),
-          },
-        ]
-      }),
-  )
+  response.json(await getHandList(store, filterFrom(request.query)))
 })
 
 app.get('/api/notes', async (request: Request, response: Response) => {
   const query = typeof request.query['q'] === 'string' ? request.query['q'] : ''
-  response.json(await store.searchNotes(query))
+  response.json(await searchNotes(store, query))
 })
 
 app.post('/api/notes', async (request: Request, response: Response) => {
@@ -235,26 +152,12 @@ app.post('/api/notes', async (request: Request, response: Response) => {
     content: string
     tags?: string[]
   }
-  await store.insertNote({
-    handId: body.handId,
-    source: body.source,
-    content: body.content,
-    tags: body.tags ?? [],
-    createdAt: new Date(),
-  })
+  await createNote(store, body)
   response.json({ ok: true })
 })
 
 app.get('/api/study/options', (_request: Request, response: Response) => {
-  response.json({
-    selectors: ALL_SELECTORS.map((selector) => ({
-      id: selector.id,
-      label: selector.label,
-      description: selector.description,
-    })),
-    presets: PRESETS.map((preset) => ({ id: preset.id, label: preset.label })),
-    rules: ALL_RULES.map((rule) => ({ id: rule.id, label: rule.label })),
-  })
+  response.json(getStudyOptions())
 })
 
 app.post('/api/study', async (request: Request, response: Response) => {
@@ -267,34 +170,19 @@ app.post('/api/study', async (request: Request, response: Response) => {
     handIds?: HandId[]
   }
 
-  const hands =
-    body.handIds !== undefined && body.handIds.length > 0
-      ? await load({ handIds: body.handIds })
-      : await load(filterFrom((body.filter ?? {}) as Request['query']))
-
-  if (hands.length === 0) {
-    response.status(400).json({ error: 'nessuna mano per questo filtro' })
-    return
-  }
-
-  const sample = await analyse(hands)
-  const built = await buildPrompt({
-    sample,
-    selector: body.selector ?? 'biggest-losses',
-    preset: body.preset ?? 'full',
+  const result = await runStudy(store, {
+    filter: filterFrom((body.filter ?? {}) as Request['query']),
+    ...(body.selector === undefined ? {} : { selector: body.selector }),
+    ...(body.preset === undefined ? {} : { preset: body.preset }),
     ...(body.limit === undefined ? {} : { limit: body.limit }),
     ...(body.leakId === undefined ? {} : { leakId: body.leakId }),
+    ...(body.handIds === undefined ? {} : { handIds: body.handIds }),
   })
-
-  response.json({
-    text: built.text,
-    characters: built.characters,
-    hands: built.hands.map((hand) => ({
-      id: hand.context.hand.id,
-      netBB: Number(hand.context.heroNetBB().toFixed(2)),
-      leaks: [...new Set(hand.leaks.map((leak) => leak.ruleId))],
-    })),
-  })
+  if (!result.ok) {
+    sendError(response, result)
+    return
+  }
+  response.json(result.value)
 })
 
 /**

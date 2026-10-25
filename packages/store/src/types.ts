@@ -49,6 +49,9 @@ export interface HandStore {
   upsert(hands: readonly Hand[]): Promise<void>
   query(filter: HandFilter): AsyncIterable<Hand>
   stats(filter: HandFilter): Promise<StatsResult>
+  insertNote(note: HandNote): Promise<void>
+  listNotesForHand(handId: HandId): Promise<readonly HandNote[]>
+  searchNotes(query: string): Promise<readonly HandNote[]>
   close(): void
 }
 

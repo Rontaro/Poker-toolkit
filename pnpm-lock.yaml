@@ -27,6 +27,34 @@ importers:
         specifier: workspace:*
         version: link:../../core
 
+  packages/api-core:
+    dependencies:
+      '@poker/core':
+        specifier: workspace:*
+        version: link:../core
+      '@poker/equity':
+        specifier: workspace:*
+        version: link:../equity
+      '@poker/metrics':
+        specifier: workspace:*
+        version: link:../metrics
+      '@poker/prompt-builder':
+        specifier: workspace:*
+        version: link:../prompt-builder
+      '@poker/rules':
+        specifier: workspace:*
+        version: link:../rules
+      '@poker/store':
+        specifier: workspace:*
+        version: link:../store
+      '@poker/timeline':
+        specifier: workspace:*
+        version: link:../timeline
+    devDependencies:
+      '@poker/adapter-pokerstars':
+        specifier: workspace:*
+        version: link:../adapters/pokerstars
+
   packages/cli:
     dependencies:
       '@poker/core':
@@ -58,6 +86,9 @@ importers:
 
   packages/dashboard:
     dependencies:
+      '@poker/api-core':
+        specifier: workspace:*
+        version: link:../api-core
       '@poker/core':
         specifier: workspace:*
         version: link:../core
