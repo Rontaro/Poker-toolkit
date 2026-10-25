@@ -1,5 +1,13 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": { "rootDir": "src", "outDir": "dist" },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts"],
+  // These two import a `*.sql?raw` module specifier, which Vite/Vitest
+  // resolve natively but plain `tsc` does not: it typechecks fine (see
+  // raw-sql.d.ts) but the emitted `.js` keeps the literal `?raw` import,
+  // which Node then fails to resolve at runtime
+  // (ERR_UNKNOWN_FILE_EXTENSION on the .sql file). Excluded here so neither
+  // `build` nor `typecheck` touches them; `npx vitest run packages/store`
+  // still compiles and tests them directly, unaffected by this file.
+  "exclude": ["src/browser-hand-store.ts", "src/browser.ts"]
 }
