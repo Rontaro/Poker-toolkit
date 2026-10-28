@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { Money, type Hand } from '@poker/core'
-import { BrowserHandStore, SESSION_GAP_MS, deleteBrowserData } from '../src/browser.js'
+import { BrowserHandStore, SESSION_GAP_MS } from '../src/browser.js'
 import { MINUTE, movedTo, oneHand, realHands } from './helpers.js'
 
 const open = (): Promise<BrowserHandStore> => BrowserHandStore.create()
@@ -32,10 +32,14 @@ describe('persistence', () => {
     store.close()
   })
 
-  it('deleteBrowserData() does not throw after the store is closed', async () => {
-    const store = await BrowserHandStore.openPersistent()
-    store.close()
-    await expect(deleteBrowserData()).resolves.toBeUndefined()
+  it('says why it is not persistent, and create() has nothing to explain', async () => {
+    const fallback = await BrowserHandStore.openPersistent()
+    expect(fallback.persistenceIssue).toMatch(/non supporta il salvataggio locale/)
+    fallback.close()
+
+    const inMemory = await open()
+    expect(inMemory.persistenceIssue).toBeUndefined()
+    inMemory.close()
   })
 })
 

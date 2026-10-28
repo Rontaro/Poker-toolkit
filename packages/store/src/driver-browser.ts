@@ -53,28 +53,83 @@ export async function openBrowserDatabase(filename = ':memory:'): Promise<SqlDat
  * exist on the main thread, and the Node build of the library has no
  * `installOpfsSAHPoolVfs` at all.
  */
-let sahPoolPromise: Promise<SAHPoolUtil | undefined> | undefined
 
-/** Installs the SAH pool VFS once per process; resolves to `undefined`
- * (never rejects) when it cannot be installed here, so callers can fall back
- * rather than fail. A failure is cached like a success -- the library caches
- * a failed install per VFS name too, and retrying it needs a reload anyway. */
-function loadSahPool(): Promise<SAHPoolUtil | undefined> {
-  sahPoolPromise ??= (async () => {
+/**
+ * Where OPFS stands in this context, judged from the APIs alone:
+ * - `absent`: no OPFS here at all (Node, an old browser). Nothing can have
+ *   been stored, so there is nothing to persist to and nothing to delete.
+ * - `main-thread`: OPFS exists for this origin but its sync access handles
+ *   are exposed only to dedicated Workers, so data stored by the Worker is on
+ *   disk yet unreachable from here.
+ * - `worker`: the APIs the SAH pool needs are all present.
+ */
+type OpfsAccess = 'absent' | 'main-thread' | 'worker'
+
+function opfsAccess(): OpfsAccess {
+  // `lib` is ES2022 only (no DOM types), hence the structural view.
+  const g = globalThis as {
+    navigator?: { storage?: { getDirectory?: unknown } }
+    FileSystemFileHandle?: { prototype?: { createSyncAccessHandle?: unknown } }
+    DedicatedWorkerGlobalScope?: unknown
+  }
+  if (typeof g.navigator?.storage?.getDirectory !== 'function') return 'absent'
+  if (typeof g.FileSystemFileHandle?.prototype?.createSyncAccessHandle === 'function') return 'worker'
+  // A Worker with OPFS but no sync handles is an old browser: nothing of
+  // ours can be stored there. Outside a Worker it is the main thread.
+  return g.DedicatedWorkerGlobalScope === undefined ? 'main-thread' : 'absent'
+}
+
+const REASON_UNSUPPORTED =
+  'Questo browser non supporta il salvataggio locale (OPFS): le mani restano solo in memoria e si perdono chiudendo la pagina.'
+const REASON_MAIN_THREAD =
+  'Il salvataggio locale (OPFS) è raggiungibile solo dal Worker dedicato: le mani restano solo in memoria.'
+
+function errorMessage(cause: unknown): string {
+  return cause instanceof Error ? cause.message : String(cause)
+}
+
+function warnNotPersistent(reason: string, cause?: unknown): void {
+  console.warn('[@poker/store] database not persistent:', reason, ...(cause === undefined ? [] : [cause]))
+}
+
+type SahPool =
+  | { readonly pool: SAHPoolUtil }
+  | { readonly pool: undefined; readonly access: OpfsAccess; readonly reason: string; readonly cause?: unknown }
+
+let sahPoolPromise: Promise<SahPool> | undefined
+
+/** Installs the SAH pool VFS once per process. Never rejects: when it cannot
+ * be installed it resolves to why, so callers can fall back (or, for a
+ * delete, refuse) rather than fail. A failure is cached like a success, on
+ * purpose: retrying would take `forceReinitIfPreviouslyFailed`, and after a
+ * failure the Worker stays in memory until the page is reloaded. */
+function loadSahPool(): Promise<SahPool> {
+  sahPoolPromise ??= (async (): Promise<SahPool> => {
+    const access = opfsAccess()
+    if (access === 'absent') return { pool: undefined, access, reason: REASON_UNSUPPORTED }
+    if (access === 'main-thread') return { pool: undefined, access, reason: REASON_MAIN_THREAD }
     try {
       const sqlite3 = await loadSqlite3()
       // Typed as always present, but the Node build does not define it.
-      if (typeof sqlite3.installOpfsSAHPoolVfs !== 'function') return undefined
-      return await sqlite3.installOpfsSAHPoolVfs({
+      if (typeof sqlite3.installOpfsSAHPoolVfs !== 'function') {
+        throw new Error('this build of sqlite-wasm has no opfs-sahpool VFS')
+      }
+      const pool = await sqlite3.installOpfsSAHPoolVfs({
         // Without this, a failed initialisation calls removeVfs(), which
-        // deletes the pool's directory -- i.e. every stored hand -- just
-        // because, say, another tab was holding the access handles at the
-        // time. A failure here must cost persistence for this session, never
-        // the data.
+        // deletes the pool's directory -- every stored hand. Files locked by
+        // another tab would likely survive that; the real risk is a partial
+        // or transient failure (quota, a flaky sync-handle acquisition) where
+        // nothing is locked and the delete goes through. A failed init must
+        // cost persistence for this session, never the data.
         preserveOnInitFailure: true,
       })
-    } catch {
-      return undefined
+      return { pool }
+    } catch (cause) {
+      const reason =
+        `Il salvataggio locale (OPFS) non è disponibile ora (${errorMessage(cause)}). ` +
+        'Se il sito è aperto in un’altra scheda, chiudila e ricarica la pagina.'
+      warnNotPersistent(reason, cause)
+      return { pool: undefined, access, reason, cause }
     }
   })()
   return sahPoolPromise
@@ -85,25 +140,34 @@ export interface PersistentDatabase {
   /** false when OPFS was not available here (e.g. Node, an old browser, a
    * private window) and the database fell back to memory. */
   readonly persistent: boolean
+  /** Why `persistent` is false, worded for the user (Italian): whether this
+   * browser has no OPFS at all or has it but it could not be used right now,
+   * with the original error. Absent when `persistent` is true. */
+  readonly reason?: string
 }
 
 /**
  * Opens `filename` on OPFS through the SAH pool VFS. The VFS requires an
  * absolute path (leading `/`). Never throws for lack of OPFS: if the VFS
  * cannot be installed, or the file cannot be opened on it, the database falls
- * back to memory and `persistent` is false, so the app keeps working and can
- * tell the user their hands will not survive a reload.
+ * back to memory, `persistent` is false and `reason` says why, so the app
+ * keeps working and can tell the user their hands will not survive a reload.
  */
 export async function openPersistentBrowserDatabase(filename: string): Promise<PersistentDatabase> {
-  const pool = await loadSahPool()
-  if (pool !== undefined) {
+  const loaded = await loadSahPool()
+  let reason: string
+  if (loaded.pool !== undefined) {
     try {
-      return { db: wrapDatabase(new pool.OpfsSAHPoolDb(filename)), persistent: true }
-    } catch {
-      // Fall through to memory: e.g. the pool has no free slot left.
+      return { db: wrapDatabase(new loaded.pool.OpfsSAHPoolDb(filename)), persistent: true }
+    } catch (cause) {
+      // E.g. the pool has no free slot left.
+      reason = `Non riesco ad aprire il database salvato (${errorMessage(cause)}): le mani restano solo in memoria.`
+      warnNotPersistent(reason, cause)
     }
+  } else {
+    reason = loaded.reason
   }
-  return { db: await openBrowserDatabase(':memory:'), persistent: false }
+  return { db: await openBrowserDatabase(':memory:'), persistent: false, reason }
 }
 
 /**
@@ -118,15 +182,31 @@ export async function openPersistentBrowserDatabase(filename: string): Promise<P
  * the library leaves the result undefined if a handle is still in use. Then
  * `openPersistentBrowserDatabase()` can be called again for an empty one.
  *
- * A no-op where the persistent VFS is not available (Node, no OPFS). If it was
- * not installed yet in this process it is installed first, so the button
- * still deletes what an earlier visit stored. Errors from the wipe itself
- * propagate: the user has to know when deleting their data did not work.
+ * If the VFS was not installed yet in this process it is installed first, so
+ * the button still deletes what an earlier visit stored. A no-op only where
+ * this browser has no OPFS at all, since then nothing can have been stored.
+ * Where OPFS exists but the pool could not be installed (another tab holding
+ * the handles, a transient failure, a call from the main thread) it throws
+ * with a message meant for the user: the data is still on disk, and
+ * resolving would let the UI say it was deleted. Errors from the wipe itself
+ * propagate for the same reason.
  */
 export async function deleteBrowserData(): Promise<void> {
-  const pool = await loadSahPool()
-  if (pool === undefined) return
-  await pool.wipeFiles()
+  const loaded = await loadSahPool()
+  if (loaded.pool !== undefined) {
+    await loaded.pool.wipeFiles()
+    return
+  }
+  if (loaded.access === 'absent') return
+  if (loaded.access === 'main-thread') {
+    throw new Error(
+      'Non riesco ad accedere ai dati salvati da qui: la cancellazione va eseguita nel Worker che apre lo store.',
+    )
+  }
+  throw new Error(
+    'Non riesco ad accedere ai dati salvati: chiudi le altre schede di questo sito e riprova.',
+    { cause: loaded.cause },
+  )
 }
 
 function wrapDatabase(db: WasmDatabase): SqlDatabase {

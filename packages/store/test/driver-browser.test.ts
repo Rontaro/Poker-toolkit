@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { deleteBrowserData, openBrowserDatabase, openPersistentBrowserDatabase } from '../src/driver-browser.js'
 import type { SqlDatabase } from '../src/sql-database.js'
@@ -136,8 +136,9 @@ describe('openBrowserDatabase', () => {
 // pin the fallback path; the OPFS path itself needs a real browser Worker.
 describe('openPersistentBrowserDatabase', () => {
   it('falls back to memory without throwing where OPFS does not exist', async () => {
-    const { db, persistent } = await openPersistentBrowserDatabase('/test.sqlite3')
+    const { db, persistent, reason } = await openPersistentBrowserDatabase('/test.sqlite3')
     expect(persistent).toBe(false)
+    expect(reason).toMatch(/non supporta il salvataggio locale/)
 
     db.exec('CREATE TABLE widgets (id INTEGER PRIMARY KEY, name TEXT) STRICT')
     db.prepare('INSERT INTO widgets (id, name) VALUES (@id, @name)').run({ id: 1, name: 'sprocket' })
@@ -162,5 +163,70 @@ describe('openPersistentBrowserDatabase', () => {
 describe('deleteBrowserData', () => {
   it('is a no-op where there is no persistent storage', async () => {
     await expect(deleteBrowserData()).resolves.toBeUndefined()
+  })
+})
+
+// The OPFS APIs are stubbed in, but the pool still cannot be installed (the
+// Node build has no SAH pool VFS) -- the same state as a real browser whose
+// install failed. The pool is cached per module, so each test imports a fresh
+// copy of the driver.
+describe('where OPFS exists but the pool cannot be installed', () => {
+  type Driver = typeof import('../src/driver-browser.js')
+  let fresh: Driver
+  let warn: ReturnType<typeof vi.spyOn>
+
+  beforeEach(async () => {
+    vi.stubGlobal('navigator', { storage: { getDirectory: () => Promise.resolve({}) } })
+    vi.stubGlobal('FileSystemFileHandle', { prototype: { createSyncAccessHandle: () => undefined } })
+    warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined)
+    vi.resetModules()
+    fresh = await import('../src/driver-browser.js')
+  })
+
+  afterEach(() => {
+    vi.unstubAllGlobals()
+    vi.restoreAllMocks()
+    vi.resetModules()
+  })
+
+  it('deleteBrowserData() throws instead of reporting success', async () => {
+    await expect(fresh.deleteBrowserData()).rejects.toThrow(/chiudi le altre schede/)
+  })
+
+  it('openPersistentBrowserDatabase() falls back, says it is unavailable now, and warns with the cause', async () => {
+    const { db, persistent, reason } = await fresh.openPersistentBrowserDatabase('/test.sqlite3')
+    expect(persistent).toBe(false)
+    expect(reason).toMatch(/non è disponibile ora \(this build of sqlite-wasm has no opfs-sahpool VFS\)/)
+    expect(warn).toHaveBeenCalledWith(expect.any(String), reason, expect.any(Error))
+    db.close()
+  })
+})
+
+// OPFS without sync access handles, outside a Worker: the main thread. Data
+// the Worker stored is on disk but unreachable from here.
+describe('on the main thread', () => {
+  type Driver = typeof import('../src/driver-browser.js')
+  let fresh: Driver
+
+  beforeEach(async () => {
+    vi.stubGlobal('navigator', { storage: { getDirectory: () => Promise.resolve({}) } })
+    vi.resetModules()
+    fresh = await import('../src/driver-browser.js')
+  })
+
+  afterEach(() => {
+    vi.unstubAllGlobals()
+    vi.resetModules()
+  })
+
+  it('deleteBrowserData() throws rather than pretend the data is gone', async () => {
+    await expect(fresh.deleteBrowserData()).rejects.toThrow(/Worker/)
+  })
+
+  it('openPersistentBrowserDatabase() falls back and says it must run in the Worker', async () => {
+    const { db, persistent, reason } = await fresh.openPersistentBrowserDatabase('/test.sqlite3')
+    expect(persistent).toBe(false)
+    expect(reason).toMatch(/solo dal Worker dedicato/)
+    db.close()
   })
 })

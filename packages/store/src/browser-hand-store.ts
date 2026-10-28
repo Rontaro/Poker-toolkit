@@ -72,22 +72,25 @@ const UPSERT_HAND_SQL = `
 export class BrowserHandStore implements HandStore {
   readonly #db: SqlDatabase
   readonly #persistent: boolean
+  readonly #persistenceIssue: string | undefined
 
-  private constructor(db: SqlDatabase, persistent: boolean) {
+  private constructor(db: SqlDatabase, persistent: boolean, persistenceIssue: string | undefined) {
     this.#db = db
     this.#persistent = persistent
+    this.#persistenceIssue = persistenceIssue
   }
 
   static async create(filename?: string): Promise<BrowserHandStore> {
-    return BrowserHandStore.#migrated(await openBrowserDatabase(filename), false)
+    return BrowserHandStore.#migrated(await openBrowserDatabase(filename), false, undefined)
   }
 
   /** Opens (or creates) the store on OPFS. Outside a Worker with OPFS it
    * falls back to memory instead of failing; `persistent` says which one the
-   * caller got, so the UI can warn that nothing will survive a reload. */
+   * caller got and `persistenceIssue` why, so the UI can warn that nothing
+   * will survive a reload. */
   static async openPersistent(filename = '/poker-toolkit.sqlite3'): Promise<BrowserHandStore> {
-    const { db, persistent } = await openPersistentBrowserDatabase(filename)
-    return BrowserHandStore.#migrated(db, persistent)
+    const { db, persistent, reason } = await openPersistentBrowserDatabase(filename)
+    return BrowserHandStore.#migrated(db, persistent, reason)
   }
 
   /** Whether the hands survive a page reload (OPFS) or live in memory. */
@@ -95,7 +98,15 @@ export class BrowserHandStore implements HandStore {
     return this.#persistent
   }
 
-  static #migrated(db: SqlDatabase, persistent: boolean): BrowserHandStore {
+  /** When `openPersistent()` fell back to memory: why, worded for the user
+   * (Italian) -- no OPFS in this browser, or OPFS present but unusable right
+   * now, with the original error. Undefined when the store is persistent, and
+   * for `create()`, which is in memory by choice rather than by failure. */
+  get persistenceIssue(): string | undefined {
+    return this.#persistenceIssue
+  }
+
+  static #migrated(db: SqlDatabase, persistent: boolean, persistenceIssue: string | undefined): BrowserHandStore {
     // A failed migration must not leave an open, unreachable WASM connection
     // behind -- there is no process exit to reclaim it the way there would
     // be in Node, so the tab would carry the leaked heap for its lifetime.
@@ -107,7 +118,7 @@ export class BrowserHandStore implements HandStore {
       db.close()
       throw cause
     }
-    return new BrowserHandStore(db, persistent)
+    return new BrowserHandStore(db, persistent, persistenceIssue)
   }
 
   async upsert(hands: readonly Hand[]): Promise<void> {
