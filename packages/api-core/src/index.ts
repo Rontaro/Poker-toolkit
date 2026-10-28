@@ -5,10 +5,12 @@
  * sight.
  *
  * Every function here is `(store, ...typed params) => result` or
- * `Promise<result>`. Turning a query string into a `HandFilter`, and turning
- * a result back into an HTTP response, stays in
- * `packages/dashboard/server/index.ts` -- that part is Express-specific and
- * always will be.
+ * `Promise<result>`. On top of them, `dispatch` (see `dispatch.ts`) is the one
+ * route table both transports share: it takes a transport-neutral
+ * `ApiRequest` (method, path without `/api`, query, body), reads the filter
+ * with `filterFromQuery`, and returns an `ApiResponse` (status, body). The
+ * Express server and the Web Worker only translate their own request and
+ * reply shapes to and from those two.
  *
  * Error convention: a function whose Express handler used to answer with
  * `response.status(400/404).json({error})` returns `ApiResult<T>` (see
@@ -17,17 +19,16 @@
  * range, a hand id that does not exist, a filter matching no hands. A thrown
  * exception still means a programming error, not a bad request. Every
  * function with this need (`getHand`, `getHandEquity`, `calculateFreeEquity`,
- * `runStudy`) uses this same shape, so the Express layer handles all of them
- * the same way:
- *
- * ```ts
- * const result = await getHand(store, id)
- * if (!result.ok) { response.status(result.status).json({ error: result.error }); return }
- * response.json(result.value)
- * ```
+ * `runStudy`) uses this same shape, so `dispatch` handles all of them the
+ * same way: `{status: result.status, body: {error: result.error}}`.
  */
 
 export type { ApiResult } from './errors.js'
+
+export { dispatch } from './dispatch.js'
+export type { ApiRequest, ApiResponse } from './dispatch.js'
+
+export { filterFromQuery } from './filter-query.js'
 
 export { getOverview } from './overview.js'
 export type { EmptyOverview, Overview, OverviewBankrollPoint, OverviewResult } from './overview.js'

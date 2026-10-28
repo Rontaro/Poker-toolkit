@@ -7,9 +7,9 @@
  * `ApiResult<T>` instead of throwing: `{ ok: true, value }` on success, or
  * `{ ok: false, status, error }` on an expected failure, carrying the HTTP
  * status the caller should use and the message Express already sent as
- * `{ error }`. The `status` travels with the result precisely so
- * `dashboard/server/index.ts` never has to re-derive "was this a bad request
- * or a missing hand" from the message text.
+ * `{ error }`. The `status` travels with the result precisely so `dispatch`
+ * never has to re-derive "was this a bad request or a missing hand" from the
+ * message text.
  *
  * A thrown exception stays reserved for programming errors (a bug here or in
  * a package this one calls), so the Express layer can let those crash loudly
