@@ -73,9 +73,11 @@ function stringsOf(query: Request['query']): Record<string, string> {
 /**
  * Everything else under `/api`. Mounted with `app.use`, so `request.path` is
  * already relative to `/api`. HEAD answers as GET, as Express's own `app.get`
- * routes did; any other method than GET/HEAD/POST falls through to Express's
- * default 404, as before. A thrown exception goes to Express's error handler
- * (a 500) instead of becoming an unhandled rejection.
+ * routes did; any other method falls through to Express's default 404 (OPTIONS
+ * included, which the per-route registrations used to answer automatically --
+ * nothing sends it: the browser reaches this through the same-origin Vite
+ * proxy). A thrown exception, from `dispatch` or from serialising its result,
+ * goes to Express's error handler (a 500) instead of an unhandled rejection.
  */
 app.use('/api', (request: Request, response: Response, next: NextFunction) => {
   const method = request.method === 'HEAD' ? 'GET' : request.method
@@ -89,9 +91,11 @@ app.use('/api', (request: Request, response: Response, next: NextFunction) => {
     path: request.path,
     query: stringsOf(request.query),
     body: request.body,
-  }).then((result) => {
-    response.status(result.status).json(result.body)
-  }, next)
+  })
+    .then((result) => {
+      response.status(result.status).json(result.body)
+    })
+    .catch(next)
 })
 
 app.listen(PORT, () => {

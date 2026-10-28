@@ -30,7 +30,9 @@ import { getTimeline } from './timeline.js'
 export interface ApiRequest {
   readonly method: 'GET' | 'POST'
   /** Without the `/api` prefix, e.g. `/overview` or `/hand/abc123/equity`.
-   * Path parameters are percent-decoded, as Express decodes `:id`. */
+   * Pass it raw (still percent-encoded): `dispatch` decodes path parameters
+   * itself, as Express decodes `:id`, so a pre-decoded path would be decoded
+   * twice. */
   readonly path: string
   readonly query?: Readonly<Record<string, string>>
   readonly body?: unknown
@@ -103,8 +105,7 @@ const ROUTES: readonly Route[] = [
   route('GET', '/hand/:id', async (store, { params }) => fromResult(await getHand(store, params['id'] as HandId))),
 
   route('GET', '/hand/:id/equity', async (store, { params, query }) => {
-    const notation = typeof query['range'] === 'string' ? query['range'] : DEFAULT_RANGE
-    return fromResult(await getHandEquity(store, params['id'] as HandId, notation))
+    return fromResult(await getHandEquity(store, params['id'] as HandId, query['range'] ?? DEFAULT_RANGE))
   }),
 
   route('POST', '/equity', (_store, { body }) => {
@@ -116,8 +117,7 @@ const ROUTES: readonly Route[] = [
   route('GET', '/hand-list', (store, { query }) => getHandList(store, filterFromQuery(query)).then(json)),
 
   route('GET', '/notes', async (store, { query }) => {
-    const text = typeof query['q'] === 'string' ? query['q'] : ''
-    return json(await searchNotes(store, text))
+    return json(await searchNotes(store, query['q'] ?? ''))
   }),
 
   route('POST', '/notes', async (store, { body }) => {

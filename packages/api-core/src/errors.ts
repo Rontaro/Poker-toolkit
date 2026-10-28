@@ -12,8 +12,9 @@
  * message text.
  *
  * A thrown exception stays reserved for programming errors (a bug here or in
- * a package this one calls), so the Express layer can let those crash loudly
- * instead of mistaking them for a handled 400.
+ * a package this one calls): `dispatch` lets it propagate, and each transport
+ * reports it as its own kind of failure (Express as a 500) instead of
+ * mistaking it for a handled 400.
  */
 export type ApiResult<T> =
   | { readonly ok: true; readonly value: T }
