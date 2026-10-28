@@ -20,3 +20,6 @@ export { SESSION_GAP_MS, deriveSessions, deriveSessionIds } from '@poker/core'
 // (see `index.ts`): this package's second entry point so a browser bundle
 // can import "@poker/store/browser" and never pull in `node:sqlite`.
 export { BrowserHandStore } from './browser-hand-store.js'
+
+// For the "delete all data" button: close the store first, then call this.
+export { deleteBrowserData } from './driver-browser.js'

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
-import { openBrowserDatabase } from '../src/driver-browser.js'
+import { deleteBrowserData, openBrowserDatabase, openPersistentBrowserDatabase } from '../src/driver-browser.js'
 import type { SqlDatabase } from '../src/sql-database.js'
 
 // All in-memory: no OPFS, no Worker. These run under plain Vitest/Node, the
@@ -129,5 +129,38 @@ describe('openBrowserDatabase', () => {
 
   it('close() does not throw', () => {
     expect(() => db.close()).not.toThrow()
+  })
+})
+
+// Node has no OPFS (and the library's Node build no SAH pool VFS), so these
+// pin the fallback path; the OPFS path itself needs a real browser Worker.
+describe('openPersistentBrowserDatabase', () => {
+  it('falls back to memory without throwing where OPFS does not exist', async () => {
+    const { db, persistent } = await openPersistentBrowserDatabase('/test.sqlite3')
+    expect(persistent).toBe(false)
+
+    db.exec('CREATE TABLE widgets (id INTEGER PRIMARY KEY, name TEXT) STRICT')
+    db.prepare('INSERT INTO widgets (id, name) VALUES (@id, @name)').run({ id: 1, name: 'sprocket' })
+    expect(db.prepare('SELECT name FROM widgets WHERE id = ?').get(1)).toEqual({ name: 'sprocket' })
+    db.close()
+  })
+
+  it('gives independent databases on repeated calls', async () => {
+    const first = await openPersistentBrowserDatabase('/test.sqlite3')
+    const second = await openPersistentBrowserDatabase('/test.sqlite3')
+    first.db.exec('CREATE TABLE only_in_first (id INTEGER) STRICT')
+
+    const row = second.db
+      .prepare("SELECT name FROM sqlite_master WHERE type = 'table' AND name = ?")
+      .get('only_in_first')
+    expect(row).toBeUndefined()
+    first.db.close()
+    second.db.close()
+  })
+})
+
+describe('deleteBrowserData', () => {
+  it('is a no-op where there is no persistent storage', async () => {
+    await expect(deleteBrowserData()).resolves.toBeUndefined()
   })
 })

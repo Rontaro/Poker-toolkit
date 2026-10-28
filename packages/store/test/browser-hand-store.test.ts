@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { Money, type Hand } from '@poker/core'
-import { BrowserHandStore, SESSION_GAP_MS } from '../src/browser.js'
+import { BrowserHandStore, SESSION_GAP_MS, deleteBrowserData } from '../src/browser.js'
 import { MINUTE, movedTo, oneHand, realHands } from './helpers.js'
 
 const open = (): Promise<BrowserHandStore> => BrowserHandStore.create()
@@ -11,6 +11,33 @@ async function collect(iterable: AsyncIterable<Hand>): Promise<Hand[]> {
   for await (const hand of iterable) out.push(hand)
   return out
 }
+
+describe('persistence', () => {
+  it('create() is in memory', async () => {
+    const store = await open()
+    expect(store.persistent).toBe(false)
+    store.close()
+  })
+
+  // Node has no OPFS, so openPersistent() must degrade to an ordinary
+  // in-memory store rather than fail; the OPFS path needs a browser Worker.
+  it('openPersistent() falls back to a working in-memory store where OPFS does not exist', async () => {
+    const store = await BrowserHandStore.openPersistent()
+    expect(store.persistent).toBe(false)
+
+    const hand = oneHand()
+    await store.upsert([hand])
+    const [back] = await collect(store.query({}))
+    expect(back).toEqual(hand)
+    store.close()
+  })
+
+  it('deleteBrowserData() does not throw after the store is closed', async () => {
+    const store = await BrowserHandStore.openPersistent()
+    store.close()
+    await expect(deleteBrowserData()).resolves.toBeUndefined()
+  })
+})
 
 describe('migrations', () => {
   it('creates the schema from scratch', async () => {

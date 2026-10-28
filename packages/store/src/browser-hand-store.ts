@@ -1,6 +1,6 @@
 import { deriveSessionIds, type Hand, type HandId, type SessionInput } from '@poker/core'
 
-import { openBrowserDatabase } from './driver-browser.js'
+import { openBrowserDatabase, openPersistentBrowserDatabase } from './driver-browser.js'
 import { buildLimitOffset, buildWhere } from './filter-sql.js'
 import { applyMigrations, type MigrationEntry } from './migrate-core.js'
 import { hydrateHand, toChips, toHandRow } from './serialize.js'
@@ -66,28 +66,48 @@ const UPSERT_HAND_SQL = `
  * asynchronous, so unlike `SqliteHandStore`'s synchronous constructor this
  * class has a private constructor and an async `create()` factory.
  *
- * In-memory only for now (whatever `openBrowserDatabase()`'s default gives) --
- * OPFS persistence needs a dedicated Worker and is a later task.
+ * `create()` is in-memory; `openPersistent()` keeps the hands on OPFS across
+ * reloads, which only works inside a dedicated Worker.
  */
 export class BrowserHandStore implements HandStore {
   readonly #db: SqlDatabase
+  readonly #persistent: boolean
 
-  private constructor(db: SqlDatabase) {
+  private constructor(db: SqlDatabase, persistent: boolean) {
     this.#db = db
+    this.#persistent = persistent
   }
 
   static async create(filename?: string): Promise<BrowserHandStore> {
-    const db = await openBrowserDatabase(filename)
+    return BrowserHandStore.#migrated(await openBrowserDatabase(filename), false)
+  }
+
+  /** Opens (or creates) the store on OPFS. Outside a Worker with OPFS it
+   * falls back to memory instead of failing; `persistent` says which one the
+   * caller got, so the UI can warn that nothing will survive a reload. */
+  static async openPersistent(filename = '/poker-toolkit.sqlite3'): Promise<BrowserHandStore> {
+    const { db, persistent } = await openPersistentBrowserDatabase(filename)
+    return BrowserHandStore.#migrated(db, persistent)
+  }
+
+  /** Whether the hands survive a page reload (OPFS) or live in memory. */
+  get persistent(): boolean {
+    return this.#persistent
+  }
+
+  static #migrated(db: SqlDatabase, persistent: boolean): BrowserHandStore {
     // A failed migration must not leave an open, unreachable WASM connection
     // behind -- there is no process exit to reclaim it the way there would
     // be in Node, so the tab would carry the leaked heap for its lifetime.
+    // On OPFS it would also keep the pool's access handle, so the file could
+    // be neither reopened nor wiped until a reload.
     try {
       applyMigrations(db, MIGRATIONS)
     } catch (cause) {
       db.close()
       throw cause
     }
-    return new BrowserHandStore(db)
+    return new BrowserHandStore(db, persistent)
   }
 
   async upsert(hands: readonly Hand[]): Promise<void> {
