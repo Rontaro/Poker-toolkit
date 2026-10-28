@@ -68,24 +68,53 @@ export function toQuery(filters: Filters): string {
   return params.toString()
 }
 
+/**
+ * The transport is the only thing a future web/Worker-backed app needs to
+ * swap. Views never see this interface -- they only ever call `get`/`post`
+ * below, unchanged. `query` is the already-built query string, either empty
+ * or starting with `?`, to keep `httpTransport` a one-to-one match of what
+ * `get`/`post` did before this indirection existed.
+ */
+export interface Transport {
+  get<T>(path: string, query: string): Promise<T>
+  post<T>(path: string, body: unknown): Promise<T>
+}
+
+const httpTransport: Transport = {
+  async get<T>(path: string, query: string): Promise<T> {
+    const response = await fetch(`/api${path}${query}`)
+    if (!response.ok) throw new Error(`${path}: ${response.status}`)
+    return (await response.json()) as T
+  },
+  async post<T>(path: string, body: unknown): Promise<T> {
+    const response = await fetch(`/api${path}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    })
+    if (!response.ok) {
+      const detail = (await response.json().catch(() => ({}))) as { error?: string }
+      throw new Error(detail.error ?? `${path}: ${response.status}`)
+    }
+    return (await response.json()) as T
+  },
+}
+
+let activeTransport: Transport = httpTransport
+
+/** Lets a consumer (e.g. the future web Worker-backed app) swap the fetch
+ * transport for its own, without any view needing to know which is active. */
+export function setTransport(transport: Transport): void {
+  activeTransport = transport
+}
+
 export async function get<T>(path: string, filters?: Filters): Promise<T> {
   const query = filters === undefined ? '' : `?${toQuery(filters)}`
-  const response = await fetch(`/api${path}${query}`)
-  if (!response.ok) throw new Error(`${path}: ${response.status}`)
-  return (await response.json()) as T
+  return activeTransport.get<T>(path, query)
 }
 
 export async function post<T>(path: string, body: unknown): Promise<T> {
-  const response = await fetch(`/api${path}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  })
-  if (!response.ok) {
-    const detail = (await response.json().catch(() => ({}))) as { error?: string }
-    throw new Error(detail.error ?? `${path}: ${response.status}`)
-  }
-  return (await response.json()) as T
+  return activeTransport.post<T>(path, body)
 }
 
 /** Formats a number the way the tables want it: fixed, or a dash. */

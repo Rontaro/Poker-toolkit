@@ -11,7 +11,7 @@
  * deliberately hard.
  */
 
-import type { ReactNode } from 'react'
+import type { JSX, ReactNode } from 'react'
 
 const GLYPH: Record<string, string> = { c: '♣', d: '♦', h: '♥', s: '♠' }
 

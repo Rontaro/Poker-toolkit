@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, type JSX } from 'react'
 
 import { get, post, type Filters, type LeakEvent, type LeakSummary } from '../api.js'
 import { NoHands, Panel, Term, useResource } from '../components/Common.js'

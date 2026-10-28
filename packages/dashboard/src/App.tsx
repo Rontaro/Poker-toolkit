@@ -1,14 +1,17 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, type JSX } from 'react'
 
-import { EMPTY_FILTERS, type Filters } from './api.js'
-import { Equity } from './views/Equity.js'
-import { Guide } from './views/Guide.js'
-import { Leaks } from './views/Leaks.js'
-import { Overview } from './views/Overview.js'
-import { Statistics } from './views/Statistics.js'
-import { Studio } from './views/Studio.js'
-import { Timeline } from './views/Timeline.js'
-import { Training } from './views/Training.js'
+import {
+  EMPTY_FILTERS,
+  Equity,
+  Guide,
+  Leaks,
+  Overview,
+  Statistics,
+  Studio,
+  Timeline,
+  Training,
+  type Filters,
+} from '@poker/ui'
 
 const VIEWS = [
   { id: 'overview', label: 'Panoramica' },

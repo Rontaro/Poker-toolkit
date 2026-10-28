@@ -1,3 +1,5 @@
+import type { JSX } from 'react'
+
 import { fixed, type Filters, type Metric, type Verdict } from '../api.js'
 import { NoHands, Panel, Term, useResource } from '../components/Common.js'
 

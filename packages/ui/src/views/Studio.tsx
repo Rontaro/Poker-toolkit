@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type JSX } from 'react'
 
 import { get, post, type Filters } from '../api.js'
 import { Panel } from '../components/Common.js'

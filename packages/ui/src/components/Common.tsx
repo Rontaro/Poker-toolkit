@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useState, type JSX, type ReactNode } from 'react'
 
 import { get, type Filters } from '../api.js'
 

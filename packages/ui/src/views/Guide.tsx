@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type JSX } from 'react'
 
 import { get, type Metric } from '../api.js'
 import { Panel } from '../components/Common.js'
