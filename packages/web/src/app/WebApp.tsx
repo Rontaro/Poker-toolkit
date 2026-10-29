@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type JSX } from 'react'
 
-import { AppShell, type ImportInstructions } from '@poker/ui'
+import { AppShell, clearTrainingProgress, type ImportInstructions } from '@poker/ui'
 
 import type { WorkerClient } from '../worker/client.js'
 import type { IngestProgress, IngestSummary, StoreStatus } from '../worker/protocol.js'
@@ -238,7 +238,7 @@ export function WebApp({
   const wipe = async (): Promise<void> => {
     if (busyRef.current !== undefined || demo !== undefined) return
     const confirmed = window.confirm(
-      'Cancellare tutte le mani salvate in questo browser? Non si può annullare: per riaverle dovrai caricare di nuovo i file.',
+      'Cancellare tutti i dati salvati in questo browser: le mani, le note e i progressi dell’allenamento? Non si può annullare: per riavere le mani dovrai caricare di nuovo i file.',
     )
     if (!confirmed || !begin('wipe')) return
 
@@ -246,6 +246,9 @@ export function WebApp({
     setResult(undefined)
     try {
       opened(await client.wipe())
+      // "Tutti i dati" includes the trainer's progress, which lives in the
+      // page's localStorage rather than in the Worker's archive.
+      clearTrainingProgress()
     } catch (cause) {
       setError((cause as Error).message)
       refresh()

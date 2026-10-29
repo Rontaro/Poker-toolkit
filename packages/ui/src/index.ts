@@ -7,7 +7,7 @@ export { Leaks } from './views/Leaks.js'
 export { Timeline } from './views/Timeline.js'
 export { Studio } from './views/Studio.js'
 export { Equity } from './views/Equity.js'
-export { Training } from './views/Training.js'
+export { Training, clearTrainingProgress } from './views/Training.js'
 export { Guide } from './views/Guide.js'
 
 export { Empty, NoHands, Panel, Figure, Term, useResource, type ImportInstructions } from './components/Common.js'

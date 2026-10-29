@@ -73,6 +73,24 @@ function persist(saved: Saved): void {
   }
 }
 
+/** Sent on `window` when the progress is deleted, so a trainer on screen
+ * forgets it too instead of writing it back with its next answer. */
+const RESET_EVENT = 'poker-trainer-reset'
+
+/**
+ * Deletes the trainer's progress from this browser: levels, record, the
+ * per-exercise statistics. For the web app's "Cancella tutti i dati", which
+ * has to mean all of them; a Training view that is open starts over.
+ */
+export function clearTrainingProgress(): void {
+  try {
+    window.localStorage.removeItem(STORAGE_KEY)
+  } catch {
+    // Storage disabled: then nothing was ever saved.
+  }
+  window.dispatchEvent(new Event(RESET_EVENT))
+}
+
 interface Result {
   readonly drill: DrillId
   readonly quality: Quality
@@ -96,6 +114,16 @@ export function Training(): JSX.Element {
   const [session, setSession] = useState<Session | undefined>(undefined)
   const [finished, setFinished] = useState<Session | undefined>(undefined)
   const rng = useRef<() => number>(seeded(Date.now() >>> 0))
+
+  useEffect(() => {
+    const reset = (): void => {
+      setSaved(EMPTY_SAVED)
+      setSession(undefined)
+      setFinished(undefined)
+    }
+    window.addEventListener(RESET_EVENT, reset)
+    return () => window.removeEventListener(RESET_EVENT, reset)
+  }, [])
 
   const update = (next: Saved): void => {
     setSaved(next)
