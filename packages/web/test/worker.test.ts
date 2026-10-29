@@ -432,6 +432,25 @@ describe('the demo', () => {
     await send({ id: 2, kind: 'api', request: overview })
     expect(final(2)).toMatchObject({ body: { empty: true } })
   })
+
+  it('stays on the user’s archive when the sample loads but cannot be counted', async () => {
+    const store = await BrowserHandStore.create()
+    const close = vi.spyOn(store, 'close')
+    // The import counts its own batches by id; only the count of the whole
+    // sample, once it is loaded, fails.
+    const stats = store.stats.bind(store)
+    vi.spyOn(store, 'stats').mockImplementation(async (filter) =>
+      filter.handIds === undefined ? Promise.reject(new Error('conteggio fallito')) : stats(filter),
+    )
+    const { send, final } = worker({ openDemoStore: async () => store })
+
+    await send({ id: 1, kind: 'enter-demo' })
+    expect(final(1)).toMatchObject({ kind: 'error', message: expect.stringContaining('conteggio fallito') })
+    expect(close).toHaveBeenCalledOnce()
+    // The page was told the demo failed: the views must read the archive.
+    await send({ id: 2, kind: 'api', request: overview })
+    expect(final(2)).toMatchObject({ body: { empty: true } })
+  })
 })
 
 /** Page and Worker joined back to back, as `postMessage` would join them. */

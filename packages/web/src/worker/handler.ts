@@ -75,11 +75,14 @@ export function createWorkerHandler(
     }
   }
 
-  /** The sample hands' store while the demo is on. Only ever set to a store
-   * that opened: a failed demo leaves the views on the user's archive. */
-  let demo: BrowserHandStore | undefined
+  /** The sample hands' store while the demo is on, with how many hands it
+   * holds. Only ever set to a store that opened and was counted: a demo that
+   * fails at any step leaves the views on the user's archive, which is what
+   * the page will believe once it gets the error. The count is taken once,
+   * since nothing writes to the sample after it is loaded. */
+  let demo: { readonly store: BrowserHandStore; readonly handCount: number } | undefined
 
-  async function openDemo(): Promise<BrowserHandStore> {
+  async function openDemo(): Promise<{ store: BrowserHandStore; handCount: number }> {
     const sample = await deps.openDemoStore()
     try {
       const bytes = new TextEncoder().encode(await deps.loadDemoHands())
@@ -88,7 +91,8 @@ export function createWorkerHandler(
       const summary = await ingestFiles(sample, [{ name: DEMO_FILE_NAME, bytes: bytes.buffer as ArrayBuffer }], () => undefined)
       const failure = summary.errors[0]?.message ?? (summary.handsImported === 0 ? 'nessuna mano letta' : undefined)
       if (failure !== undefined) throw new Error(failure)
-      return sample
+      const { handCount } = await sample.stats({})
+      return { store: sample, handCount }
     } catch (cause) {
       sample.close()
       throw cause
@@ -99,7 +103,7 @@ export function createWorkerHandler(
     const { id } = request
     switch (request.kind) {
       case 'api': {
-        const current = demo ?? (await opened())
+        const current = demo?.store ?? (await opened())
         let status: number
         let body: unknown
         try {
@@ -181,8 +185,7 @@ export function createWorkerHandler(
             throw new Error(`Non riesco ad aprire le mani di esempio: ${errorMessage(cause)}`, { cause })
           }
         }
-        const { handCount } = await demo.stats({})
-        post({ id, kind: 'demo-entered', handCount })
+        post({ id, kind: 'demo-entered', handCount: demo.handCount })
         return
       }
 
@@ -190,7 +193,7 @@ export function createWorkerHandler(
         const sample = demo
         demo = undefined
         try {
-          sample?.close()
+          sample?.store.close()
         } catch (cause) {
           logError('close demo', cause)
         }
