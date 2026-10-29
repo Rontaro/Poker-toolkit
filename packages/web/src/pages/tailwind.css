@@ -17,13 +17,19 @@
     -webkit-text-size-adjust: 100%;
   }
 
+  /* Only what @poker/ui's stylesheet sets to the same values: on
+   * /allenamento both are loaded, in an order the build decides, and the
+   * Training view must look exactly as it does in /app. */
   body {
     margin: 0;
     background: #090d0b;
     color: #e6ece8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :where(.site) {
     font-family: 'IBM Plex Sans Condensed', system-ui, sans-serif;
     line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
   }
 
   :where(.site),
