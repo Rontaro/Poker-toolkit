@@ -1,0 +1,3 @@
+# Generated, and held byte for byte to its generator by a test (CRLF and a BOM,
+# as the PokerStars client writes): no line-ending conversion either way.
+packages/web/src/demo/sample-hands.txt -text
