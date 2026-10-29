@@ -79,6 +79,10 @@ export async function ingestFiles(
           // The store keys quarantine by a hash of the raw text, so a hand
           // already set aside by an earlier upload is not added again: like a
           // hand, it counts as already present, not as newly quarantined.
+          // Counted by listing, twice: only files with an unreadable hand get
+          // here, and the quarantine holds a handful of rows, so a count
+          // method on `HandStore` (both stores, the contract) would buy
+          // nothing measurable.
           const before = (await store.listQuarantined()).length
           await store.quarantine(parsed.quarantine)
           const added = (await store.listQuarantined()).length - before

@@ -196,6 +196,17 @@ export function WebApp({
 
   const upload = async (picked: readonly File[]): Promise<void> => {
     if (busyRef.current !== undefined) return
+    // The button is disabled until the archive is open; a drop has no such
+    // guard, so it gets the same answer in words.
+    if (status === undefined) {
+      setResult(undefined)
+      setError(
+        openError === undefined
+          ? 'L’archivio si sta ancora aprendo: riprova tra un attimo.'
+          : 'Non posso importare: l’archivio salvato non si apre.',
+      )
+      return
+    }
     const files = picked.filter((file) => HAND_HISTORY_FILE.test(file.name))
     if (files.length === 0) {
       setResult(undefined)
@@ -343,6 +354,17 @@ function useFileDrop(onFiles: (files: File[]) => void, onDragging: (dragging: bo
   }, [onDragging])
 }
 
+/** What the count line says about the user's archive. Out of OPFS (another
+ * tab holds it, a private window, an old browser) the hands here live only in
+ * this tab, and "0 mani in archivio" would read as the saved ones being gone. */
+function archiveLine(status: StoreStatus | undefined, opening: boolean): string {
+  if (status === undefined) return opening ? 'apertura archivio…' : 'archivio non disponibile'
+  if (status.persistent) return `${number(status.handCount)} mani in archivio`
+  return status.handCount === 0
+    ? 'archivio salvato non raggiungibile da qui'
+    : `${number(status.handCount)} mani solo in questa scheda`
+}
+
 function StorePanel({
   status,
   openError,
@@ -376,11 +398,7 @@ function StorePanel({
   const ready = demo === undefined ? status !== undefined : demo.handCount !== undefined
   const line =
     demo === undefined
-      ? status !== undefined
-        ? `${number(status.handCount)} mani in archivio`
-        : opening
-          ? 'apertura archivio…'
-          : 'archivio non disponibile'
+      ? archiveLine(status, opening)
       : demo.handCount === undefined
         ? 'apertura mani di esempio…'
         : `${number(demo.handCount)} mani di esempio`
