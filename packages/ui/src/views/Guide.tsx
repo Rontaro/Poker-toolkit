@@ -69,8 +69,8 @@ export function Guide(): JSX.Element {
           <span className="n">4</span>
           <h4>Rimetti dentro la risposta</h4>
           <p>
-            Sotto ogni mano c'è un campo dove incollare quello che ti è stato risposto. Resta
-            attaccato alla mano e lo ritrovi.
+            Nella scheda <b>Leak</b>, sotto il replay di ogni mano con un leak, c'è un campo dove
+            incollare quello che ti è stato risposto. Resta attaccato alla mano e lo ritrovi.
           </p>
         </div>
       </div>
@@ -191,8 +191,8 @@ export function Guide(): JSX.Element {
               <td>Equity</td>
               <td>
                 La tua quota del piatto se le carte restanti uscissero tutte, ripetuto infinite
-                volte. Va confrontata con le pot odds: è per questo che nella scheda Equity le due
-                colonne stanno vicine.
+                volte. Va confrontata con le pot odds: è per questo che nel replay della scheda Leak
+                l'equity e quella che ti serviva stanno vicine.
               </td>
             </tr>
             <tr>
