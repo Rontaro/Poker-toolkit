@@ -111,3 +111,55 @@
 .store-detail {
   color: var(--ink-faint);
 }
+
+/*
+ * Above the filters on every view while the sample hands are on screen. Amber,
+ * like the archive warnings: not an error, but not the user's own data either.
+ */
+.demo-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 20px;
+  padding: 12px 28px;
+  border-bottom: 1px solid var(--rule);
+  border-left: 2px solid var(--amber);
+  background: rgba(224, 163, 68, 0.07);
+  color: var(--chalk);
+  font-size: 13px;
+}
+
+.demo-banner p {
+  margin: 0;
+  flex: 1 1 320px;
+  line-height: 1.5;
+}
+
+.demo-banner b {
+  color: var(--amber);
+  font-weight: 500;
+}
+
+.demo-exit {
+  flex: none;
+  color: var(--amber);
+  border-color: var(--amber);
+}
+
+.demo-exit:focus-visible,
+.empty .ghost:focus-visible {
+  outline: 1px solid var(--jade);
+  outline-offset: 1px;
+}
+
+.demo-exit:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+@media (max-width: 640px) {
+  .demo-banner {
+    padding: 10px 16px;
+  }
+}

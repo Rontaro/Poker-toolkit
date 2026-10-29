@@ -38,16 +38,19 @@ type ViewId = (typeof VIEWS)[number]['id']
  * `revision` is that reload: whenever it changes, every view is remounted and
  * refetches, exactly as a filter change does. `importInstructions` is the
  * how, shown by the empty state and the guide; it defaults to the local
- * dashboard's CLI commands.
+ * dashboard's CLI commands. `banner`, when given, sits above the filters on
+ * every view: the web app says there when the hands on screen are samples.
  */
 export function AppShell({
   revision,
   foot,
   importInstructions = LOCAL_IMPORT_INSTRUCTIONS,
+  banner,
 }: {
   revision: number
   foot: ReactNode
   importInstructions?: ImportInstructions
+  banner?: ReactNode
 }): JSX.Element {
   const [view, setView] = useState<ViewId>('overview')
   const [filters, setFilters] = useState<Filters>(EMPTY_FILTERS)
@@ -83,6 +86,7 @@ export function AppShell({
         </nav>
 
         <main className="main">
+          {banner}
           <GlobalFilters value={filters} onChange={setFilters} />
 
           {view === 'overview' && (

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type JSX } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type JSX } from 'react'
 
 import { AppShell, type ImportInstructions } from '@poker/ui'
 
@@ -18,49 +18,94 @@ import '@fontsource/ibm-plex-sans-condensed/600.css'
 import '@poker/ui/styles.css'
 import './web.css'
 
-const WEB_IMPORT: ImportInstructions = {
-  emptyState: (
-    <p>
-      Carica le hand history di PokerStars con <b>Carica le tue mani</b>, nella barra a lato,
-      oppure trascina i file <code>.txt</code> su questa pagina. Restano in questo browser: non
-      vengono inviate a nessuno.
-    </p>
-  ),
-  guideStep: (
-    <p>
-      Con <b>Carica le tue mani</b>, nella barra a lato, scegli i file che il client di PokerStars
-      scrive da solo nella cartella <b>HandHistory</b> (su Windows, sotto{' '}
-      <b>%LOCALAPPDATA%\PokerStars.Italy</b>). Ricaricali quando vuoi: le mani già viste non vengono
-      duplicate. Restano in questo browser.
-    </p>
-  ),
+/** How to get hands in, as the views word it. With `onDemo`, the empty
+ * archive also offers the sample hands. */
+function webImport(onDemo: (() => void) | undefined): ImportInstructions {
+  return {
+    emptyState: (
+      <>
+        <p>
+          Carica le hand history di PokerStars con <b>Carica le tue mani</b>, nella barra a lato,
+          oppure trascina i file <code>.txt</code> su questa pagina. Restano in questo browser: non
+          vengono inviate a nessuno.
+        </p>
+        {onDemo !== undefined && (
+          <p>
+            Non hai file a portata di mano?{' '}
+            <button className="ghost" type="button" onClick={onDemo}>
+              Prova con mani di esempio
+            </button>
+          </p>
+        )}
+      </>
+    ),
+    guideStep: (
+      <p>
+        Con <b>Carica le tue mani</b>, nella barra a lato, scegli i file che il client di PokerStars
+        scrive da solo nella cartella <b>HandHistory</b> (su Windows, sotto{' '}
+        <b>%LOCALAPPDATA%\PokerStars.Italy</b>). Ricaricali quando vuoi: le mani già viste non vengono
+        duplicate. Restano in questo browser.
+      </p>
+    ),
+  }
 }
 
 const HAND_HISTORY_FILE = /\.txt$/i
 
 const OPEN_FAILED = 'Non riesco ad aprire l’archivio salvato. Puoi cancellarlo e ricominciare.'
 
+const DEMO_NOTICE = 'Stai guardando mani di esempio, generate apposta: non sono di nessun giocatore reale.'
+
 const number = (value: number): string => value.toLocaleString('it-IT')
 
-type Busy = 'import' | 'wipe' | undefined
+type Busy = 'import' | 'wipe' | 'demo' | undefined
+
+/** The sample hands on screen instead of the user's; `handCount` is
+ * undefined while they load. */
+type Demo = { readonly handCount: number | undefined } | undefined
 
 /** What an import ended with: the Worker's summary, plus the files the page
  * itself left out before sending them. */
 type ImportResult = IngestSummary & { readonly ignored: number }
 
+/** `?demo=1` follows the demo, so a reload lands where the user was. */
+function setDemoInUrl(on: boolean): void {
+  const url = new URL(window.location.href)
+  if (on) url.searchParams.set('demo', '1')
+  else url.searchParams.delete('demo')
+  window.history.replaceState(window.history.state, '', url)
+}
+
 /**
  * The app in the browser: the same shell as the local dashboard, with the
  * archive controls where the dashboard shows its live indicator. Every
  * request the views make goes to the Worker (see `start.tsx`); this component
- * only talks to it for the import, the status and the wipe.
+ * only talks to it for the import, the status, the wipe and the demo.
+ *
+ * In the demo the views read the sample hands, which the Worker keeps in a
+ * store of their own; the user's archive stays as it was. Loading files means
+ * wanting to see one's own hands, so it leaves the demo and imports into the
+ * user's archive, and the result is on screen at once. The wipe is hidden:
+ * next to sample hands, "delete all data" would read as deleting those, and
+ * it would act on an archive that is not on screen.
+ *
+ * `demoAtStart` is the demo `start.tsx` already asked the Worker for, before
+ * the views' first requests, when the page was opened at `?demo=1`.
  */
-export function WebApp({ client }: { client: WorkerClient }): JSX.Element {
+export function WebApp({
+  client,
+  demoAtStart,
+}: {
+  client: WorkerClient
+  demoAtStart?: Promise<number> | undefined
+}): JSX.Element {
   const [status, setStatus] = useState<StoreStatus | undefined>(undefined)
   /** Why the archive could not be opened, when it could not: then the wipe is
    * the way out, and has to stay reachable. */
   const [openError, setOpenError] = useState<string | undefined>(undefined)
   const [revision, setRevision] = useState(0)
-  const [busy, setBusy] = useState<Busy>(undefined)
+  const [busy, setBusy] = useState<Busy>(demoAtStart === undefined ? undefined : 'demo')
+  const [demo, setDemo] = useState<Demo>(demoAtStart === undefined ? undefined : { handCount: undefined })
   const [progress, setProgress] = useState<IngestProgress | undefined>(undefined)
   const [result, setResult] = useState<ImportResult | undefined>(undefined)
   const [error, setError] = useState<string | undefined>(undefined)
@@ -68,7 +113,7 @@ export function WebApp({ client }: { client: WorkerClient }): JSX.Element {
 
   // Read synchronously, unlike `busy`: two drops in the same tick both see the
   // state of the render before them, and would both start an import.
-  const busyRef = useRef<Busy>(undefined)
+  const busyRef = useRef<Busy>(demoAtStart === undefined ? undefined : 'demo')
   const begin = (next: Exclude<Busy, undefined>): boolean => {
     if (busyRef.current !== undefined) return false
     busyRef.current = next
@@ -97,10 +142,62 @@ export function WebApp({ client }: { client: WorkerClient }): JSX.Element {
 
   useEffect(refresh, [refresh])
 
+  useEffect(() => {
+    if (demoAtStart === undefined) return
+    demoAtStart
+      .then(
+        (handCount) => setDemo({ handCount }),
+        (cause: Error) => {
+          setDemo(undefined)
+          setDemoInUrl(false)
+          setError(cause.message)
+          setRevision((value) => value + 1)
+        },
+      )
+      .finally(end)
+  }, [demoAtStart])
+
+  const enterDemo = async (): Promise<void> => {
+    if (!begin('demo')) return
+    setError(undefined)
+    setResult(undefined)
+    setDemo({ handCount: undefined })
+    try {
+      setDemo({ handCount: await client.enterDemo() })
+      setDemoInUrl(true)
+    } catch (cause) {
+      setDemo(undefined)
+      setError((cause as Error).message)
+    } finally {
+      end()
+      setRevision((value) => value + 1)
+    }
+  }
+
+  /** Back to the user's archive. Throws if the Worker could not do it. */
+  const backToArchive = async (): Promise<void> => {
+    await client.leaveDemo()
+    setDemo(undefined)
+    setDemoInUrl(false)
+    setRevision((value) => value + 1)
+  }
+
+  const leaveDemo = async (): Promise<void> => {
+    if (!begin('demo')) return
+    setError(undefined)
+    try {
+      await backToArchive()
+    } catch (cause) {
+      setError((cause as Error).message)
+    } finally {
+      end()
+    }
+  }
+
   const upload = async (picked: readonly File[]): Promise<void> => {
+    if (busyRef.current !== undefined) return
     const files = picked.filter((file) => HAND_HISTORY_FILE.test(file.name))
     if (files.length === 0) {
-      if (busyRef.current !== undefined) return
       setResult(undefined)
       setError('Nessun file .txt: le hand history di PokerStars sono file di testo.')
       return
@@ -111,6 +208,7 @@ export function WebApp({ client }: { client: WorkerClient }): JSX.Element {
     setResult(undefined)
     setProgress(undefined)
     try {
+      if (demo !== undefined) await backToArchive()
       const outcome = await client.ingest(files, setProgress)
       setResult({ ...outcome.summary, ignored: picked.length - files.length })
       opened(outcome.status)
@@ -125,7 +223,7 @@ export function WebApp({ client }: { client: WorkerClient }): JSX.Element {
   }
 
   const wipe = async (): Promise<void> => {
-    if (busyRef.current !== undefined) return
+    if (busyRef.current !== undefined || demo !== undefined) return
     const confirmed = window.confirm(
       'Cancellare tutte le mani salvate in questo browser? Non si può annullare: per riaverle dovrai caricare di nuovo i file.',
     )
@@ -148,21 +246,44 @@ export function WebApp({ client }: { client: WorkerClient }): JSX.Element {
   uploadRef.current = upload
   useFileDrop((files) => void uploadRef.current(files), setDragging)
 
+  // Offered while the user's own archive is empty, wherever it says so.
+  const canTryDemo = demo === undefined && status?.handCount === 0
+  const enterDemoRef = useRef(enterDemo)
+  enterDemoRef.current = enterDemo
+  const instructions = useMemo(
+    () => webImport(canTryDemo ? () => void enterDemoRef.current() : undefined),
+    [canTryDemo],
+  )
+
   return (
     <>
       <AppShell
         revision={revision}
-        importInstructions={WEB_IMPORT}
+        importInstructions={instructions}
+        banner={
+          demo !== undefined && (
+            <div className="demo-banner" role="status">
+              <p>
+                <b>{DEMO_NOTICE}</b> Il tuo archivio resta com’è: quando esci dalla demo lo ritrovi intatto.
+              </p>
+              <button className="ghost demo-exit" type="button" disabled={busy !== undefined} onClick={() => void leaveDemo()}>
+                Esci dalla demo
+              </button>
+            </div>
+          )
+        }
         foot={
           <StorePanel
             status={status}
             openError={openError}
+            demo={demo}
             busy={busy}
             progress={progress}
             result={result}
             error={error}
             onFiles={(files) => void upload(files)}
             onWipe={() => void wipe()}
+            onDemo={canTryDemo ? () => void enterDemo() : undefined}
           />
         }
       />
@@ -225,21 +346,25 @@ function useFileDrop(onFiles: (files: File[]) => void, onDragging: (dragging: bo
 function StorePanel({
   status,
   openError,
+  demo,
   busy,
   progress,
   result,
   error,
   onFiles,
   onWipe,
+  onDemo,
 }: {
   status: StoreStatus | undefined
   openError: string | undefined
+  demo: Demo
   busy: Busy
   progress: IngestProgress | undefined
   result: ImportResult | undefined
   error: string | undefined
   onFiles: (files: File[]) => void
   onWipe: () => void
+  onDemo: (() => void) | undefined
 }): JSX.Element {
   const input = useRef<HTMLInputElement>(null)
   const opening = status === undefined && openError === undefined
@@ -248,15 +373,23 @@ function StorePanel({
   const canUpload = busy === undefined && status !== undefined
   const canWipe = busy === undefined && !opening
 
+  const ready = demo === undefined ? status !== undefined : demo.handCount !== undefined
+  const line =
+    demo === undefined
+      ? status !== undefined
+        ? `${number(status.handCount)} mani in archivio`
+        : opening
+          ? 'apertura archivio…'
+          : 'archivio non disponibile'
+      : demo.handCount === undefined
+        ? 'apertura mani di esempio…'
+        : `${number(demo.handCount)} mani di esempio`
+
   return (
     <div className="rail-foot store-panel">
       <div className="store-count">
-        <span className={status === undefined ? 'pulse' : 'pulse live'} />
-        {status !== undefined
-          ? `${number(status.handCount)} mani in archivio`
-          : opening
-            ? 'apertura archivio…'
-            : 'archivio non disponibile'}
+        <span className={ready ? 'pulse live' : 'pulse'} />
+        {line}
       </div>
 
       <input
@@ -275,6 +408,11 @@ function StorePanel({
       <button className="ghost store-action" type="button" disabled={!canUpload} onClick={() => input.current?.click()}>
         {busy === 'import' ? 'Importazione…' : 'Carica le tue mani'}
       </button>
+      {onDemo !== undefined && (
+        <button className="ghost store-action" type="button" disabled={busy !== undefined} onClick={onDemo}>
+          {busy === 'demo' ? 'Apertura…' : 'Prova con mani di esempio'}
+        </button>
+      )}
 
       {busy === 'import' && <ImportProgress progress={progress} />}
       {result !== undefined && <ImportSummary result={result} />}
@@ -284,7 +422,7 @@ function StorePanel({
           <b>{OPEN_FAILED}</b> <span className="store-detail">{openError}</span>
         </p>
       )}
-      {status !== undefined && !status.persistent && (
+      {demo === undefined && status !== undefined && !status.persistent && (
         <p className="store-warning" role="status">
           <b>Le mani non verranno salvate.</b> {status.persistenceIssue}
         </p>
@@ -295,9 +433,11 @@ function StorePanel({
         </p>
       )}
 
-      <button className="ghost store-action store-danger" type="button" disabled={!canWipe} onClick={onWipe}>
-        {busy === 'wipe' ? 'Cancellazione…' : 'Cancella tutti i dati'}
-      </button>
+      {demo === undefined && (
+        <button className="ghost store-action store-danger" type="button" disabled={!canWipe} onClick={onWipe}>
+          {busy === 'wipe' ? 'Cancellazione…' : 'Cancella tutti i dati'}
+        </button>
+      )}
     </div>
   )
 }
