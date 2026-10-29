@@ -120,9 +120,9 @@ export function Privacy(): JSX.Element {
             <p>
               E non devi fidarti nemmeno del codice: il sito dichiara al browser una <b>Content Security Policy</b>{' '}
               che permette alla pagina e al Web Worker di collegarsi solo a questo stesso sito, e di caricare
-              script, stili e font solo da qui. Se il codice provasse a inviare le tue mani a un altro dominio,
-              sarebbe il browser a bloccarlo. La trovi tra le intestazioni della pagina, negli strumenti per
-              sviluppatori del browser.
+              script, stili e font solo da qui. Una richiesta verso un altro dominio, fatta dalla pagina o dal
+              Worker, verrebbe bloccata dal browser. La trovi tra le intestazioni della pagina, negli strumenti
+              per sviluppatori del browser.
             </p>
           </Section>
 

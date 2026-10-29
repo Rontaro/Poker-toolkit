@@ -103,7 +103,7 @@ export function Statistics({ filters }: { filters: Filters }): JSX.Element {
         </table>
       </Panel>
 
-      <Panel title="Per posizione" meta="cash e tornei non vengono mai mescolati">
+      <Panel title="Per posizione" meta="filtra per gioco per non mescolare cash e tornei">
         <div style={{ overflowX: 'auto' }}>
           <table className="sticky-first">
             <thead>

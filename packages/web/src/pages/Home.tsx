@@ -172,11 +172,14 @@ function Features(): JSX.Element {
             text: (
               <>
                 Confrontate con i <b className={strong}>range di riferimento per il cash NL2</b>, 6-max o full
-                ring, scelti in base alle tue mani.
+                ring.
               </>
             ),
           },
-          { icon: 'layers', text: 'Cash e tornei non vengono mai mescolati. Nessun giudizio sotto le trenta occasioni.' },
+          {
+            icon: 'layers',
+            text: 'Il filtro Gioco tiene separati cash e tornei. Nessun giudizio sotto le trenta occasioni.',
+          },
           { icon: 'eye', text: 'Ogni sigla ha la sua definizione: basta passarci sopra.' },
         ]}
       />
