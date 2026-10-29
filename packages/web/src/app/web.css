@@ -1,0 +1,114 @@
+/*
+ * The web app's own pieces, in the same idiom as @poker/ui's styles.css (its
+ * custom properties, hairlines, monospace figures): the archive controls at
+ * the foot of the rail, where the local dashboard has its live indicator, and
+ * the veil shown while files are dragged over the page.
+ */
+
+.store-panel {
+  margin-top: auto;
+  padding: 14px 20px 0;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--ink-faint);
+}
+
+.store-count {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.store-action {
+  text-align: center;
+}
+
+.store-action:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.store-action:disabled:hover {
+  color: var(--ink-dim);
+  border-color: var(--rule);
+}
+
+.store-action:focus-visible {
+  outline: 1px solid var(--jade);
+  outline-offset: 1px;
+}
+
+.store-danger:not(:disabled):hover {
+  color: var(--rust);
+  border-color: var(--rust);
+}
+
+.store-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.store-progress .bar {
+  height: 3px;
+  background: var(--rule);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.store-progress .bar span {
+  display: block;
+  height: 100%;
+  background: var(--jade);
+  transition: width 160ms ease;
+}
+
+.store-summary p,
+.store-warning {
+  margin: 0;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.store-summary {
+  color: var(--chalk);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.store-summary b {
+  color: var(--jade);
+  font-weight: 500;
+}
+
+.store-warning {
+  color: var(--amber);
+  border-left: 2px solid var(--amber);
+  padding-left: 8px;
+}
+
+.store-warning b {
+  font-weight: 500;
+}
+
+.drop-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  background: rgba(9, 13, 11, 0.82);
+  border: 1px dashed var(--jade);
+  pointer-events: none;
+}
+
+.drop-veil p {
+  font-family: var(--serif);
+  font-size: 26px;
+  color: var(--ink);
+}
