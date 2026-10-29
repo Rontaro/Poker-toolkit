@@ -91,6 +91,33 @@ export function clearTrainingProgress(): void {
   window.dispatchEvent(new Event(RESET_EVENT))
 }
 
+/**
+ * Calls `reset` whenever the progress is deleted: by `clearTrainingProgress()`
+ * in this tab, or in another tab of the same site, which this one only hears
+ * about through a `storage` event (`newValue` null for a removed key, `key`
+ * null for `localStorage.clear()`). Without the second, a trainer left open in
+ * another tab would write its old progress back with its next answer.
+ * Returns the unsubscribe.
+ */
+export function onTrainingReset(reset: () => void): () => void {
+  const fromOtherTab = (event: Event): void => {
+    const { key, newValue, storageArea } = event as StorageEvent
+    let local = true
+    try {
+      local = storageArea === undefined || storageArea === null || storageArea === window.localStorage
+    } catch {
+      // Storage disabled: then there is no other area for the event to be about.
+    }
+    if (local && (key === null || (key === STORAGE_KEY && newValue === null))) reset()
+  }
+  window.addEventListener(RESET_EVENT, reset)
+  window.addEventListener('storage', fromOtherTab)
+  return () => {
+    window.removeEventListener(RESET_EVENT, reset)
+    window.removeEventListener('storage', fromOtherTab)
+  }
+}
+
 interface Result {
   readonly drill: DrillId
   readonly quality: Quality
@@ -115,15 +142,15 @@ export function Training(): JSX.Element {
   const [finished, setFinished] = useState<Session | undefined>(undefined)
   const rng = useRef<() => number>(seeded(Date.now() >>> 0))
 
-  useEffect(() => {
-    const reset = (): void => {
-      setSaved(EMPTY_SAVED)
-      setSession(undefined)
-      setFinished(undefined)
-    }
-    window.addEventListener(RESET_EVENT, reset)
-    return () => window.removeEventListener(RESET_EVENT, reset)
-  }, [])
+  useEffect(
+    () =>
+      onTrainingReset(() => {
+        setSaved(EMPTY_SAVED)
+        setSession(undefined)
+        setFinished(undefined)
+      }),
+    [],
+  )
 
   const update = (next: Saved): void => {
     setSaved(next)
