@@ -801,6 +801,17 @@ input[type='range']::-webkit-slider-thumb {
   .split {
     grid-template-columns: 1fr;
   }
+  /* A hidden bubble still takes up room: 310px from the left of a term near
+   * the right edge widened the page by as much. Out of the layout until it
+   * is shown, and never wider than the screen when it is. */
+  .term > .bubble {
+    display: none;
+    max-width: calc(100vw - 32px);
+  }
+  .term:hover > .bubble,
+  .term:focus-visible > .bubble {
+    display: block;
+  }
 }
 
 /*
@@ -999,7 +1010,9 @@ input[type='range'] {
 
 @media (max-width: 1080px) {
   .equity-grid {
-    grid-template-columns: 1fr;
+    /* `minmax(0, …)`, as for the shell: `1fr` would grow to the widest
+     * control's content and push the page past the screen. */
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -1782,6 +1795,19 @@ table.steps td {
 }
 
 @media (max-width: 900px) {
+  /* A phone has no room for desktop gutters: the tables need it more. */
+  .page,
+  .filters {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  thead th,
+  tbody td,
+  tbody th {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
   .working {
     grid-template-columns: 1fr;
   }
