@@ -41,7 +41,9 @@ import { cspDirectives, headersFor, parseHeadersFile } from '../scripts/cf-heade
  *    - `new WebSocket()`, `new EventSource()` and `sendBeacon()` fail whatever
  *      their argument: a static site has no endpoint for them;
  *    - every absolute `http(s)://`/`ws(s)://` URL written anywhere in a string
- *      or template must be on `KNOWN_URLS` below, each entry with the reason it
+ *      or template, and every string or template piece that starts with a
+ *      protocol-relative `//host/…` URL (`PROTOCOL_RELATIVE`), must be on
+ *      `KNOWN_URLS` below, each entry with the reason it
  *      is harmless (XML namespaces, error-message links, links the user
  *      clicks). That is what catches the indirect case, a URL stored in a
  *      variable and passed to `fetch` later, which point 2's first check
@@ -187,6 +189,17 @@ function staticPrefix(node: AstNode | undefined): string | undefined {
 
 const HTTP_METHOD = /^(GET|HEAD|POST|PUT|DELETE|PATCH|OPTIONS)$/i
 
+/**
+ * A string that is a protocol-relative URL (`//host.tld/…`), which resolves
+ * against the page's own scheme and so reaches another host just as well.
+ * Only at the very start of the string, and only when what follows the `//`
+ * is a dotted host name (or `localhost`) ending at a port, a path, a query, a
+ * fragment or the end: `'//'` on its own, `'// note'`, `'//# sourceMappingURL'`
+ * or a path such as `'a//b'` are not URLs. Regular expressions never reach
+ * here (their `value` is not a string).
+ */
+const PROTOCOL_RELATIVE = /^\/\/(?:localhost|(?:[a-z0-9-]+\.)+[a-z0-9-]+)(?::\d+)?(?=[/?#]|$)[^\s"'`<>()\\]*/i
+
 /** The arguments of `node` that are URLs it connects to, and whether any use
  * of it at all is a finding. */
 function networkSink(node: AstNode): { readonly name: string; readonly urls: AstNode[]; readonly always?: true } | undefined {
@@ -264,7 +277,10 @@ function scanScript(file: string, code: string): string[] {
       text = value.cooked ?? value.raw
     }
     if (text !== undefined) {
-      for (const [url] of text.matchAll(/\b(?:https?|wss?):\/\/[^\s"'`<>()\\]+/gi)) {
+      const urls = [...text.matchAll(/\b(?:https?|wss?):\/\/[^\s"'`<>()\\]+/gi)].map(([url]) => url)
+      const protocolRelative = PROTOCOL_RELATIVE.exec(text)?.[0]
+      if (protocolRelative !== undefined) urls.push(protocolRelative)
+      for (const url of urls) {
         if (isExternalUrl(url) && !isKnownUrl(url)) {
           at(node, `an absolute URL that is not on KNOWN_URLS: ${url} (if it is harmless, add it there with the reason)`)
         }
