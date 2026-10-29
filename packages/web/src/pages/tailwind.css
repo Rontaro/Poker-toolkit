@@ -1,3 +1,120 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*
+ * Preflight is off (see tailwind.config.ts), so the pages' own base is here,
+ * and everything past `body` is scoped to `.site`, inside `:where()` so that
+ * it weighs no more than a bare element selector and every utility overrides
+ * it. On /allenamento the Training view sits next to the site's header and
+ * footer, and relies on the browser's defaults and on @poker/ui's stylesheet,
+ * not on these.
+ */
+@layer base {
+  html {
+    background: #090d0b;
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: #090d0b;
+    color: #e6ece8;
+    font-family: 'IBM Plex Sans Condensed', system-ui, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :where(.site),
+  :where(.site) *,
+  :where(.site) *::before,
+  :where(.site) *::after {
+    box-sizing: border-box;
+  }
+
+  :where(.site) h1,
+  :where(.site) h2,
+  :where(.site) h3,
+  :where(.site) h4,
+  :where(.site) p,
+  :where(.site) ol,
+  :where(.site) ul,
+  :where(.site) figure {
+    margin: 0;
+  }
+
+  :where(.site) ol,
+  :where(.site) ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  :where(.site) img,
+  :where(.site) svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  :where(.site) img {
+    height: auto;
+  }
+
+  :where(.site) a {
+    color: inherit;
+  }
+
+  :where(.site) code {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+
+  :where(.site) ::selection {
+    background: rgba(70, 211, 154, 0.25);
+  }
+
+  :where(.site) :focus-visible {
+    outline: 1px solid #46d39a;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /*
+   * A ledger's ruled paper in phosphor: faint horizontal rules every 32px and
+   * the felt's jade glow from the top left, as behind the app.
+   */
+  .ledger-paper {
+    background-image:
+      radial-gradient(90% 60% at 15% -10%, rgba(70, 211, 154, 0.09), transparent 60%),
+      repeating-linear-gradient(180deg, transparent 0 31px, rgba(70, 211, 154, 0.035) 31px 32px);
+  }
+
+  /* The real app, on show: hairline frame, a jade glow, nothing else. */
+  .screen {
+    border: 1px solid #2a3833;
+    border-radius: 10px;
+    background: #0e1412;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(70, 211, 154, 0.06),
+      0 30px 80px -20px rgba(0, 0, 0, 0.8),
+      0 0 70px -10px rgba(70, 211, 154, 0.18);
+  }
+
+  .reveal {
+    animation: site-rise 560ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+}
+
+@keyframes site-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+  }
+}

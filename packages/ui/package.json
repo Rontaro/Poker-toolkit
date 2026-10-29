@@ -8,6 +8,10 @@
       "types": "./src/index.ts",
       "default": "./src/index.ts"
     },
+    "./training": {
+      "types": "./src/views/Training.tsx",
+      "default": "./src/views/Training.tsx"
+    },
     "./styles.css": "./src/styles.css"
   },
   "scripts": {
