@@ -276,7 +276,11 @@ body::before {
 
 .page {
   padding: 26px 28px 60px;
-  animation: rise 320ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  /* `backwards`, not `both`: the end state is the element's own, and an
+   * animation that keeps filling leaves an identity transform behind, which
+   * makes every page the containing block of its `position: fixed`
+   * descendants (the tooltips on a phone). */
+  animation: rise 320ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
 }
 
 @keyframes rise {
@@ -287,7 +291,7 @@ body::before {
 }
 
 .page > * {
-  animation: rise 320ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: rise 320ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
 }
 .page > *:nth-child(1) {
   animation-delay: 20ms;
@@ -801,17 +805,6 @@ input[type='range']::-webkit-slider-thumb {
   .split {
     grid-template-columns: 1fr;
   }
-  /* A hidden bubble still takes up room: 310px from the left of a term near
-   * the right edge widened the page by as much. Out of the layout until it
-   * is shown, and never wider than the screen when it is. */
-  .term > .bubble {
-    display: none;
-    max-width: calc(100vw - 32px);
-  }
-  .term:hover > .bubble,
-  .term:focus-visible > .bubble {
-    display: block;
-  }
 }
 
 /*
@@ -876,6 +869,29 @@ input[type='range'] {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+
+/*
+ * On a narrow screen a hidden bubble still takes up room: 310px from the left
+ * of a term near the right edge widened the page by as much. Out of the
+ * layout until it is shown, and then pinned to the bottom of the screen at
+ * full width, so a term near the right edge cannot push it off the side.
+ * After the rules above, which it overrides at the same specificity.
+ */
+@media (max-width: 1080px) {
+  .term > .bubble {
+    display: none;
+    position: fixed;
+    top: auto;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    width: auto;
+  }
+  .term:hover > .bubble,
+  .term:focus-visible > .bubble {
+    display: block;
+  }
 }
 
 /* ─── guide ─────────────────────────────────────────────────────────────── */
