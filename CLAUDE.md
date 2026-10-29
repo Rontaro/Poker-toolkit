@@ -10,6 +10,19 @@ into a chat for the qualitative half of the analysis.
 > side of the site's rules, which permit post-session analysis of your own
 > exported hands and forbid real-time assistance.
 
+Two ways to run it, same packages underneath:
+
+- **Local**: CLI, `watch`, and the dashboard (Express over `node:sqlite`).
+- **Web**: `packages/web`, public at https://poker.rontaro.com. Everything runs
+  in the browser — the store is sqlite-wasm on OPFS inside a Web Worker, and
+  there is no server. The rule above holds there too, enforced twice: the CSP
+  in `public/_headers` has `connect-src 'self'`, and
+  `test/bundle-isolation.test.ts` builds the site and fails on any Node module
+  or any URL on another host in the bundle.
+
+The site is Italian only; the plan for English is in the vault,
+`Projects/poker-toolkit/plans/2026-10-29-english-version.md`.
+
 ## Run it
 
 ```bash
@@ -18,7 +31,7 @@ pnpm ingest                 # one pass over the client's folders, deduplicated
 pnpm watch                  # then stays listening while you play
 pnpm study --selector biggest-losses --limit 5 --preset full --clipboard
 pnpm report --since 7d --out <path>
-pnpm test                   # 405 tests
+pnpm test                   # 589 tests
 pnpm -r typecheck && pnpm -r build
 ```
 
@@ -38,10 +51,28 @@ would bind 5181 twice and concurrently kills the whole group on the failure.
 Database defaults to `~/.poker-toolkit/hands.db`; override with `--db` or, for
 the API, `POKER_DB`.
 
+The web site:
+
+```bash
+pnpm --filter @poker/web dev            # port 5190, no CSP (see Gotchas)
+pnpm --filter @poker/web build          # into packages/web/dist
+pnpm --filter @poker/web preview        # port 5191, dist with public/_headers applied
+pnpm --filter @poker/web demo:generate  # rewrites src/demo/sample-hands.txt
+```
+
+Routes: `/` landing, `/privacy`, `/allenamento` (the trainer alone), `/app`
+(the analysis app; `?demo=1` for the sample hands), anything else not found.
+Each is its own chunk, chosen in `src/main.tsx`.
+
 Eight tabs: Panoramica, Statistiche, Leak, Andamento, Studio, Equity,
 Allenamento, Come si usa. The last one is the glossary and the workflow — every
 acronym in the tool also carries its own definition on hover, sourced from the metric's own
 `description` field rather than from a copy in the UI.
+
+The eight views live in `packages/ui`, shared by the dashboard and the web app:
+`AppShell` is the frame, and every request goes through a `Transport`
+(`setTransport`) — HTTP to Express in the dashboard, `postMessage` to the
+Worker on the web.
 
 Allenamento is the drill game, and the only part of the tool that looks forward
 instead of back: it deals a spot, asks for the one number the spot turns on —
@@ -49,7 +80,16 @@ outs, equity, the price the pot is making — and then shows the working, card b
 card. Eleven levels and an endless mode that pulls towards whatever you keep
 getting wrong. It runs entirely in the browser on `@poker/trainer`, and its
 progress lives in `localStorage`: the API over the store is read-only by design,
-and a game score has no business in the hand database.
+and a game score has no business in the hand database. On the web, "Cancella
+tutti i dati" deletes it too (`clearTrainingProgress`), in every open tab.
+
+## Deploy (web only)
+
+Cloudflare Pages project linked to GitHub `Rontaro/Poker-toolkit`: build
+`pnpm --filter @poker/web build`, output `packages/web/dist`, env
+`NODE_VERSION=24`, `PNPM_VERSION=9.15.4`. **Every push to `main` publishes the
+site** — work on a branch. No header is set in the Cloudflare dashboard:
+all of them, CSP included, live in `packages/web/public/_headers`.
 
 ## Dependency direction
 
@@ -64,8 +104,20 @@ core ← adapters/pokerstars ← ingest
   ├── equity     └ prompt-builder
   │     ↑                │
   ├── trainer            │
-  └─────┴────────────────┴── cli, dashboard
+  └─────┴────────────────┴── cli, api-core
+
+trainer  ← ui ← dashboard, web
+api-core ← dashboard (Express), web (Worker)
 ```
+
+- `api-core`: the routes as pure functions plus `dispatch()`, the one route
+  table that Express and the Worker both call.
+- `store` has two entries: `.` (Node, `node:sqlite`) and `./browser`
+  (sqlite-wasm, `BrowserHandStore`, OPFS, `deleteBrowserData`).
+- `@poker/ingest/parse` is the pure parse step (no `fs`, no watcher), for the
+  Worker.
+- `web` imports only the browser entries; `bundle-isolation.test.ts` fails if
+  a Node built-in, `chokidar` or `express` reaches the bundle.
 
 If `core` ever imports `chokidar`, `express` or a driver, the design is wrong.
 
@@ -131,6 +183,36 @@ If `core` ever imports `chokidar`, `express` or a driver, the design is wrong.
 - Hand ids are content hashes, not site ids, and are **language-independent**:
   the same hand exported in Italian and in English stores as one row.
 
+Web:
+
+- **OPFS through the "opfs-sahpool" VFS**, not "opfs": no `SharedArrayBuffer`,
+  so no COOP/COEP headers. The price is one connection per pool: a second tab
+  cannot open the archive, runs in memory and says why.
+  `preserveOnInitFailure: true` is load-bearing — without it a failed init
+  deletes the pool's directory, i.e. every stored hand.
+- **`*.sql?raw` imports break plain `tsc` output**, so `browser-hand-store.ts`
+  and `browser.ts` are excluded from `packages/store/tsconfig.json`; Vite and
+  Vitest compile and test them directly.
+- **`ApiResponse.body` is not serialised yet.** Express runs it through JSON;
+  the Worker must too (`overJson` in `worker/handler.ts`), or `Date`s and
+  `undefined` fields reach the page in shapes Express could never send.
+- **`dispatch()` wants the raw, still percent-encoded path**: it decodes path
+  parameters itself, as Express does, so a decoded path is decoded twice.
+- **`vite dev` does not apply the CSP; `vite preview` does** (through
+  `scripts/cf-headers.ts`, which reads `_headers` the way Pages does). Dev
+  injects inline scripts and styles the policy refuses, so check anything
+  CSP-related on `preview`.
+- **Tailwind is for the public pages only**: preflight off, `content` limited
+  to `src/pages`, and the config path named in `postcss.config.js`, because
+  Tailwind looks for it in the working directory — a build started elsewhere
+  (repo root, the isolation test) silently gets no utilities.
+- **`assetsInlineLimit: 0`**: `font-src 'self'` refuses `data:` fonts, and
+  Vite would inline the smallest font subsets.
+- **`src/demo/sample-hands.txt` is `-text` in `.gitattributes`**: CRLF and a
+  BOM like the client writes, held byte for byte to its generator by a test,
+  which `core.autocrlf=true` would otherwise break.
+- **React 19 has no global `JSX` namespace**: `import type { JSX } from 'react'`.
+
 ## Adding things
 
 - **A site**: a package implementing `SiteAdapter`. Nothing existing changes.
@@ -145,6 +227,10 @@ If `core` ever imports `chokidar`, `express` or a driver, the design is wrong.
 - **A drill**: a definition in `packages/trainer/src/drills/` plus a line in the
   registry. It generates a spot with the answer already computed and the working
   attached; the level that uses it is a block in `config/curriculum.json`.
+- **An API route**: a function in `packages/api-core/src/` and a line in the
+  route table in `dispatch.ts`. Express and the Worker both pick it up.
+- **A view**: `packages/ui/src/views/`, requests through the `Transport`,
+  never `fetch`.
 
 ## Fixtures
 
@@ -153,14 +239,17 @@ are English (the `.it` client is set to English); the Italian ones are
 translations and cannot confirm the Italian wording. Tokens that no file on disk
 could confirm are marked `UNVERIFIED` in `locales/it.ts`.
 
-The real fixtures contain other players' screen names. Worth knowing before this
-repository is pushed anywhere public.
+The repository is public: in the real fixtures every screen name (hero's and
+the other players') is replaced with a pseudonym. Keep it so for any new real
+hand.
 
 ## Known gaps
 
 Dead blinds (`posts small & big blinds`), run-it-twice, Zoom and TournSummary
 are unimplemented or unproven. `min-bet` covers bets only; min-raises are not
-detected. The dashboard has no automated tests.
+detected. The views have almost no UI tests (only the transport and the
+trainer's reset). `filterFromQuery` passes `minBb`/`maxBb` through without
+scaling by `CHIP_SCALE`: latent, since no view sends them yet.
 
 ## Vault
 
