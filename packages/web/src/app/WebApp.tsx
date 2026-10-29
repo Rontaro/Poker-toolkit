@@ -430,6 +430,9 @@ function StorePanel({
       <button className="ghost store-action" type="button" disabled={!canUpload} onClick={() => input.current?.click()}>
         {busy === 'import' ? 'Importazione…' : 'Carica le tue mani'}
       </button>
+      <a className="store-privacy" href="/privacy">
+        Privacy delle tue mani
+      </a>
       {onDemo !== undefined && (
         <button className="ghost store-action" type="button" disabled={busy !== undefined} onClick={onDemo}>
           {busy === 'demo' ? 'Apertura…' : 'Prova con mani di esempio'}

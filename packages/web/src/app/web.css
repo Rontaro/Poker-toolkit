@@ -37,6 +37,25 @@
   outline-offset: 1px;
 }
 
+/* Under the upload button: where the hands go, before anyone picks a file. */
+.store-privacy {
+  align-self: center;
+  margin-top: -4px;
+  color: var(--ink-faint);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-bright);
+  text-underline-offset: 3px;
+}
+
+.store-privacy:hover {
+  color: var(--jade);
+}
+
+.store-privacy:focus-visible {
+  outline: 1px solid var(--jade);
+  outline-offset: 2px;
+}
+
 .store-danger:not(:disabled):hover {
   color: var(--rust);
   border-color: var(--rust);
