@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from 'react'
 
-import { LINKS, SitePage } from './Layout.js'
+import { LINKS, SitePage, eyebrow, primaryCta, secondaryCta } from './Layout.js'
 
 /**
  * What happens to the hands, said plainly. Every sentence here has to stay
@@ -16,7 +16,7 @@ export function Privacy(): JSX.Element {
       <main className="site">
         <div className="ledger-paper border-0 border-b border-solid border-rule">
           <div className="mx-auto max-w-3xl px-4 pb-12 pt-12 sm:px-6 sm:pb-16 sm:pt-20">
-            <p className="reveal font-mono text-[12px] uppercase tracking-[0.18em] text-jade">Privacy</p>
+            <p className={`reveal ${eyebrow}`}>Privacy</p>
             <h1 className="reveal mt-5 font-serif text-[44px] font-normal leading-[1.04] [animation-delay:60ms] sm:text-[60px]">
               Le tue mani <em className="text-jade">non lasciano mai</em> il tuo browser.
             </h1>
@@ -59,18 +59,24 @@ export function Privacy(): JSX.Element {
               (OPFS), dentro un database SQLite. Nessun altro sito può leggerlo. Le mani restano lì finché non le
               cancelli, così ritrovi tutto quando torni.
             </p>
+            <p>
+              L’unica eccezione la decide il browser: se il disco è quasi pieno, i browser possono liberare spazio
+              cancellando i dati dei siti, e questo archivio è tra quelli. Le hand history originali restano
+              comunque dove le ha scritte PokerStars.
+            </p>
           </Section>
 
           <Section title="Come cancellarle">
             <p>
-              Nell’app, il bottone <b>Cancella tutti i dati</b>, in fondo alla barra a lato, elimina l’intero
-              archivio: mani, note, tutto. Non si può annullare: per riavere le mani dovrai caricare di nuovo i
-              file.
+              Nell’app, il bottone <b>Cancella tutti i dati</b>, sotto <b>Carica le tue mani</b>, cancella tutto
+              quello che il sito ha salvato in questo browser: le mani, le note e i progressi dell’allenamento.
+              Non si può annullare: per riavere le mani dovrai caricare di nuovo i file. Durante la demo il bottone
+              non c’è, perché sullo schermo non ci sono le tue mani.
             </p>
             <p>
-              Se invece cancelli i dati del sito dalle impostazioni del browser, l’archivio viene cancellato
-              allo stesso modo. Non ne esiste una copia altrove: <b>nessun backup da parte nostra</b>, perché le
-              mani non ci sono mai arrivate. I file originali restano dove li ha scritti PokerStars.
+              Se invece cancelli i dati del sito dalle impostazioni del browser, sparisce tutto allo stesso modo.
+              Non ne esiste una copia altrove: <b>nessun backup da parte nostra</b>, perché le mani non ci sono mai
+              arrivate.
             </p>
           </Section>
 
@@ -80,8 +86,9 @@ export function Privacy(): JSX.Element {
               caso l’app te lo dice, e le mani restano solo finché la pagina è aperta.
             </p>
             <p>
-              Con l’app aperta in più schede, solo una alla volta può usare l’archivio salvato. Le altre lavorano
-              su una copia temporanea, solo per quella scheda, e te lo segnalano.
+              Con l’app aperta in più schede, solo una alla volta può usare l’archivio salvato. Le altre partono da
+              un archivio vuoto, tenuto in memoria solo per quella scheda: le mani caricate lì non vengono salvate,
+              e la scheda te lo segnala.
             </p>
           </Section>
 
@@ -95,8 +102,9 @@ export function Privacy(): JSX.Element {
 
           <Section title="Allenamento">
             <p>
-              La scheda Allenamento non guarda le tue mani. I progressi del gioco (livelli superati, punteggi)
-              restano nello spazio di archiviazione locale del browser per questo sito.
+              La scheda Allenamento non guarda le tue mani. I progressi del gioco (livelli superati, record,
+              risposte date) restano nello spazio di archiviazione locale del browser per questo sito, e
+              «Cancella tutti i dati» cancella anche quelli.
             </p>
           </Section>
 
@@ -111,16 +119,10 @@ export function Privacy(): JSX.Element {
           </Section>
 
           <div className="mt-14 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={LINKS.app}
-              className="inline-flex w-full items-center justify-center rounded-sm border border-solid border-jade bg-jade px-6 py-3.5 font-sans text-[16px] font-semibold text-felt no-underline hover:brightness-110 sm:w-auto"
-            >
+            <a href={LINKS.app} className={primaryCta}>
               Carica le tue mani
             </a>
-            <a
-              href={LINKS.home}
-              className="inline-flex w-full items-center justify-center rounded-sm border border-solid border-rule-bright px-6 py-3.5 font-sans text-[16px] font-medium text-ink no-underline hover:border-jade hover:text-jade sm:w-auto"
-            >
+            <a href={LINKS.home} className={secondaryCta}>
               Torna alla pagina iniziale
             </a>
           </div>

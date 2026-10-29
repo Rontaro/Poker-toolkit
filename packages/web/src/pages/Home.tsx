@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from 'react'
 
-import { Disclaimer, Icon, LINKS, SitePage, type IconName } from './Layout.js'
+import { Disclaimer, Icon, LINKS, SitePage, eyebrow, primaryCta, secondaryCta, type IconName } from './Layout.js'
 
 /**
  * The landing page: what the tool does, shown on the demo's own screens, how
@@ -28,12 +28,6 @@ export function Home(): JSX.Element {
   )
 }
 
-const primaryCta =
-  'inline-flex w-full items-center justify-center gap-2 rounded-sm border border-solid border-jade bg-jade px-6 py-3.5 font-sans text-[16px] font-semibold tracking-[0.02em] text-felt no-underline shadow-[0_0_40px_-8px_rgba(70,211,154,0.55)] transition-[filter,box-shadow] hover:brightness-110 sm:w-auto'
-
-const secondaryCta =
-  'inline-flex w-full items-center justify-center gap-2 rounded-sm border border-solid border-rule-bright bg-felt-raised/60 px-6 py-3.5 font-sans text-[16px] font-medium tracking-[0.02em] text-ink no-underline transition-colors hover:border-jade hover:text-jade sm:w-auto'
-
 function Hero(): JSX.Element {
   return (
     <section className="ledger-paper relative overflow-hidden border-0 border-b border-solid border-rule">
@@ -43,7 +37,7 @@ function Hero(): JSX.Element {
         className="pointer-events-none absolute inset-y-0 left-[max(16px,calc(50%-36rem))] hidden w-[5px] border-0 border-x border-solid border-rust/25 lg:block"
       />
       <div className="mx-auto max-w-6xl px-4 pb-16 pt-12 sm:px-6 sm:pb-24 sm:pt-20 lg:pl-14">
-        <p className="reveal font-mono text-[12px] uppercase tracking-[0.18em] text-jade">
+        <p className={`reveal ${eyebrow}`}>
           PokerStars · analisi post-sessione
         </p>
         <h1 className="reveal mt-5 max-w-4xl font-serif text-[44px] font-normal leading-[1.02] tracking-[-0.005em] text-ink [animation-delay:60ms] sm:text-[68px] lg:text-[80px]">
@@ -62,9 +56,9 @@ function Hero(): JSX.Element {
             Prova con mani di esempio
           </a>
         </div>
-        <p className="reveal mt-4 font-mono text-[12px] tracking-[0.04em] text-ink-faint [animation-delay:220ms]">
+        <p className="reveal mt-4 font-mono text-[12px] tracking-[0.04em] text-ink-dim [animation-delay:220ms]">
           Gratis · nessun account · nessun upload ·{' '}
-          <a href={LINKS.privacy} className="text-ink-dim underline decoration-rule-bright underline-offset-4 hover:text-jade">
+          <a href={LINKS.privacy} className="text-chalk underline decoration-rule-bright underline-offset-4 hover:text-jade">
             come trattiamo i dati
           </a>
         </p>
@@ -72,14 +66,16 @@ function Hero(): JSX.Element {
         <figure className="reveal relative mt-14 [animation-delay:300ms] sm:mt-16">
           <div className="screen">
             <img
-              src="/landing/panoramica.webp"
+              src="/landing/panoramica-1440.webp"
+              srcSet="/landing/panoramica-960.webp 960w, /landing/panoramica-1440.webp 1440w, /landing/panoramica.webp 2880w"
+              sizes="(min-width: 1152px) 1072px, (min-width: 1024px) calc(100vw - 80px), (min-width: 640px) calc(100vw - 48px), calc(100vw - 32px)"
               width={1440}
               height={900}
               alt="La Panoramica dell’app con le mani di esempio: mani, risultato, win rate, VPIP e PFR, costo dei leak, la curva del bankroll e i tre leak più cari."
               fetchPriority="high"
             />
           </div>
-          <figcaption className="mt-3 font-mono text-[11.5px] tracking-[0.06em] text-ink-faint">
+          <figcaption className="mt-3 font-mono text-[11.5px] tracking-[0.06em] text-ink-dim">
             La Panoramica, sulle 320 mani di esempio della demo.
           </figcaption>
         </figure>
@@ -112,7 +108,7 @@ function Feature({ index, tab, title, lead, points, image, alt, flip = false, ex
         <p className="flex items-baseline gap-3 font-mono text-[12px] uppercase tracking-[0.18em]">
           <span className="text-jade">{index}</span>
           <span className="h-px flex-1 bg-rule" aria-hidden="true" />
-          <span className="text-ink-faint">{tab}</span>
+          <span className="text-ink-dim">{tab}</span>
         </p>
         <h3 className="mt-5 font-serif text-[34px] font-normal leading-[1.08] text-ink sm:text-[40px]">{title}</h3>
         <p className="mt-4 text-[17px] leading-relaxed text-chalk">{lead}</p>
@@ -143,12 +139,12 @@ function Features(): JSX.Element {
   return (
     <section className="mx-auto max-w-6xl px-4 pt-20 sm:px-6 sm:pt-28" aria-labelledby="features-title">
       <div className="max-w-3xl pb-12 sm:pb-16">
-        <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-jade">Cosa trovi</p>
+        <p className={eyebrow}>Cosa trovi</p>
         <h2 id="features-title" className="mt-4 font-serif text-[38px] font-normal leading-[1.08] sm:text-[52px]">
           Il risultato è il rumore. <em className="text-jade">I leak sono il segnale.</em>
         </h2>
         <p className="mt-5 text-[17px] leading-relaxed text-chalk">
-          Sei schede, un solo giro: importi le mani, guardi cosa ti costa, ti fai spiegare le peggiori.
+          Otto schede, un solo giro: importi le mani, guardi cosa ti costa, ti fai spiegare le peggiori.
           Tutto è misurato in <b className={strong}>bb</b>, grandi bui, così una sessione a NL2 e una a
           NL10 si possono confrontare.
         </p>
@@ -158,7 +154,7 @@ function Features(): JSX.Element {
         index="01"
         tab="Statistiche"
         title="I numeri che contano, con un metro accanto."
-        lead="Ogni statistica ha la sua banda di riferimento: sai subito se sei sopra, sotto o dentro."
+        lead="Le statistiche principali hanno una banda di riferimento: sai subito se sei sopra, sotto o dentro."
         image="/landing/statistiche.webp"
         alt="La scheda Statistiche: VPIP, PFR, 3-bet e le altre, complessive e per posizione, ognuna con il giudizio rispetto al profilo NL2."
         points={[
@@ -175,7 +171,8 @@ function Features(): JSX.Element {
             icon: 'ruler',
             text: (
               <>
-                Confrontate con i <b className={strong}>range di riferimento per NL2</b>, 6-max o full ring.
+                Confrontate con i <b className={strong}>range di riferimento per il cash NL2</b>, 6-max o full
+                ring, scelti in base alle tue mani.
               </>
             ),
           },
@@ -201,13 +198,24 @@ function Features(): JSX.Element {
             icon: 'sort',
             text: (
               <>
-                Ordinati per <b className={strong}>costo stimato in bb</b>, non per frequenza: un errore caro
-                ripetuto venti volte pesa più di uno da poco ripetuto duecento.
+                Ordinati per <b className={strong}>costo stimato in bb</b>, non per frequenza. È una stima per
+                metterli in ordine, non la somma di quello che hai perso.
               </>
             ),
           },
-          { icon: 'replay', text: 'Clicca un episodio per rileggere la mano, strada per strada.' },
-          { icon: 'scale', text: 'Il costo è una stima per metterli in ordine, non la somma di quello che hai perso.' },
+          {
+            icon: 'replay',
+            text: (
+              <>
+                Clicca un episodio per rileggere la mano, con la tua <b className={strong}>equity strada per
+                strada</b> contro un range, accanto a quella che ti serviva per chiamare.
+              </>
+            ),
+          },
+          {
+            icon: 'note',
+            text: 'Sotto il replay c’è un campo per incollare la risposta che hai ricevuto: resta salvata con la mano.',
+          },
         ]}
       />
 
@@ -217,13 +225,14 @@ function Features(): JSX.Element {
         title="Com’è andata, e quando hai smesso di giocare bene."
         lead="Un leak costante si corregge studiando. Uno che raddoppia dopo un piatto perso, no."
         image="/landing/andamento.webp"
-        alt="La scheda Andamento: il tilt dopo i piatti persi, il win rate mobile, i risultati per ora del giorno, la stanchezza e le sessioni."
+        alt="La scheda Andamento: il tilt dopo i piatti persi, il win rate mobile e i leak per ora del giorno e per mani dall’inizio della sessione."
         points={[
           {
             icon: 'wave',
             text: (
               <>
-                <b className={strong}>Curva del bankroll</b> e win rate mobile su finestre di cento mani.
+                <b className={strong}>Win rate mobile</b>, su finestre di cento mani: quando la sessione ha
+                cambiato direzione.
               </>
             ),
           },
@@ -237,7 +246,10 @@ function Features(): JSX.Element {
               </>
             ),
           },
-          { icon: 'clock', text: 'Stanchezza e ora del giorno: come cambi man mano che la sessione si allunga.' },
+          {
+            icon: 'clock',
+            text: 'Leak ogni cento mani per ora del giorno e per mani dall’inizio della sessione: se a fine serata giochi peggio, si vede.',
+          },
         ]}
       />
 
@@ -264,29 +276,35 @@ function Features(): JSX.Element {
               </>
             ),
           },
-          { icon: 'note', text: 'Sotto ogni mano incolli la risposta: resta attaccata alla mano e la ritrovi.' },
+          { icon: 'note', text: 'Il testo si può modificare prima di copiarlo: quello che leggi è quello che incolli.' },
         ]}
       />
 
       <Feature
         index="05"
         tab="Equity"
-        title="Quanto spesso vinci, carta per carta."
-        lead="La tua mano contro il range dell’avversario, su qualsiasi board, con accanto l’equity che ti servirebbe per chiamare."
+        title="Quanto spesso vinci, contro un range."
+        lead="La tua mano, o il tuo range, contro il range dell’avversario, su qualsiasi board: quanto spesso vinci se le carte restanti uscissero tutte."
         image="/landing/equity.webp"
         alt="La scheda Equity: una mano della demo precaricata al flop, contro un range, con l’equity calcolata e l’elenco delle mani giocate."
         points={[
-          { icon: 'pie', text: 'Una mano o un range contro un range, con preflop, flop, turn o river.' },
+          {
+            icon: 'pie',
+            text: 'A board vuoto o con 3, 4 o 5 carte. Calcolo esatto quando le combinazioni sono poche, altrimenti una stima su 100.000 campioni.',
+          },
           {
             icon: 'cards',
             text: (
               <>
-                <b className={strong}>Precaricabile dalle tue mani</b>: le tue carte e il board, fino alla strada che
-                scegli, da una mano giocata.
+                <b className={strong}>Precaricabile dalle tue mani</b>: le tue carte e il board di una mano
+                giocata, al preflop, al flop o al river.
               </>
             ),
           },
-          { icon: 'gauge', text: 'Equity e pot odds vicine: se ti serve il 25% e ne hai il 40%, chiamare guadagna.' },
+          {
+            icon: 'gauge',
+            text: 'Range pronti con un clic: coppie, assi suited, broadway, top 10%, qualsiasi mano.',
+          },
         ]}
       />
 
@@ -372,7 +390,7 @@ function Export(): JSX.Element {
   return (
     <section className="border-0 border-y border-solid border-rule bg-felt-raised/50" aria-labelledby="export-title">
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
-        <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-jade">Prima di iniziare</p>
+        <p className={eyebrow}>Prima di iniziare</p>
         <h2 id="export-title" className="mt-4 max-w-3xl font-serif text-[36px] font-normal leading-[1.08] sm:text-[48px]">
           Come esportare le hand history da PokerStars
         </h2>
@@ -385,7 +403,7 @@ function Export(): JSX.Element {
             </li>
           ))}
         </ol>
-        <p className="mt-6 max-w-3xl text-[14.5px] leading-relaxed text-ink-faint">
+        <p className="mt-6 max-w-3xl text-[14.5px] leading-relaxed text-ink-dim">
           I nomi esatti dei menu cambiano tra le versioni del client. Se la tua installazione è diversa, cerca sul
           disco la cartella <Path>HandHistory</Path>.
         </p>
@@ -409,7 +427,7 @@ function PrivacyBrief(): JSX.Element {
     {
       icon: 'database',
       title: 'Salvate solo qui',
-      text: 'Nell’archivio privato del browser per questo sito, finché non le cancelli. Non ne esiste una copia altrove.',
+      text: 'Nell’archivio privato del browser per questo sito. Non ne esiste una copia altrove, nemmeno da parte nostra.',
     },
     {
       icon: 'trash',
@@ -422,7 +440,7 @@ function PrivacyBrief(): JSX.Element {
     <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28" aria-labelledby="privacy-title">
       <div className="grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-jade">Privacy in breve</p>
+          <p className={eyebrow}>Privacy in breve</p>
           <h2 id="privacy-title" className="mt-4 font-serif text-[36px] font-normal leading-[1.08] sm:text-[44px]">
             Le tue mani <em className="text-jade">restano tue</em>.
           </h2>
@@ -454,7 +472,7 @@ function Closing(): JSX.Element {
     <section className="ledger-paper border-0 border-t border-solid border-rule">
       <div className="mx-auto flex max-w-6xl flex-col items-start gap-8 px-4 py-20 sm:px-6 sm:py-24 lg:flex-row lg:items-end lg:justify-between">
         <h2 className="max-w-2xl font-serif text-[36px] font-normal leading-[1.08] sm:text-[48px]">
-          L’ultima sessione è ancora nella cartella. <em className="text-jade">Aprila.</em>
+          La tua ultima sessione è un file di testo. <em className="text-jade">Rileggila.</em>
         </h2>
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
           <a href={LINKS.app} className={primaryCta}>

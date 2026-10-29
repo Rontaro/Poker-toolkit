@@ -1,6 +1,6 @@
 import type { JSX } from 'react'
 
-import { LINKS, SitePage } from './Layout.js'
+import { LINKS, SitePage, primaryCta } from './Layout.js'
 
 /** Any path the site does not have. Served with a 200 by Cloudflare Pages
  * (no root `404.html`, so unknown paths get `index.html`), hence the
@@ -16,10 +16,7 @@ export function NotFound(): JSX.Element {
             Questa mano <em className="text-jade">non è nell’archivio</em>.
           </h1>
           <p className="text-[18px] leading-relaxed text-chalk">L’indirizzo non corrisponde a nessuna pagina del sito.</p>
-          <a
-            href={LINKS.home}
-            className="inline-flex w-full items-center justify-center rounded-sm border border-solid border-jade bg-jade px-6 py-3.5 font-sans text-[16px] font-semibold text-felt no-underline hover:brightness-110 sm:w-auto"
-          >
+          <a href={LINKS.home} className={primaryCta}>
             Torna alla pagina iniziale
           </a>
         </div>

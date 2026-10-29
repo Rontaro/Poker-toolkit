@@ -29,12 +29,23 @@ export const LINKS = {
 
 type Current = 'home' | 'training' | 'privacy' | undefined
 
+/** The two calls to action, full width on a phone, and the small label in
+ * mono capitals that opens every section. */
+export const primaryCta =
+  'inline-flex w-full items-center justify-center gap-2 rounded-sm border border-solid border-jade bg-jade px-6 py-3.5 font-sans text-[16px] font-semibold tracking-[0.02em] text-felt no-underline shadow-[0_0_40px_-8px_rgba(70,211,154,0.55)] transition-[filter,box-shadow] hover:brightness-110 sm:w-auto'
+
+export const secondaryCta =
+  'inline-flex w-full items-center justify-center gap-2 rounded-sm border border-solid border-rule-bright bg-felt-raised/60 px-6 py-3.5 font-sans text-[16px] font-medium tracking-[0.02em] text-ink no-underline transition-colors hover:border-jade hover:text-jade sm:w-auto'
+
+export const eyebrow = 'font-mono text-[12px] font-normal uppercase tracking-[0.18em] text-jade'
+
 /** The app's wordmark, as the rail draws it, next to the favicon. */
 function Brand(): JSX.Element {
   return (
     <a href={LINKS.home} className="flex shrink-0 items-center gap-2.5 no-underline" aria-label="Ledger, pagina iniziale">
       <img src="/favicon.svg" alt="" width={30} height={30} className="h-[30px] w-[30px]" />
-      <span className="font-serif text-[27px] leading-none tracking-[0.01em] text-ink">
+      {/* Below 360px only the mark: the full call to action needs the room. */}
+      <span className="font-serif text-[27px] leading-none tracking-[0.01em] text-ink max-[359px]:hidden">
         Led<em className="text-jade">ger</em>
       </span>
     </a>
@@ -42,7 +53,7 @@ function Brand(): JSX.Element {
 }
 
 const navLink =
-  'rounded-sm px-2.5 py-1.5 font-sans text-[14px] tracking-[0.02em] text-ink-dim no-underline transition-colors hover:text-ink'
+  'flex items-center rounded-sm px-2 py-1.5 font-sans text-[14px] tracking-[0.02em] text-ink-dim no-underline transition-colors hover:text-ink sm:px-2.5'
 
 export function SiteHeader({ current }: { current?: Current }): JSX.Element {
   return (
@@ -50,19 +61,22 @@ export function SiteHeader({ current }: { current?: Current }): JSX.Element {
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 sm:px-6">
         <Brand />
         <nav className="ml-auto flex items-center gap-1 sm:gap-2" aria-label="Sito">
+          {/* On a phone an icon, so the call to action keeps its full words. */}
           <a
             href={LINKS.training}
             className={`${navLink} ${current === 'training' ? '!text-ink' : ''}`}
             aria-current={current === 'training' ? 'page' : undefined}
+            aria-label="Allenamento"
+            title="Allenamento"
           >
-            Allenamento
+            <Icon name="cards" className="sm:hidden" />
+            <span className="hidden sm:inline">Allenamento</span>
           </a>
           <a
             href={LINKS.app}
-            className="rounded-sm border border-solid border-jade/60 bg-jade/10 px-3 py-1.5 font-sans text-[14px] font-medium tracking-[0.02em] text-jade no-underline transition-colors hover:bg-jade hover:text-felt"
+            className="whitespace-nowrap rounded-sm border border-solid border-jade/60 bg-jade/10 px-3 py-1.5 font-sans text-[14px] font-medium tracking-[0.02em] text-jade no-underline transition-colors hover:bg-jade hover:text-felt"
           >
-            <span className="hidden sm:inline">Analizza le tue mani</span>
-            <span className="sm:hidden">Apri l’app</span>
+            Analizza le tue mani
           </a>
         </nav>
       </div>
@@ -93,10 +107,10 @@ export function Disclaimer({ className = '' }: { className?: string }): JSX.Elem
 }
 
 export function SiteFooter(): JSX.Element {
-  const link = 'text-ink-dim no-underline transition-colors hover:text-jade'
+  const link = 'text-chalk no-underline transition-colors hover:text-jade'
   return (
     <footer className="site border-0 border-t border-solid border-rule">
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 font-mono text-[12.5px] text-ink-faint sm:flex-row sm:items-center sm:px-6">
+      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 font-mono text-[12.5px] text-ink-dim sm:flex-row sm:items-center sm:px-6">
         <p>
           Fatto da{' '}
           <a className={link} href={LINKS.author}>
