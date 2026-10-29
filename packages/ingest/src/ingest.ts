@@ -2,10 +2,10 @@ import { readFileSync, statSync } from 'node:fs'
 import { readdir } from 'node:fs/promises'
 import { join } from 'node:path'
 
-import { pokerStarsAdapter } from '@poker/adapter-pokerstars'
-import { decodeText } from '@poker/adapter-pokerstars'
-import { sha256Hex, type Hand, type LocalePack, type SiteAdapter } from '@poker/core'
-import type { QuarantineEntry, SqliteHandStore } from '@poker/store'
+import { sha256Hex, type SiteAdapter } from '@poker/core'
+import type { SqliteHandStore } from '@poker/store'
+
+import { DEFAULT_ADAPTERS, parseHandHistory } from './parse-file.js'
 
 /**
  * Reading hand history files into the store.
@@ -47,9 +47,7 @@ export interface IngestResult {
   readonly filesUnrecognised: readonly string[]
 }
 
-export const DEFAULT_ADAPTERS: readonly SiteAdapter<never>[] = [
-  pokerStarsAdapter as unknown as SiteAdapter<never>,
-]
+export { DEFAULT_ADAPTERS }
 
 const HAND_HISTORY_FILE = /\.txt$/i
 
@@ -136,35 +134,13 @@ export async function ingestFile(
     }
   }
 
-  const text = decodeText(bytes).text
+  const { hands, quarantine, unrecognised } = parseHandHistory(bytes, path, adapters)
 
-  const detected = adapters
-    .map((adapter) => ({ adapter, detection: adapter.detect(text) }))
-    .filter((entry) => entry.detection.matched)
-    .sort((a, b) => b.detection.confidence - a.detection.confidence)[0]
-
-  if (detected === undefined) {
+  if (unrecognised) {
     // Recorded anyway: an unrecognised file that has not changed should not be
     // re-read on every run either.
     await options.store.recordIngestedFile({ path, size, mtime, contentHash })
     return { kind: 'read', parsed: 0, quarantined: 0, unrecognised: true }
-  }
-
-  const locale = detected.adapter.locales.find(
-    (candidate) => (candidate as LocalePack).language === detected.detection.language,
-  )
-  if (locale === undefined) {
-    await options.store.recordIngestedFile({ path, size, mtime, contentHash })
-    return { kind: 'read', parsed: 0, quarantined: 0, unrecognised: true }
-  }
-
-  const hands: Hand[] = []
-  const quarantine: QuarantineEntry[] = []
-
-  for (const raw of detected.adapter.split(text)) {
-    const result = detected.adapter.parse(raw, locale)
-    if (result.ok) hands.push(result.value)
-    else quarantine.push({ raw: result.raw, sourcePath: path, issues: result.errors })
   }
 
   if (hands.length > 0) await options.store.upsert(hands)

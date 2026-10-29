@@ -7,6 +7,10 @@
     ".": {
       "types": "./src/index.ts",
       "default": "./src/index.ts"
+    },
+    "./parse": {
+      "types": "./src/parse-file.ts",
+      "default": "./src/parse-file.ts"
     }
   },
   "scripts": {
