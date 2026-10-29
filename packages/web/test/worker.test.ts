@@ -5,6 +5,7 @@ import { describe, expect, it, vi } from 'vitest'
 
 import { BrowserHandStore } from '@poker/store/browser'
 
+import { DEMO_HAND_COUNT } from '../scripts/generate-demo-hands.js'
 import { WorkerClient, type WorkerLike } from '../src/worker/client.js'
 import { createWorkerHandler, type WorkerDeps } from '../src/worker/handler.js'
 import type { UploadedFile, WorkerRequest, WorkerResponse } from '../src/worker/protocol.js'
@@ -26,7 +27,7 @@ const SESSION = ['en', 'cash', 'nl2-6max-session.txt'] as const
 
 /** The committed sample, as the Worker's dynamic import would load it. */
 const SAMPLE = readFileSync(join(here, '..', 'src', 'demo', 'sample-hands.txt'), 'utf8')
-const SAMPLE_HANDS = 320
+const SAMPLE_HANDS = DEMO_HAND_COUNT
 
 /** What every handler in this file is given unless a test says otherwise. */
 const BASE_DEPS: WorkerDeps = {

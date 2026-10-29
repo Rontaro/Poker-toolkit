@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@poker/adapter-pokerstars": "workspace:*",
+    "@poker/equity": "workspace:*",
     "@poker/rules": "workspace:*",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",

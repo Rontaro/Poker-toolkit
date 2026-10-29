@@ -280,6 +280,9 @@ importers:
       '@poker/adapter-pokerstars':
         specifier: workspace:*
         version: link:../adapters/pokerstars
+      '@poker/equity':
+        specifier: workspace:*
+        version: link:../equity
       '@poker/rules':
         specifier: workspace:*
         version: link:../rules
