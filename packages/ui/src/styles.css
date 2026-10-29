@@ -785,7 +785,9 @@ input[type='range']::-webkit-slider-thumb {
 
 @media (max-width: 1080px) {
   .shell {
-    grid-template-columns: 1fr;
+    /* Not `1fr`, whose minimum is the content's: the tabs' row would set
+     * the page's width and a phone would get a page wider than its screen. */
+    grid-template-columns: minmax(0, 1fr);
   }
   .rail {
     border-right: 0;
