@@ -104,7 +104,9 @@ export function WebApp({
    * the way out, and has to stay reachable. */
   const [openError, setOpenError] = useState<string | undefined>(undefined)
   const [revision, setRevision] = useState(0)
-  const [busy, setBusy] = useState<Busy>(demoAtStart === undefined ? undefined : 'demo')
+  // Opened at `?demo=1`: busy with the demo `start.tsx` already asked for.
+  const initialBusy: Busy = demoAtStart === undefined ? undefined : 'demo'
+  const [busy, setBusy] = useState<Busy>(initialBusy)
   const [demo, setDemo] = useState<Demo>(demoAtStart === undefined ? undefined : { handCount: undefined })
   const [progress, setProgress] = useState<IngestProgress | undefined>(undefined)
   const [result, setResult] = useState<ImportResult | undefined>(undefined)
@@ -113,7 +115,7 @@ export function WebApp({
 
   // Read synchronously, unlike `busy`: two drops in the same tick both see the
   // state of the render before them, and would both start an import.
-  const busyRef = useRef<Busy>(demoAtStart === undefined ? undefined : 'demo')
+  const busyRef = useRef<Busy>(initialBusy)
   const begin = (next: Exclude<Busy, undefined>): boolean => {
     if (busyRef.current !== undefined) return false
     busyRef.current = next
@@ -276,6 +278,8 @@ export function WebApp({
             <div className="demo-banner" role="status">
               <p>
                 <b>{DEMO_NOTICE}</b> Il tuo archivio resta com’è: quando esci dalla demo lo ritrovi intatto.
+                <br />
+                Le note che scrivi qui sono solo per prova: spariscono quando esci dalla demo.
               </p>
               <button className="ghost demo-exit" type="button" disabled={busy !== undefined} onClick={() => void leaveDemo()}>
                 Esci dalla demo
