@@ -20,7 +20,8 @@ import type { Config } from 'tailwindcss'
  * not a different product.
  */
 export default {
-  content: ['./src/pages/**/*.{ts,tsx}'],
+  // Relative to this file, not to the working directory.
+  content: { relative: true, files: ['./src/pages/**/*.{ts,tsx}'] },
   corePlugins: { preflight: false },
   theme: {
     extend: {
