@@ -24,6 +24,19 @@ function text(name: string, content: string): UploadedFile {
 
 const SESSION = ['en', 'cash', 'nl2-6max-session.txt'] as const
 
+/** The committed sample, as the Worker's dynamic import would load it. */
+const SAMPLE = readFileSync(join(here, '..', 'src', 'demo', 'sample-hands.txt'), 'utf8')
+const SAMPLE_HANDS = 320
+
+/** What every handler in this file is given unless a test says otherwise. */
+const BASE_DEPS: WorkerDeps = {
+  openStore: () => BrowserHandStore.create(),
+  deleteData: async () => undefined,
+  openDemoStore: () => BrowserHandStore.create(),
+  loadDemoHands: async () => SAMPLE,
+  logError: () => undefined,
+}
+
 /** The handler wired to an in-memory store, collecting what it posts. */
 function worker(overrides: Partial<WorkerDeps> = {}): {
   send: (request: WorkerRequest) => Promise<void>
@@ -32,12 +45,7 @@ function worker(overrides: Partial<WorkerDeps> = {}): {
   deps: WorkerDeps
 } {
   const posted: WorkerResponse[] = []
-  const deps: WorkerDeps = {
-    openStore: () => BrowserHandStore.create(),
-    deleteData: vi.fn(async () => undefined),
-    logError: () => undefined,
-    ...overrides,
-  }
+  const deps: WorkerDeps = { ...BASE_DEPS, deleteData: vi.fn(async () => undefined), ...overrides }
   const send = createWorkerHandler(deps, (response) => posted.push(response))
   const final = (id: number): WorkerResponse => {
     const found = posted.filter((response) => response.id === id && response.kind !== 'progress')
@@ -304,7 +312,7 @@ describe('the request queue', () => {
     const posted: WorkerResponse[] = []
     let failures = 0
     const send = createWorkerHandler(
-      { openStore: () => BrowserHandStore.create(), deleteData: async () => undefined, logError: () => undefined },
+      BASE_DEPS,
       (response) => {
         if (failures > 0) {
           failures -= 1
@@ -327,12 +335,111 @@ describe('the request queue', () => {
   })
 })
 
+describe('the demo', () => {
+  const overview = { method: 'GET', path: '/overview', query: {} } as const
+
+  it('shows the sample hands and leaves the user’s archive as it was', async () => {
+    const { send, final } = worker()
+    await send({ id: 1, kind: 'ingest', files: [fixture('session.txt', ...SESSION)] })
+
+    await send({ id: 2, kind: 'enter-demo' })
+    expect(final(2)).toEqual({ id: 2, kind: 'demo-entered', handCount: SAMPLE_HANDS })
+    await send({ id: 3, kind: 'api', request: overview })
+    expect(final(3)).toMatchObject({ status: 200, body: { hands: SAMPLE_HANDS } })
+    await send({ id: 4, kind: 'status' })
+    expect(final(4)).toMatchObject({ status: { handCount: 52 } })
+
+    await send({ id: 5, kind: 'leave-demo' })
+    expect(final(5)).toEqual({ id: 5, kind: 'demo-left' })
+    await send({ id: 6, kind: 'api', request: overview })
+    expect(final(6)).toMatchObject({ status: 200, body: { hands: 52 } })
+  })
+
+  it('sends imports and wipes to the user’s archive, never into the sample', async () => {
+    const { send, final } = worker()
+    await send({ id: 1, kind: 'enter-demo' })
+
+    await send({ id: 2, kind: 'ingest', files: [fixture('session.txt', ...SESSION)] })
+    expect(final(2)).toMatchObject({ summary: { handsImported: 52 }, status: { handCount: 52 } })
+    await send({ id: 3, kind: 'api', request: overview })
+    expect(final(3)).toMatchObject({ body: { hands: SAMPLE_HANDS } })
+
+    await send({ id: 4, kind: 'wipe' })
+    expect(final(4)).toMatchObject({ kind: 'wiped', status: { handCount: 0 } })
+    await send({ id: 5, kind: 'api', request: overview })
+    expect(final(5)).toMatchObject({ body: { hands: SAMPLE_HANDS } })
+
+    await send({ id: 6, kind: 'leave-demo' })
+    await send({ id: 7, kind: 'api', request: overview })
+    expect(final(7)).toMatchObject({ body: { empty: true } })
+  })
+
+  it('opens one sample store, closes it on the way out, and opens afresh next time', async () => {
+    const closed: number[] = []
+    let opened = 0
+    const openDemoStore = async (): Promise<BrowserHandStore> => {
+      const index = ++opened
+      const store = await BrowserHandStore.create()
+      const close = store.close.bind(store)
+      store.close = () => {
+        closed.push(index)
+        close()
+      }
+      return store
+    }
+    const { send, final } = worker({ openDemoStore })
+
+    await send({ id: 1, kind: 'enter-demo' })
+    await send({ id: 2, kind: 'enter-demo' })
+    expect(final(2)).toMatchObject({ kind: 'demo-entered', handCount: SAMPLE_HANDS })
+    expect(opened).toBe(1)
+
+    await send({ id: 3, kind: 'leave-demo' })
+    await send({ id: 4, kind: 'leave-demo' })
+    expect(final(4)).toEqual({ id: 4, kind: 'demo-left' })
+    expect(closed).toEqual([1])
+
+    await send({ id: 5, kind: 'enter-demo' })
+    expect(opened).toBe(2)
+  })
+
+  it('opens even when the user’s archive will not', async () => {
+    const { send, final } = worker({ openStore: async () => Promise.reject(new Error('wasm mancante')) })
+    await send({ id: 1, kind: 'enter-demo' })
+    expect(final(1)).toMatchObject({ kind: 'demo-entered', handCount: SAMPLE_HANDS })
+    await send({ id: 2, kind: 'api', request: overview })
+    expect(final(2)).toMatchObject({ kind: 'api', status: 200 })
+
+    await send({ id: 3, kind: 'leave-demo' })
+    await send({ id: 4, kind: 'api', request: overview })
+    expect(final(4)).toMatchObject({ kind: 'error', message: expect.stringContaining('wasm mancante') })
+  })
+
+  it('reports a sample that will not load, closes its store, and stays on the user’s archive', async () => {
+    const store = await BrowserHandStore.create()
+    const close = vi.spyOn(store, 'close')
+    const { send, final } = worker({
+      openDemoStore: async () => store,
+      loadDemoHands: async () => 'not a hand history',
+    })
+
+    await send({ id: 1, kind: 'enter-demo' })
+    expect(final(1)).toMatchObject({
+      kind: 'error',
+      message: expect.stringMatching(/^Non riesco ad aprire le mani di esempio: /),
+    })
+    expect(close).toHaveBeenCalledOnce()
+    await send({ id: 2, kind: 'api', request: overview })
+    expect(final(2)).toMatchObject({ body: { empty: true } })
+  })
+})
+
 /** Page and Worker joined back to back, as `postMessage` would join them. */
 describe('client and Worker together', () => {
   function connected(): WorkerClient {
     let deliver: (response: WorkerResponse) => void = () => undefined
     const send = createWorkerHandler(
-      { openStore: () => BrowserHandStore.create(), deleteData: async () => undefined, logError: () => undefined },
+      BASE_DEPS,
       (response) => queueMicrotask(() => deliver(response)),
     )
     const fake: WorkerLike = {
@@ -362,5 +469,14 @@ describe('client and Worker together', () => {
 
     expect(await client.status()).toMatchObject({ handCount: 52, persistent: false })
     expect(await client.wipe()).toMatchObject({ handCount: 0 })
+  })
+
+  it('enters and leaves the demo', async () => {
+    const client = connected()
+    expect(await client.enterDemo()).toBe(SAMPLE_HANDS)
+    expect((await client.transport.get<{ hands: number }>('/overview', '')).hands).toBe(SAMPLE_HANDS)
+    expect(await client.status()).toMatchObject({ handCount: 0 })
+    await client.leaveDemo()
+    expect(await client.transport.get('/overview', '')).toMatchObject({ empty: true })
   })
 })

@@ -24,6 +24,12 @@ export type WorkerRequest =
   | { readonly id: number; readonly kind: 'status' }
   /** Close the store, delete everything stored, reopen an empty one. */
   | { readonly id: number; readonly kind: 'wipe' }
+  /** Answer `api` requests from the sample hands, held in a store of their
+   * own in memory, until `leave-demo`. The user's archive is never touched:
+   * `status`, `ingest` and `wipe` keep acting on it throughout. */
+  | { readonly id: number; readonly kind: 'enter-demo' }
+  /** Back to the user's archive; the sample store is closed. */
+  | { readonly id: number; readonly kind: 'leave-demo' }
 
 export interface StoreStatus {
   readonly handCount: number
@@ -69,6 +75,9 @@ export type WorkerResponse =
   | { readonly id: number; readonly kind: 'ingested'; readonly summary: IngestSummary; readonly status: StoreStatus }
   | { readonly id: number; readonly kind: 'status'; readonly status: StoreStatus }
   | { readonly id: number; readonly kind: 'wiped'; readonly status: StoreStatus }
+  /** `handCount`: how many sample hands the views are now looking at. */
+  | { readonly id: number; readonly kind: 'demo-entered'; readonly handCount: number }
+  | { readonly id: number; readonly kind: 'demo-left' }
   /** The request failed as a whole; `message` is meant for the user. */
   | { readonly id: number; readonly kind: 'error'; readonly message: string }
 

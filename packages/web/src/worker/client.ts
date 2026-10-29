@@ -124,6 +124,20 @@ export class WorkerClient {
     return response.status
   }
 
+  /** Points the views at the sample hands; resolves with how many there are.
+   * The user's archive is left as it is. */
+  async enterDemo(): Promise<number> {
+    const response = await this.#request({ kind: 'enter-demo' })
+    if (response.kind !== 'demo-entered') throw unexpected(response)
+    return response.handCount
+  }
+
+  /** Points the views back at the user's archive. */
+  async leaveDemo(): Promise<void> {
+    const response = await this.#request({ kind: 'leave-demo' })
+    if (response.kind !== 'demo-left') throw unexpected(response)
+  }
+
   async #api<T>(path: string, request: ApiRequest): Promise<T> {
     const response = await this.#request({ kind: 'api', request })
     if (response.kind !== 'api') throw unexpected(response)

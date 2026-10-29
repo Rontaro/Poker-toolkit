@@ -15,10 +15,18 @@ export interface WorkerDeps {
   readonly openStore: () => Promise<BrowserHandStore>
   /** `deleteBrowserData()` in the Worker. */
   readonly deleteData: () => Promise<void>
+  /** `BrowserHandStore.create()` in the Worker: the sample hands' own store,
+   * in memory, so they can never mix with the user's. */
+  readonly openDemoStore: () => Promise<BrowserHandStore>
+  /** The sample hands' text, loaded only when the demo is first opened. */
+  readonly loadDemoHands: () => Promise<string>
   /** Where a programming error is reported in full, since the page only gets
    * Express's terse `<path>: 500` for it. */
   readonly logError?: (context: string, cause: unknown) => void
 }
+
+/** What the sample hands are called as an import, should anything name it. */
+const DEMO_FILE_NAME = 'mani-di-esempio.txt'
 
 /** What `response.json(body)` puts on the wire, read back: `Date`s become ISO
  * strings, `undefined` fields disappear. Without it the page would get, over
@@ -67,11 +75,31 @@ export function createWorkerHandler(
     }
   }
 
+  /** The sample hands' store while the demo is on. Only ever set to a store
+   * that opened: a failed demo leaves the views on the user's archive. */
+  let demo: BrowserHandStore | undefined
+
+  async function openDemo(): Promise<BrowserHandStore> {
+    const sample = await deps.openDemoStore()
+    try {
+      const bytes = new TextEncoder().encode(await deps.loadDemoHands())
+      // The same import as an upload: the sample goes through the parser and
+      // its arithmetic check like any file the user could hand in.
+      const summary = await ingestFiles(sample, [{ name: DEMO_FILE_NAME, bytes: bytes.buffer as ArrayBuffer }], () => undefined)
+      const failure = summary.errors[0]?.message ?? (summary.handsImported === 0 ? 'nessuna mano letta' : undefined)
+      if (failure !== undefined) throw new Error(failure)
+      return sample
+    } catch (cause) {
+      sample.close()
+      throw cause
+    }
+  }
+
   async function run(request: WorkerRequest): Promise<void> {
     const { id } = request
     switch (request.kind) {
       case 'api': {
-        const current = await opened()
+        const current = demo ?? (await opened())
         let status: number
         let body: unknown
         try {
@@ -140,6 +168,33 @@ export function createWorkerHandler(
           return
         }
         post({ id, kind: 'wiped', status })
+        return
+      }
+
+      case 'enter-demo': {
+        // Independent of the user's archive: the demo opens even when that
+        // one will not, or is held by another tab.
+        if (demo === undefined) {
+          try {
+            demo = await openDemo()
+          } catch (cause) {
+            throw new Error(`Non riesco ad aprire le mani di esempio: ${errorMessage(cause)}`, { cause })
+          }
+        }
+        const { handCount } = await demo.stats({})
+        post({ id, kind: 'demo-entered', handCount })
+        return
+      }
+
+      case 'leave-demo': {
+        const sample = demo
+        demo = undefined
+        try {
+          sample?.close()
+        } catch (cause) {
+          logError('close demo', cause)
+        }
+        post({ id, kind: 'demo-left' })
         return
       }
     }
