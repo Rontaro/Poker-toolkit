@@ -1,6 +1,7 @@
 import { dispatch } from '@poker/api-core'
 import type { BrowserHandStore } from '@poker/store/browser'
 
+import { errorMessage } from './errors.js'
 import { ingestFiles } from './ingest.js'
 import type { StoreStatus, WorkerRequest, WorkerResponse } from './protocol.js'
 
@@ -17,10 +18,6 @@ export interface WorkerDeps {
   /** Where a programming error is reported in full, since the page only gets
    * Express's terse `<path>: 500` for it. */
   readonly logError?: (context: string, cause: unknown) => void
-}
-
-function message(cause: unknown): string {
-  return cause instanceof Error ? cause.message : String(cause)
 }
 
 /** What `response.json(body)` puts on the wire, read back: `Date`s become ISO
@@ -66,7 +63,7 @@ export function createWorkerHandler(
     try {
       return await store
     } catch (cause) {
-      throw new Error(`Non riesco ad aprire l’archivio delle mani: ${message(cause)}`, { cause })
+      throw new Error(`Non riesco ad aprire l’archivio delle mani: ${errorMessage(cause)}`, { cause })
     }
   }
 
@@ -108,7 +105,8 @@ export function createWorkerHandler(
 
       case 'wipe': {
         // The store must be closed before its files are deleted; a store that
-        // never opened has nothing to close.
+        // never opened (the case the wipe is the way out of) has nothing to
+        // close.
         const previous = await store.catch(() => undefined)
         try {
           previous?.close()
@@ -130,7 +128,15 @@ export function createWorkerHandler(
         const status = await statusOf(await opened())
 
         if (failure !== undefined) {
-          post({ id, kind: 'error', message: message(failure) })
+          // A store in memory (OPFS held by another tab) took this tab's
+          // hands with it when it closed: say that much happened, and that
+          // the saved ones are still there.
+          const text =
+            previous?.persistent === false
+              ? 'Le mani di questa scheda sono state cancellate. I dati salvati non sono raggiungibili da qui: ' +
+                'chiudi le altre schede di questo sito e riprova per cancellare anche quelli.'
+              : errorMessage(failure)
+          post({ id, kind: 'error', message: text })
           return
         }
         post({ id, kind: 'wiped', status })
@@ -147,10 +153,11 @@ export function createWorkerHandler(
         await run(request)
       } catch (cause) {
         logError(request.kind, cause)
-        post({ id: request.id, kind: 'error', message: message(cause) })
+        post({ id: request.id, kind: 'error', message: errorMessage(cause) })
       }
     })
-    queue = next
+    // Even if posting the error fails, the next request must still run.
+    queue = next.catch((cause: unknown) => logError(`${request.kind}: answer not delivered`, cause))
     return next
   }
 }

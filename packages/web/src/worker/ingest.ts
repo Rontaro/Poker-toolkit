@@ -2,6 +2,7 @@ import type { Hand, HandId } from '@poker/core'
 import { parseHandHistory } from '@poker/ingest/parse'
 import type { BrowserHandStore } from '@poker/store/browser'
 
+import { errorMessage } from './errors.js'
 import type { IngestProgress, IngestSummary, UploadedFile } from './protocol.js'
 
 /**
@@ -33,10 +34,6 @@ async function countStored(store: BrowserHandStore, ids: readonly HandId[]): Pro
     count += handCount
   }
   return count
-}
-
-function message(cause: unknown): string {
-  return cause instanceof Error ? cause.message : String(cause)
 }
 
 export async function ingestFiles(
@@ -79,8 +76,14 @@ export async function ingestFiles(
         const total = unique.length + parsed.quarantine.length
 
         if (parsed.quarantine.length > 0) {
+          // The store keys quarantine by a hash of the raw text, so a hand
+          // already set aside by an earlier upload is not added again: like a
+          // hand, it counts as already present, not as newly quarantined.
+          const before = (await store.listQuarantined()).length
           await store.quarantine(parsed.quarantine)
-          handsQuarantined += parsed.quarantine.length
+          const added = (await store.listQuarantined()).length - before
+          handsQuarantined += added
+          handsAlreadyPresent += parsed.quarantine.length - added
           handsDone += parsed.quarantine.length
         }
 
@@ -97,8 +100,12 @@ export async function ingestFiles(
         }
       }
     } catch (cause) {
-      // One broken file must not cost the others.
-      errors.push({ file: file.name, message: message(cause) })
+      // One broken file must not cost the others. The detail is often the
+      // English of SQLite or of the parser, so it follows an Italian lead.
+      errors.push({
+        file: file.name,
+        message: `Non sono riuscito a importare questo file: ${errorMessage(cause)}`,
+      })
     }
 
     bytesBefore += size

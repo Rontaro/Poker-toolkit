@@ -51,9 +51,10 @@ export interface IngestSummary {
   /** Hands that were not in the archive before this import. */
   readonly handsImported: number
   /** Hands the archive already had (hand ids are content hashes, so a file
-   * uploaded twice adds nothing the second time). */
+   * uploaded twice adds nothing the second time), including unparsable ones
+   * an earlier upload had already set aside. */
   readonly handsAlreadyPresent: number
-  /** Hands that did not parse and were set aside. */
+  /** Hands that did not parse and were set aside by this import. */
   readonly handsQuarantined: number
   /** Files no adapter recognised as a hand history. */
   readonly unrecognisedFiles: readonly string[]

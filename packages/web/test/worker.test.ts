@@ -134,9 +134,25 @@ describe('ingest in the Worker', () => {
     })
     const response = final(1)
     expect(response).toMatchObject({
-      summary: { errors: [{ file: 'first.txt', message: 'disco pieno' }] },
+      summary: {
+        errors: [{ file: 'first.txt', message: 'Non sono riuscito a importare questo file: disco pieno' }],
+      },
     })
     expect(response.kind === 'ingested' && response.summary.handsImported).toBeGreaterThan(0)
+  })
+})
+
+describe('ingest in the Worker: re-uploads', () => {
+  it('counts a hand quarantined by an earlier upload as already present, not again', async () => {
+    const original = readFileSync(join(FIXTURES, 'en', 'cash', 'fold-preflop-no-showdown.txt'), 'utf8')
+    const broken = text('broken.txt', original.replace('Total pot €0.29', 'Total pot €0.39'))
+    const { send, final } = worker()
+
+    await send({ id: 1, kind: 'ingest', files: [broken] })
+    expect(final(1)).toMatchObject({ summary: { handsQuarantined: 1, handsAlreadyPresent: 0 } })
+
+    await send({ id: 2, kind: 'ingest', files: [text('broken.txt', original.replace('Total pot €0.29', 'Total pot €0.39'))] })
+    expect(final(2)).toMatchObject({ summary: { handsQuarantined: 0, handsAlreadyPresent: 1 } })
   })
 })
 
@@ -234,6 +250,83 @@ describe('wipe', () => {
   })
 })
 
+describe('wipe as the way out of an archive that will not open', () => {
+  it('deletes and reopens when the first open failed', async () => {
+    let attempts = 0
+    const deleteData = vi.fn(async () => undefined)
+    const { send, final } = worker({
+      openStore: async () => {
+        attempts += 1
+        if (attempts === 1) throw new Error('schema version 9 is newer than this build')
+        return BrowserHandStore.create()
+      },
+      deleteData,
+    })
+
+    await send({ id: 1, kind: 'status' })
+    expect(final(1)).toMatchObject({
+      kind: 'error',
+      message: expect.stringContaining('schema version 9 is newer than this build'),
+    })
+
+    await send({ id: 2, kind: 'wipe' })
+    expect(deleteData).toHaveBeenCalledOnce()
+    expect(final(2)).toMatchObject({ kind: 'wiped', status: { handCount: 0 } })
+
+    await send({ id: 3, kind: 'status' })
+    expect(final(3)).toMatchObject({ kind: 'status', status: { handCount: 0 } })
+  })
+})
+
+describe('wipe while another tab holds the saved data', () => {
+  it('says the hands of this tab are gone and the saved ones are not', async () => {
+    const { send, final } = worker({
+      // In memory, as openPersistent() leaves it when the pool is locked.
+      openStore: () => BrowserHandStore.create(),
+      deleteData: async () => {
+        throw new Error('Non riesco ad accedere ai dati salvati: chiudi le altre schede di questo sito e riprova.')
+      },
+    })
+    await send({ id: 1, kind: 'ingest', files: [fixture('session.txt', ...SESSION)] })
+    await send({ id: 2, kind: 'wipe' })
+
+    expect(final(2)).toMatchObject({
+      kind: 'error',
+      message: expect.stringMatching(/^Le mani di questa scheda sono state cancellate\. .*chiudi le altre schede/),
+    })
+    await send({ id: 3, kind: 'status' })
+    expect(final(3)).toMatchObject({ status: { handCount: 0 } })
+  })
+})
+
+describe('the request queue', () => {
+  it('keeps serving after an answer, and its error report, could not be posted', async () => {
+    const posted: WorkerResponse[] = []
+    let failures = 0
+    const send = createWorkerHandler(
+      { openStore: () => BrowserHandStore.create(), deleteData: async () => undefined, logError: () => undefined },
+      (response) => {
+        if (failures > 0) {
+          failures -= 1
+          throw new Error('DataCloneError')
+        }
+        posted.push(response)
+      },
+    )
+
+    // The answer fails to post, the error report then goes through.
+    failures = 1
+    await send({ id: 1, kind: 'status' })
+    expect(posted).toEqual([{ id: 1, kind: 'error', message: 'DataCloneError' }])
+
+    // Both fail: that request's promise rejects, but the queue goes on.
+    failures = 2
+    await expect(send({ id: 2, kind: 'status' })).rejects.toThrow('DataCloneError')
+    await send({ id: 3, kind: 'status' })
+    expect(posted.at(-1)).toMatchObject({ id: 3, kind: 'status', status: { handCount: 0 } })
+  })
+})
+
 /** Page and Worker joined back to back, as `postMessage` would join them. */
 describe('client and Worker together', () => {
   function connected(): WorkerClient {
@@ -263,7 +356,9 @@ describe('client and Worker together', () => {
     await expect(
       client.transport.get(`/hand/does-not-exist/equity?range=${encodeURIComponent('22+, AKs')}`, ''),
     ).rejects.toThrow('mano non trovata')
-    await expect(client.transport.get('/hand/x/equity?range=ZZZ', '')).rejects.toThrow()
+    await expect(client.transport.get('/hand/x/equity?range=ZZZ', '')).rejects.toThrow(
+      '"ZZZ" is not a valid pair, hand shape, range, or explicit combo',
+    )
 
     expect(await client.status()).toMatchObject({ handCount: 52, persistent: false })
     expect(await client.wipe()).toMatchObject({ handCount: 0 })
