@@ -1807,6 +1807,12 @@ table.steps td {
     padding-left: 10px;
     padding-right: 10px;
   }
+  /* The glossaries' first columns keep a desktop width, set inline: they
+   * scroll inside their panel rather than spill past its border. They carry
+   * no tooltip for the scrolling box to clip. */
+  .panel:has(> table.glossary) {
+    overflow-x: auto;
+  }
 
   .working {
     grid-template-columns: 1fr;
