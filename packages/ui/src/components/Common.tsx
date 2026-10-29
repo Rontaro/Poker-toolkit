@@ -38,8 +38,8 @@ export function Empty({ children }: { children: ReactNode }): JSX.Element {
 /**
  * How hands get into the archive, which is the one thing the local dashboard
  * and the web app explain differently: a CLI command there, an upload here.
- * Views stay unaware of which one they run in; the shell provides the words.
- * The default is the local dashboard's, so it needs no provider at all.
+ * Views stay unaware of which one they run in: `AppShell` provides the words
+ * it was given, the local dashboard's by default.
  */
 export interface ImportInstructions {
   /** Under "Nessuna mano in archivio", on every view with nothing to show. */

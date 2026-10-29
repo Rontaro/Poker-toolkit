@@ -1,6 +1,11 @@
 import { useMemo, useState, type JSX, type ReactNode } from 'react'
 
 import { EMPTY_FILTERS, type Filters } from '../api.js'
+import {
+  ImportInstructionsContext,
+  LOCAL_IMPORT_INSTRUCTIONS,
+  type ImportInstructions,
+} from './Common.js'
 import { Equity } from '../views/Equity.js'
 import { Guide } from '../views/Guide.js'
 import { Leaks } from '../views/Leaks.js'
@@ -10,7 +15,7 @@ import { Studio } from '../views/Studio.js'
 import { Timeline } from '../views/Timeline.js'
 import { Training } from '../views/Training.js'
 
-export const VIEWS = [
+const VIEWS = [
   { id: 'overview', label: 'Panoramica' },
   { id: 'statistics', label: 'Statistiche' },
   { id: 'leaks', label: 'Leak' },
@@ -21,66 +26,78 @@ export const VIEWS = [
   { id: 'guide', label: 'Come si usa' },
 ] as const
 
-export type ViewId = (typeof VIEWS)[number]['id']
+type ViewId = (typeof VIEWS)[number]['id']
 
 /**
  * The whole app around the views: rail with the wordmark and the eight tabs,
  * the filters, and the active view. Shared by the local dashboard and the web
- * app, which differ only in what sits at the foot of the rail (a live
- * indicator over SSE, or the upload and the archive controls) and in what
- * makes the views reload.
+ * app, which differ in what sits at the foot of the rail (a live indicator
+ * over SSE, or the upload and the archive controls), in what makes the views
+ * reload, and in how hands get into the archive.
  *
  * `revision` is that reload: whenever it changes, every view is remounted and
- * refetches, exactly as a filter change does.
+ * refetches, exactly as a filter change does. `importInstructions` is the
+ * how, shown by the empty state and the guide; it defaults to the local
+ * dashboard's CLI commands.
  */
-export function AppShell({ revision, foot }: { revision: number; foot: ReactNode }): JSX.Element {
+export function AppShell({
+  revision,
+  foot,
+  importInstructions = LOCAL_IMPORT_INSTRUCTIONS,
+}: {
+  revision: number
+  foot: ReactNode
+  importInstructions?: ImportInstructions
+}): JSX.Element {
   const [view, setView] = useState<ViewId>('overview')
   const [filters, setFilters] = useState<Filters>(EMPTY_FILTERS)
 
   const key = useMemo(() => `${JSON.stringify(filters)}#${revision}`, [filters, revision])
 
   return (
-    <div className="shell">
-      <nav className="rail">
-        <div className="wordmark">
-          <h1>
-            Led<em>ger</em>
-          </h1>
-          <p>Analisi post-sessione</p>
-        </div>
+    <ImportInstructionsContext.Provider value={importInstructions}>
+      <div className="shell">
+        <nav className="rail">
+          <div className="wordmark">
+            <h1>
+              Led<em>ger</em>
+            </h1>
+            <p>Analisi post-sessione</p>
+          </div>
 
-        <div className="nav">
-          {VIEWS.map((entry, index) => (
-            <button
-              key={entry.id}
-              type="button"
-              aria-current={view === entry.id}
-              onClick={() => setView(entry.id)}
-            >
-              <span className="idx">{String(index + 1).padStart(2, '0')}</span>
-              <span>{entry.label}</span>
-            </button>
-          ))}
-        </div>
+          <div className="nav">
+            {VIEWS.map((entry, index) => (
+              <button
+                key={entry.id}
+                type="button"
+                aria-current={view === entry.id}
+                onClick={() => setView(entry.id)}
+              >
+                <span className="idx">{String(index + 1).padStart(2, '0')}</span>
+                <span>{entry.label}</span>
+              </button>
+            ))}
+          </div>
 
-        {foot}
-      </nav>
+          {foot}
+        </nav>
 
-      <main className="main">
-        <GlobalFilters value={filters} onChange={setFilters} />
+        <main className="main">
+          <GlobalFilters value={filters} onChange={setFilters} />
 
-        {view === 'overview' && (
-          <Overview key={key} filters={filters} onGuide={() => setView('guide')} />
-        )}
-        {view === 'statistics' && <Statistics key={key} filters={filters} />}
-        {view === 'leaks' && <Leaks key={key} filters={filters} />}
-        {view === 'timeline' && <Timeline key={key} filters={filters} />}
-        {view === 'studio' && <Studio key={key} filters={filters} />}
-        {view === 'equity' && <Equity key={key} filters={filters} />}
-        {view === 'training' && <Training />}
-        {view === 'guide' && <Guide />}
-      </main>
-    </div>
+          {view === 'overview' && (
+            <Overview key={key} filters={filters} onGuide={() => setView('guide')} />
+          )}
+          {view === 'statistics' && <Statistics key={key} filters={filters} />}
+          {view === 'leaks' && <Leaks key={key} filters={filters} />}
+          {view === 'timeline' && <Timeline key={key} filters={filters} />}
+          {view === 'studio' && <Studio key={key} filters={filters} />}
+          {view === 'equity' && <Equity key={key} filters={filters} />}
+          {view === 'training' && <Training />}
+          {view === 'guide' && <Guide />}
+        </main>
+      </div>
+    </ImportInstructionsContext.Provider>
   )
 }
 
@@ -92,7 +109,7 @@ export function AppShell({ revision, foot }: { revision: number; foot: ReactNode
  * one produces a number that describes neither, and a filter you have to
  * remember to set is a filter you will forget.
  */
-export function GlobalFilters({
+function GlobalFilters({
   value,
   onChange,
 }: {

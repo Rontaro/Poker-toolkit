@@ -5,16 +5,11 @@
  * the veil shown while files are dragged over the page.
  */
 
-.store-panel {
-  margin-top: auto;
-  padding: 14px 20px 0;
-  border-top: 1px solid var(--rule);
-  display: flex;
+/* On top of `.rail-foot` (placement, rule, type): a column instead of a row. */
+.rail-foot.store-panel {
   flex-direction: column;
+  align-items: stretch;
   gap: 10px;
-  font-family: var(--mono);
-  font-size: 10.5px;
-  color: var(--ink-faint);
 }
 
 .store-count {
@@ -111,4 +106,8 @@
   font-family: var(--serif);
   font-size: 26px;
   color: var(--ink);
+}
+
+.store-detail {
+  color: var(--ink-faint);
 }

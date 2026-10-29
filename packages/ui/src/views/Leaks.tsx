@@ -270,11 +270,9 @@ function Equity({ handId }: { handId: string }): JSX.Element {
   useEffect(() => {
     setBusy(true)
     setReport(undefined)
-    // Through `get`, not `fetch`: in the web app there is no `/api` to fetch,
-    // the Worker answers. The query rides on the path so the URL is exactly
-    // the one this used to request. A 400/404 (an unparsable range, a hand
-    // that is gone) rejects with the server's own message, which is shown in
-    // place, as when the error body used to be read straight off the response.
+    // Through `get`, so whichever transport is active (Express or the web
+    // app's Worker) answers. An unparsable range or a missing hand rejects
+    // with the server's own message, shown in place of the table.
     get<EquityReport>(`/hand/${handId}/equity?range=${encodeURIComponent(range)}`)
       .catch((cause: Error): EquityReport => ({ range, streets: [], error: cause.message }))
       .then(setReport)

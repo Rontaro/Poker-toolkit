@@ -70,12 +70,11 @@ export function toQuery(filters: Filters): string {
 
 /**
  * The transport is the only thing the web (Worker-backed) app swaps. Views
- * never see this interface -- they only ever call `get`/`post` below,
- * unchanged. `query` is the already-built query string, either empty or
- * starting with `?`, to keep `httpTransport` a one-to-one match of what
- * `get`/`post` did before this indirection existed. A `path` may carry its
- * own query string too (`/hand/abc/equity?range=...`): a transport must treat
- * `path + query` as the URL after `/api`, exactly as `fetch` does.
+ * never see this interface -- they only ever call `get`/`post` below.
+ * `query` is the already-built query string, either empty or starting with
+ * `?`. A `path` may carry its own query string too
+ * (`/hand/abc/equity?range=...`): a transport must treat `path + query` as
+ * the URL after `/api`, exactly as `fetch` does.
  *
  * Errors: any non-2xx answer rejects with `Error(body.error)` when the body
  * is JSON carrying an `error` string, else `Error('<path>: <status>')`. Every
