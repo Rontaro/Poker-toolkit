@@ -7,8 +7,9 @@ import { LINKS, SitePage, eyebrow, primaryCta, secondaryCta } from './Layout.js'
  * true of the code: if the Worker, the store or the hosting change, this page
  * changes with them.
  *
- * TODO(csp): once the site's Content-Security-Policy is in place (it limits
- * connections to this origin), say so in "Il codice è pubblico".
+ * "Il codice è pubblico" describes the Content-Security-Policy in
+ * `public/_headers` (`connect-src 'self'`, scripts, styles and fonts from this
+ * origin only), which `test/bundle-isolation.test.ts` keeps in place.
  */
 export function Privacy(): JSX.Element {
   return (
@@ -115,6 +116,13 @@ export function Privacy(): JSX.Element {
                 GitHub
               </a>
               .
+            </p>
+            <p>
+              E non devi fidarti nemmeno del codice: il sito dichiara al browser una <b>Content Security Policy</b>{' '}
+              che permette alla pagina e al Web Worker di collegarsi solo a questo stesso sito, e di caricare
+              script, stili e font solo da qui. Se il codice provasse a inviare le tue mani a un altro dominio,
+              sarebbe il browser a bloccarlo. La trovi tra le intestazioni della pagina, negli strumenti per
+              sviluppatori del browser.
             </p>
           </Section>
 
