@@ -62,16 +62,21 @@ export async function openBrowserDatabase(filename = ':memory:'): Promise<SqlDat
  *   are exposed only to dedicated Workers, so data stored by the Worker is on
  *   disk yet unreachable from here.
  * - `worker`: the APIs the SAH pool needs are all present.
+ * - `blocked`: the APIs are present but `getDirectory()` rejects (some
+ *   private-browsing windows). Only `loadSahPool()`'s probe can tell this one
+ *   apart; as with `absent`, nothing can have been stored.
  */
-type OpfsAccess = 'absent' | 'main-thread' | 'worker'
+type OpfsAccess = 'absent' | 'main-thread' | 'worker' | 'blocked'
 
-function opfsAccess(): OpfsAccess {
-  // `lib` is ES2022 only (no DOM types), hence the structural view.
-  const g = globalThis as {
-    navigator?: { storage?: { getDirectory?: unknown } }
-    FileSystemFileHandle?: { prototype?: { createSyncAccessHandle?: unknown } }
-    DedicatedWorkerGlobalScope?: unknown
-  }
+// `lib` is ES2022 only (no DOM types), hence the structural view.
+interface OpfsGlobals {
+  navigator?: { storage?: { getDirectory?: unknown } }
+  FileSystemFileHandle?: { prototype?: { createSyncAccessHandle?: unknown } }
+  DedicatedWorkerGlobalScope?: unknown
+}
+
+function opfsAccess(): Exclude<OpfsAccess, 'blocked'> {
+  const g = globalThis as OpfsGlobals
   if (typeof g.navigator?.storage?.getDirectory !== 'function') return 'absent'
   if (typeof g.FileSystemFileHandle?.prototype?.createSyncAccessHandle === 'function') return 'worker'
   // A Worker with OPFS but no sync handles is an old browser: nothing of
@@ -81,6 +86,8 @@ function opfsAccess(): OpfsAccess {
 
 const REASON_UNSUPPORTED =
   'Questo browser non supporta il salvataggio locale (OPFS): le mani restano solo in memoria e si perdono chiudendo la pagina.'
+const REASON_BLOCKED =
+  'Questa finestra non permette il salvataggio locale (ad esempio la navigazione privata): le mani restano solo finché la pagina è aperta.'
 const REASON_MAIN_THREAD =
   'Il salvataggio locale (OPFS) è raggiungibile solo dal Worker dedicato: le mani restano solo in memoria.'
 
@@ -88,8 +95,22 @@ function errorMessage(cause: unknown): string {
   return cause instanceof Error ? cause.message : String(cause)
 }
 
-function warnNotPersistent(reason: string, cause?: unknown): void {
-  console.warn('[@poker/store] database not persistent:', reason, ...(cause === undefined ? [] : [cause]))
+function warn(context: string, reason: string, cause: unknown): void {
+  console.warn(`[@poker/store] ${context}:`, reason, cause)
+}
+
+/** Whether OPFS answers at all. Some private windows expose the API but
+ * reject `getDirectory()`; that is not a transient failure worth telling the
+ * user to close tabs over, and nothing can ever have been stored there. */
+async function opfsDirectoryReachable(): Promise<boolean> {
+  try {
+    // Only called once opfsAccess() has seen getDirectory as a function.
+    const storage = (globalThis as OpfsGlobals).navigator?.storage as { getDirectory(): Promise<unknown> }
+    await storage.getDirectory()
+    return true
+  } catch {
+    return false
+  }
 }
 
 type SahPool =
@@ -108,6 +129,12 @@ function loadSahPool(): Promise<SahPool> {
     const access = opfsAccess()
     if (access === 'absent') return { pool: undefined, access, reason: REASON_UNSUPPORTED }
     if (access === 'main-thread') return { pool: undefined, access, reason: REASON_MAIN_THREAD }
+    // Probed before installing so a private window gets its own reason
+    // instead of the "close the other tabs" one. Deliberately quiet: it is an
+    // expected state of the browser, not an error. Once getDirectory()
+    // resolves, a later failure (e.g. createSyncAccessHandle) stays in the
+    // throwing branch below: it cannot be told apart from another tab's lock.
+    if (!(await opfsDirectoryReachable())) return { pool: undefined, access: 'blocked', reason: REASON_BLOCKED }
     try {
       const sqlite3 = await loadSqlite3()
       // Typed as always present, but the Node build does not define it.
@@ -128,7 +155,8 @@ function loadSahPool(): Promise<SahPool> {
       const reason =
         `Il salvataggio locale (OPFS) non è disponibile ora (${errorMessage(cause)}). ` +
         'Se il sito è aperto in un’altra scheda, chiudila e ricarica la pagina.'
-      warnNotPersistent(reason, cause)
+      // Neutral wording: the first caller may be a delete, not an open.
+      warn('OPFS pool unavailable', reason, cause)
       return { pool: undefined, access, reason, cause }
     }
   })()
@@ -162,7 +190,7 @@ export async function openPersistentBrowserDatabase(filename: string): Promise<P
     } catch (cause) {
       // E.g. the pool has no free slot left.
       reason = `Non riesco ad aprire il database salvato (${errorMessage(cause)}): le mani restano solo in memoria.`
-      warnNotPersistent(reason, cause)
+      warn('database not persistent', reason, cause)
     }
   } else {
     reason = loaded.reason
@@ -184,7 +212,8 @@ export async function openPersistentBrowserDatabase(filename: string): Promise<P
  *
  * If the VFS was not installed yet in this process it is installed first, so
  * the button still deletes what an earlier visit stored. A no-op only where
- * this browser has no OPFS at all, since then nothing can have been stored.
+ * nothing can have been stored: no OPFS in this browser at all, or a window
+ * that refuses it (`getDirectory()` rejects, e.g. private browsing).
  * Where OPFS exists but the pool could not be installed (another tab holding
  * the handles, a transient failure, a call from the main thread) it throws
  * with a message meant for the user: the data is still on disk, and
@@ -197,7 +226,7 @@ export async function deleteBrowserData(): Promise<void> {
     await loaded.pool.wipeFiles()
     return
   }
-  if (loaded.access === 'absent') return
+  if (loaded.access === 'absent' || loaded.access === 'blocked') return
   if (loaded.access === 'main-thread') {
     throw new Error(
       'Non riesco ad accedere ai dati salvati da qui: la cancellazione va eseguita nel Worker che apre lo store.',

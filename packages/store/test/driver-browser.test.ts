@@ -202,6 +202,44 @@ describe('where OPFS exists but the pool cannot be installed', () => {
   })
 })
 
+// The APIs are all there but getDirectory() rejects, as in some private
+// windows: nothing can have been stored, so this is neither an error nor a
+// reason to tell the user to close tabs.
+describe('where getDirectory() rejects (private window)', () => {
+  type Driver = typeof import('../src/driver-browser.js')
+  let fresh: Driver
+  let warn: ReturnType<typeof vi.spyOn>
+
+  beforeEach(async () => {
+    vi.stubGlobal('navigator', {
+      storage: { getDirectory: () => Promise.reject(new Error('SecurityError: The operation is insecure.')) },
+    })
+    vi.stubGlobal('FileSystemFileHandle', { prototype: { createSyncAccessHandle: () => undefined } })
+    warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined)
+    vi.resetModules()
+    fresh = await import('../src/driver-browser.js')
+  })
+
+  afterEach(() => {
+    vi.unstubAllGlobals()
+    vi.restoreAllMocks()
+    vi.resetModules()
+  })
+
+  it('openPersistentBrowserDatabase() falls back with the private-window reason, quietly', async () => {
+    const { db, persistent, reason } = await fresh.openPersistentBrowserDatabase('/test.sqlite3')
+    expect(persistent).toBe(false)
+    expect(reason).toMatch(/Questa finestra non permette il salvataggio locale/)
+    expect(warn).not.toHaveBeenCalled()
+    db.close()
+  })
+
+  it('deleteBrowserData() resolves without throwing', async () => {
+    await expect(fresh.deleteBrowserData()).resolves.toBeUndefined()
+    expect(warn).not.toHaveBeenCalled()
+  })
+})
+
 // OPFS without sync access handles, outside a Worker: the main thread. Data
 // the Worker stored is on disk but unreachable from here.
 describe('on the main thread', () => {
