@@ -69,21 +69,46 @@ export function toQuery(filters: Filters): string {
 }
 
 /**
- * The transport is the only thing a future web/Worker-backed app needs to
- * swap. Views never see this interface -- they only ever call `get`/`post`
- * below, unchanged. `query` is the already-built query string, either empty
- * or starting with `?`, to keep `httpTransport` a one-to-one match of what
- * `get`/`post` did before this indirection existed.
+ * The transport is the only thing the web (Worker-backed) app swaps. Views
+ * never see this interface -- they only ever call `get`/`post` below,
+ * unchanged. `query` is the already-built query string, either empty or
+ * starting with `?`, to keep `httpTransport` a one-to-one match of what
+ * `get`/`post` did before this indirection existed. A `path` may carry its
+ * own query string too (`/hand/abc/equity?range=...`): a transport must treat
+ * `path + query` as the URL after `/api`, exactly as `fetch` does.
+ *
+ * Errors: any non-2xx answer rejects with `Error(body.error)` when the body
+ * is JSON carrying an `error` string, else `Error('<path>: <status>')`. Every
+ * transport has to keep that contract, since views show the message as is.
  */
 export interface Transport {
   get<T>(path: string, query: string): Promise<T>
   post<T>(path: string, body: unknown): Promise<T>
 }
 
-const httpTransport: Transport = {
+/** The rejection every transport produces for a non-2xx answer. */
+export function transportError(path: string, status: number, body: unknown): Error {
+  const detail = body as { error?: unknown } | null | undefined
+  const message = typeof detail?.error === 'string' ? detail.error : undefined
+  return new Error(message ?? `${path}: ${status}`)
+}
+
+async function failure(path: string, response: Response): Promise<Error> {
+  let body: unknown
+  try {
+    body = await response.json()
+  } catch {
+    // Not JSON (Express's own 500 page), or no body at all.
+    body = undefined
+  }
+  return transportError(path, response.status, body)
+}
+
+/** The default: `fetch` against the local Express API, through Vite's proxy. */
+export const httpTransport: Transport = {
   async get<T>(path: string, query: string): Promise<T> {
     const response = await fetch(`/api${path}${query}`)
-    if (!response.ok) throw new Error(`${path}: ${response.status}`)
+    if (!response.ok) throw await failure(path, response)
     return (await response.json()) as T
   },
   async post<T>(path: string, body: unknown): Promise<T> {
@@ -92,18 +117,15 @@ const httpTransport: Transport = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     })
-    if (!response.ok) {
-      const detail = (await response.json().catch(() => ({}))) as { error?: string }
-      throw new Error(detail.error ?? `${path}: ${response.status}`)
-    }
+    if (!response.ok) throw await failure(path, response)
     return (await response.json()) as T
   },
 }
 
 let activeTransport: Transport = httpTransport
 
-/** Lets a consumer (e.g. the future web Worker-backed app) swap the fetch
- * transport for its own, without any view needing to know which is active. */
+/** Lets a consumer (the web app's Worker) swap the fetch transport for its
+ * own, without any view needing to know which is active. */
 export function setTransport(transport: Transport): void {
   activeTransport = transport
 }

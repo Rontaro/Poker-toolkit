@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { get, post, setTransport, type Transport } from '../src/api.js'
+import { get, httpTransport, post, setTransport, type Transport } from '../src/api.js'
 
 describe('transport indirection', () => {
   let fakeTransport: Transport
@@ -46,25 +46,7 @@ describe('default httpTransport', () => {
     // Restore the real default transport: a prior test in this file swapped
     // it out with setTransport, and the module-level `activeTransport` is
     // shared across tests.
-    setTransport({
-      async get<T>(path: string, query: string): Promise<T> {
-        const response = await fetch(`/api${path}${query}`)
-        if (!response.ok) throw new Error(`${path}: ${response.status}`)
-        return (await response.json()) as T
-      },
-      async post<T>(path: string, body: unknown): Promise<T> {
-        const response = await fetch(`/api${path}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        })
-        if (!response.ok) {
-          const detail = (await response.json().catch(() => ({}))) as { error?: string }
-          throw new Error(detail.error ?? `${path}: ${response.status}`)
-        }
-        return (await response.json()) as T
-      },
-    })
+    setTransport(httpTransport)
   })
 
   it('get() calls fetch with the expected URL and parses JSON', async () => {
@@ -84,6 +66,28 @@ describe('default httpTransport', () => {
     global.fetch = vi.fn(async () => ({ ok: false, status: 500 })) as unknown as typeof fetch
 
     await expect(get('/overview')).rejects.toThrow('/overview: 500')
+  })
+
+  it('get() throws the server-provided error message, like post()', async () => {
+    global.fetch = vi.fn(async () => ({
+      ok: false,
+      status: 400,
+      json: async () => ({ error: 'range non valido' }),
+    })) as unknown as typeof fetch
+
+    await expect(get('/hand/abc/equity?range=ZZ')).rejects.toThrow('range non valido')
+  })
+
+  it('falls back to path and status when the error body is not JSON', async () => {
+    global.fetch = vi.fn(async () => ({
+      ok: false,
+      status: 500,
+      json: async () => {
+        throw new SyntaxError('Unexpected token <')
+      },
+    })) as unknown as typeof fetch
+
+    await expect(post('/study', {})).rejects.toThrow('/study: 500')
   })
 
   it('post() sends JSON with the right method and headers, and parses the response', async () => {

@@ -270,8 +270,13 @@ function Equity({ handId }: { handId: string }): JSX.Element {
   useEffect(() => {
     setBusy(true)
     setReport(undefined)
-    fetch(`/api/hand/${handId}/equity?range=${encodeURIComponent(range)}`)
-      .then(async (response) => (await response.json()) as EquityReport)
+    // Through `get`, not `fetch`: in the web app there is no `/api` to fetch,
+    // the Worker answers. The query rides on the path so the URL is exactly
+    // the one this used to request. A 400/404 (an unparsable range, a hand
+    // that is gone) rejects with the server's own message, which is shown in
+    // place, as when the error body used to be read straight off the response.
+    get<EquityReport>(`/hand/${handId}/equity?range=${encodeURIComponent(range)}`)
+      .catch((cause: Error): EquityReport => ({ range, streets: [], error: cause.message }))
       .then(setReport)
       .finally(() => setBusy(false))
   }, [handId, range])
