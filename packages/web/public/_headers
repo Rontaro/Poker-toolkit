@@ -1,0 +1,18 @@
+# Cloudflare Pages response headers: https://developers.cloudflare.com/pages/configuration/headers/
+# `vite preview` reads this same file (scripts/cf-headers.ts), and test/bundle-isolation.test.ts
+# checks that the CSP below keeps `connect-src 'self'`. Every rule that matches a path applies;
+# a header set by two matching rules has its values joined with a comma, so no header appears
+# both in `/*` and in a narrower rule.
+
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), browsing-topics=(), camera=(), display-capture=(), geolocation=(), gyroscope=(), hid=(), idle-detection=(), magnetometer=(), microphone=(), midi=(), payment=(), screen-wake-lock=(), serial=(), usb=(), xr-spatial-tracking=()
+  X-Frame-Options: DENY
+
+# Every file in /assets/ carries a content hash in its name: a new build is a new URL.
+# Everything else (the HTML for every route, /favicon.svg, /landing/*) keeps Pages' default
+# `Cache-Control: public, max-age=0, must-revalidate`.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
