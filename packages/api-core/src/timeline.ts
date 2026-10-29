@@ -9,8 +9,15 @@ export interface TimelineBankrollPoint {
   readonly rollingBB100: number | null
 }
 
+/** The tilt report as it crosses JSON: `ratio` is `null`, not absent, when there
+ * is nothing to compare against (no baseline, or no hand after a shock). */
+export interface TimelineTilt extends Omit<TimelineReport['tilt'], 'ratio'> {
+  readonly ratio: number | null
+}
+
 export interface TimelineResult
-  extends Omit<TimelineReport, 'bankroll'> {
+  extends Omit<TimelineReport, 'bankroll' | 'tilt'> {
+  readonly tilt: TimelineTilt
   readonly bankroll: readonly TimelineBankrollPoint[]
 }
 
@@ -24,6 +31,8 @@ export async function getTimeline(store: HandStore, filter: HandFilter): Promise
   const timeline = await buildTimeline(hands)
   return {
     ...timeline,
+    // `undefined` would vanish over JSON, and the view tests for `null`.
+    tilt: { ...timeline.tilt, ratio: timeline.tilt.ratio ?? null },
     bankroll: timeline.bankroll.map((point) => ({
       index: point.index,
       cumulativeBB: Number(point.cumulativeBB.toFixed(2)),

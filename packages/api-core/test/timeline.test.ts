@@ -32,3 +32,20 @@ describe('getTimeline', () => {
     }
   })
 })
+
+describe('getTimeline tilt ratio', () => {
+  it('is null, never absent, when there is nothing to compare against', async () => {
+    const withHands = await storeWith(...sessionHands())
+    try {
+      const result = await getTimeline(withHands, {})
+      // A short sample has no shock to measure after, so no ratio. Over JSON
+      // (the Express server and the Worker both send it that way) an
+      // `undefined` would vanish and the view would read the field as absent.
+      expect(result.tilt.handsAfterTriggers === 0 || result.tilt.baselineLeakRate === 0).toBe(true)
+      const sent = JSON.parse(JSON.stringify(result)) as { tilt: Record<string, unknown> }
+      expect(sent.tilt).toHaveProperty('ratio', null)
+    } finally {
+      withHands.close()
+    }
+  })
+})

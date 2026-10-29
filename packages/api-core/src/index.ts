@@ -40,7 +40,7 @@ export { getLeaks } from './leaks.js'
 export type { LeakEventJson, LeaksResult } from './leaks.js'
 
 export { getTimeline } from './timeline.js'
-export type { TimelineBankrollPoint, TimelineResult } from './timeline.js'
+export type { TimelineBankrollPoint, TimelineResult, TimelineTilt } from './timeline.js'
 
 export { getHand } from './hand.js'
 export type { HandDetail } from './hand.js'
