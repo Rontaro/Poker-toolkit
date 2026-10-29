@@ -1,4 +1,4 @@
-import { useEffect, useState, type JSX, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useState, type JSX, type ReactNode } from 'react'
 
 import { get, type Filters } from '../api.js'
 
@@ -35,14 +35,49 @@ export function Empty({ children }: { children: ReactNode }): JSX.Element {
   return <div className="empty">{children}</div>
 }
 
+/**
+ * How hands get into the archive, which is the one thing the local dashboard
+ * and the web app explain differently: a CLI command there, an upload here.
+ * Views stay unaware of which one they run in; the shell provides the words.
+ * The default is the local dashboard's, so it needs no provider at all.
+ */
+export interface ImportInstructions {
+  /** Under "Nessuna mano in archivio", on every view with nothing to show. */
+  readonly emptyState: ReactNode
+  /** Step 1 of "Come si usa", under its heading "Importa le mani". */
+  readonly guideStep: ReactNode
+}
+
+export const LOCAL_IMPORT_INSTRUCTIONS: ImportInstructions = {
+  emptyState: (
+    <p>
+      Importa le hand history con <code>pnpm ingest</code>, oppure lascia{' '}
+      <code>pnpm watch</code> in ascolto mentre giochi.
+    </p>
+  ),
+  guideStep: (
+    <>
+      <p>
+        Legge i file che il client di PokerStars scrive da solo. Rilancialo quando vuoi: le
+        mani già viste non vengono duplicate.
+      </p>
+      <code>pnpm ingest</code>
+    </>
+  ),
+}
+
+export const ImportInstructionsContext = createContext<ImportInstructions>(LOCAL_IMPORT_INSTRUCTIONS)
+
+export function useImportInstructions(): ImportInstructions {
+  return useContext(ImportInstructionsContext)
+}
+
 export function NoHands(): JSX.Element {
+  const { emptyState } = useImportInstructions()
   return (
     <Empty>
       <h3>Nessuna mano in archivio</h3>
-      <p>
-        Importa le hand history con <code>pnpm ingest</code>, oppure lascia{' '}
-        <code>pnpm watch</code> in ascolto mentre giochi.
-      </p>
+      {emptyState}
     </Empty>
   )
 }

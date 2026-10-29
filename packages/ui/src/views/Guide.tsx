@@ -1,7 +1,7 @@
 import { useEffect, useState, type JSX } from 'react'
 
 import { get, type Metric } from '../api.js'
-import { Panel } from '../components/Common.js'
+import { Panel, useImportInstructions } from '../components/Common.js'
 
 interface StatisticsData {
   overall: Metric[]
@@ -26,6 +26,7 @@ interface LeaksData {
 export function Guide(): JSX.Element {
   const [metrics, setMetrics] = useState<Metric[]>([])
   const [rules, setRules] = useState<{ id: string; label: string; why: string }[]>([])
+  const importInstructions = useImportInstructions()
 
   useEffect(() => {
     void get<StatisticsData>('/statistics').then((data) => setMetrics(data.overall))
@@ -46,11 +47,7 @@ export function Guide(): JSX.Element {
         <div className="step">
           <span className="n">1</span>
           <h4>Importa le mani</h4>
-          <p>
-            Legge i file che il client di PokerStars scrive da solo. Rilancialo quando vuoi: le
-            mani già viste non vengono duplicate.
-          </p>
-          <code>pnpm ingest</code>
+          {importInstructions.guideStep}
         </div>
         <div className="step">
           <span className="n">2</span>

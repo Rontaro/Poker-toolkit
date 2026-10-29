@@ -1,5 +1,5 @@
-/** Barrel for everything outside this package needs: the 8 views, the
- * public components, and the api/transport surface. */
+/** Barrel for everything outside this package needs: the 8 views, the shell
+ * around them, the public components, and the api/transport surface. */
 
 export { Overview } from './views/Overview.js'
 export { Statistics } from './views/Statistics.js'
@@ -10,7 +10,19 @@ export { Equity } from './views/Equity.js'
 export { Training } from './views/Training.js'
 export { Guide } from './views/Guide.js'
 
-export { Empty, NoHands, Panel, Figure, Term, useResource } from './components/Common.js'
+export {
+  Empty,
+  NoHands,
+  Panel,
+  Figure,
+  Term,
+  useResource,
+  ImportInstructionsContext,
+  LOCAL_IMPORT_INSTRUCTIONS,
+  useImportInstructions,
+  type ImportInstructions,
+} from './components/Common.js'
+export { AppShell, GlobalFilters, VIEWS, type ViewId } from './components/Shell.js'
 export {
   PlayingCard,
   HiddenPair,
@@ -24,6 +36,8 @@ export {
   get,
   post,
   setTransport,
+  httpTransport,
+  transportError,
   toQuery,
   fixed,
   signClass,
